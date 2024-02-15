@@ -18,13 +18,11 @@ return new class extends Migration
             $table->integer('quantity');
             $table->decimal('total_price'); 
             $table->foreignId('seller_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('category_id')->constrained('categories')->onUpdate('cascade')
-            ->onDelete('cascade');
+            $table->foreignId('buyer_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
             $table->string('address');
 
            
-       
         });
     }
 

@@ -20,9 +20,9 @@ return new class extends Migration
             $table->rememberToken();
             $table->timestamps();
             $table->boolean('is_seller'); //ngecek dia jual ngga
-            $table->int('phone_number');
-            $table->int('seller_rating'); // average bintang seller
-            $table->int('rating_count'); // total user yang ngasih bintang
+            $table->bigInteger('phone_number');
+            $table->integer('seller_rating'); // average bintang seller
+            $table->integer('rating_count'); // total user yang ngasih bintang
         });
     }
 

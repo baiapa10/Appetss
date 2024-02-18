@@ -16,8 +16,8 @@ return new class extends Migration
             $table->timestamps();
             $table->string('name');
             $table->string('description');
-            $table->foreign_id('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign_id('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
             $table->string('location');
             $table->decimal('price');
             $table->string('image');

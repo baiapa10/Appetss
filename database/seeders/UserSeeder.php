@@ -1,7 +1,7 @@
 <?php
 
 namespace Database\Seeders;
-
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -13,7 +13,7 @@ class UserSeeder extends Seeder
     public function run(): void
     {
       
-       DB::table('users')->create([
+      User::create([
             'name' => 'Kenneth Calvin',
             'email' => 'ken@gmail.com',
             'password' => '11223344',
@@ -23,7 +23,7 @@ class UserSeeder extends Seeder
            'rating_count' => 0,
         ]);
         
-        DB::table('users')->create([
+        User::create([
             'name' => 'seller lucu',
             'email' => 'seller@gmail.com',
             'password' => '11223344',

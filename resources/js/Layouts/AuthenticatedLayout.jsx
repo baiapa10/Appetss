@@ -3,32 +3,93 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
-import { Link } from '@inertiajs/react';
+// import { InertiaLink } from '@inertiajs/inertia-react';
+// import { Link } from '@inertiajs/react';
+import {
+    Box,
+    Flex,
+    Heading,
+    Input,
+    Button,
+    Link,
+    Text,
+    Stack,
+    SimpleGrid,
+    useColorModeValue,
+    ChakraProvider ,
+    Center,
+    Container,
+    Image,
+    VStack,
+  } from '@chakra-ui/react';
 
 export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 
     return (
-        <div className="min-h-screen bg-gray-100">
-            <nav className="bg-white border-b border-gray-100">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <ChakraProvider >
+        <Box minH="100vh"
+        bg={useColorModeValue("rgba(203, 142, 85, 1)")}
+        py={{ base: '6', sm: '3', lg: '4' }}
+        borderBottom="4px">
+            <Box as="nav" bg="" borderBottom="1px" borderColor="gray.500">
+                <div className="max-w-9xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between h-16">
                         <div className="flex">
-                            <div className="shrink-0 flex items-center">
-                                <Link href="/">
-                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800" />
+                            <Flex alignItems="center" mr={12}>
+                                <Link  href="/homepages">
+                                    {/* <img src="{{ URL('/storage/logo/logo.png')}}" alt=""/> */}
+                                    <ApplicationLogo className="block h-9 w-auto fill-current text-gray-800"/>
                                 </Link>
-                            </div>
+                            </Flex>
 
-                            <div className="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                                <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboard
-                                </NavLink>
-                            </div>
+                            <Flex display={{ base: "none", sm: "flex" }} spaceX={8} mt={{ base: "-px", sm: "0" }} ml={{ base: "0", sm: 10 }}>
+                                {/* <NavLink href={route('dashboard')} active={route().current('dashboard')}>
+                                    Dashboarda
+                                </NavLink> */}
+                                <Flex
+                                    // bg={useColorModeValue('gray.200', 'gray.700')}
+                                    px={7}
+                                    // py={1}
+                                    w="700px"
+                                    justifyContent="space-between"
+                                    alignItems="center"
+                                    mb={5}
+                                    // mt={2}
+                                >
+                                    {/* <Heading size="md">appets</Heading> */}
+                                    <Input
+                                    placeholder="Search Products..."
+                                    borderRadius="40px"
+                                    flexGrow={20}
+                                    colorScheme="whiteAlpha"
+                                    backgroundColor="white"
+                                    />
+                                </Flex>
+                            </Flex>
                         </div>
+                        <Flex
+                            isplay={{ base: 'none', sm: 'flex' }}
+                            alignItems="center"
+                            marginLeft="6"
+                            mb={4}
 
-                        <div className="hidden sm:flex sm:items-center sm:ms-6">
-                            <div className="ms-3 relative">
+                        >
+                            <Image
+                                src="/storage/logo/save.png"
+                                alt="Appets iklan"
+                                mr={"3"}
+                                width="41px"
+                                height="41px"
+                            />
+                            <Image
+                                src="/storage/logo/shop.png"
+                                alt="Appets iklan"
+                                mr={"4"}
+                                width="61px"
+                                height="61px"
+                            />
+                            <div className="ms-3 relative ">
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <span className="inline-flex rounded-md">
@@ -37,7 +98,6 @@ export default function Authenticated({ user, header, children }) {
                                                 className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150"
                                             >
                                                 {user.name}
-
                                                 <svg
                                                     className="ms-2 -me-0.5 h-4 w-4"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +122,7 @@ export default function Authenticated({ user, header, children }) {
                                     </Dropdown.Content>
                                 </Dropdown>
                             </div>
-                        </div>
+                        </Flex>
 
                         <div className="-me-2 flex items-center sm:hidden">
                             <button
@@ -90,36 +150,59 @@ export default function Authenticated({ user, header, children }) {
                     </div>
                 </div>
 
-                <div className={(showingNavigationDropdown ? 'block' : 'hidden') + ' sm:hidden'}>
-                    <div className="pt-2 pb-3 space-y-1">
+                <Box display={{ base: showingNavigationDropdown ? 'block' : 'none', sm: 'none' }} >
+                    <VStack spacing={3} pt={2} pb={3}>
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
                             Dashboard
                         </ResponsiveNavLink>
-                    </div>
+                    </VStack>
 
-                    <div className="pt-4 pb-1 border-t border-gray-200">
-                        <div className="px-4">
-                            <div className="font-medium text-base text-gray-800">{user.name}</div>
-                            <div className="font-medium text-sm text-gray-500">{user.email}</div>
-                        </div>
+                    <Box pt={4} pb={1} borderTop="1px" borderColor="gray.200" >
+                        <Box px={4}>
+                            <Text fontWeight="medium" fontSize="base" color="gray.800" >{user.name}</Text>
+                            <Text fontWeight="medium" fontSize="sm" color="gray.500">{user.email}</Text>
+                        </Box>
 
-                        <div className="mt-3 space-y-1">
+                        <Box mt={3} spacing={1}>
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out
                             </ResponsiveNavLink>
-                        </div>
-                    </div>
-                </div>
-            </nav>
+                        </Box>
+                    </Box>
+                </Box>
+            </Box>
 
             {header && (
-                <header className="bg-white shadow">
-                    <div className="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">{header}</div>
+                <header sx={{ bg: useColorModeValue("rgba(203, 142, 85, 1)", "rgba(203, 142, 85, 1, 0.6)"), boxShadow: "md" }} >
+                    <Container
+                        maxW="7xl"
+                        px={{ base: '4', sm: '6', lg: '8' }}
+                        py={{ base: '6', sm: '6', lg: '2' }}
+                        borderBottom="1px"
+                        borderColor="rgba(255, 255, 255, 1)"
+                        position="relative"
+                        >
+                        <Flex
+                            justifyContent="space-between"
+                            fontFamily="Fredoka One"
+                            color="rgba(255, 255, 255, 1)"
+                            fontSize="38px"
+                            fontWeight="bold"
+                            borderTop=""
+                            >
+                            <Link>Adopt</Link>
+                            <Link>Buy</Link>
+                            <Link>Equipment</Link>
+                            <Link>Food & Treats</Link>
+                        </Flex>
+                    </Container>
                 </header>
             )}
 
             <main>{children}</main>
-        </div>
+        </Box>
+        </ChakraProvider>
     );
+
 }

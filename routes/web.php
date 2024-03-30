@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomepageController;
+use App\Http\Controllers\HomepagesController;
 use App\Http\Controllers\PetController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,7 @@ use Inertia\Inertia;
 
 
 Route::get('/homepage', [HomepageController::class, 'index'] );
+// Route::get('/homepages', [HomepagesController::class, 'index'] );
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -40,6 +42,10 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/homepages', [HomepagesController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('homepages');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

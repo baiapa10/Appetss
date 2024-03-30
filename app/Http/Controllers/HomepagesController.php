@@ -15,7 +15,7 @@ class HomepagesController extends Controller
 
         return inertia::render('Homepages', [
             'pets' => $pets,
-            'title' => "halo ges",
+            'title' => "halo gesa",
         ]);
     }
 }

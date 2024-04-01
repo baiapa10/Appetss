@@ -149,7 +149,6 @@ export default function Authenticated({ user, header, children }) {
                         </div>
                     </div>
                 </div>
-
                 <Box display={{ base: showingNavigationDropdown ? 'block' : 'none', sm: 'none' }} >
                     <VStack spacing={3} pt={2} pb={3}>
                         <ResponsiveNavLink href={route('dashboard')} active={route().current('dashboard')}>
@@ -162,7 +161,6 @@ export default function Authenticated({ user, header, children }) {
                             <Text fontWeight="medium" fontSize="base" color="gray.800" >{user.name}</Text>
                             <Text fontWeight="medium" fontSize="sm" color="gray.500">{user.email}</Text>
                         </Box>
-
                         <Box mt={3} spacing={1}>
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
@@ -172,7 +170,6 @@ export default function Authenticated({ user, header, children }) {
                     </Box>
                 </Box>
             </Box>
-
             {header && (
                 <header sx={{ bg: useColorModeValue("rgba(203, 142, 85, 1)", "rgba(203, 142, 85, 1, 0.6)"), boxShadow: "md" }} >
                     <Container
@@ -199,7 +196,6 @@ export default function Authenticated({ user, header, children }) {
                     </Container>
                 </header>
             )}
-
             <main>{children}</main>
         </Box>
         </ChakraProvider>

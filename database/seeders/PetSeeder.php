@@ -16,10 +16,11 @@ class PetSeeder extends Seeder
             'name' => 'Fluffy',
             'description' => 'A fluffy, adorable cat.',
             'user_id' => 1,
-            'category_id' => 1,
+            'category_id' => 3,
             'location' => 'London',
             'price' => '10000',
             'image' => 'pet_images/fluffy.jpg',
+            'stock' => 1,
 
     ]);
     Pet::create([
@@ -31,6 +32,7 @@ class PetSeeder extends Seeder
         'location' => 'New York',
         'price' => '5000',
         'image' => 'pet_images/spike.jpg',
+        'stock' => 1,
         ]);
 }
 }

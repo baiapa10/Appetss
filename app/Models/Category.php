@@ -13,8 +13,8 @@ class Category extends Model
         'name',
         'type'
     ];
-    public function pets()
+    public function item()
     {
-        return $this->hasMany(Pet::class, 'category_id', 'category_id');
+        return $this->hasMany(Item::class, 'category_id', 'category_id');
     }
 }

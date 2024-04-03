@@ -18,13 +18,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Route::get('/', [PetController::class, 'index'])->name('pets.index');
-// Route::get('/create', [PetController::class, 'create'])->name('pets.create');
-// Route::post('/', [PetController::class, 'store'])->name('pets.store');
-// Route::get('/{pet}', [PetController::class, 'show'])->name('pets.show');
-// Route::get('/{pet}/edit', [PetController::class, 'edit'])->name('pets.edit');
-// Route::put('/{pet}', [PetController::class, 'update'])->name('pets.update');
-// Route::delete('/{pet}', [PetController::class, 'destroy'])->name('pets.destroy');
+
 
 
 Route::get('/homepage', [HomepageController::class, 'index'] );

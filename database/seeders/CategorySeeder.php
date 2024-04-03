@@ -73,5 +73,14 @@ class CategorySeeder extends Seeder
             'name' => 'Other',
             'type' => 'adopt',
         ]);
+
+        Category::create([
+            'id' => 11,
+            'name' => 'equipment',
+            'type' => 'sell',
+        ]);
+        
+      
+        
     }
 }

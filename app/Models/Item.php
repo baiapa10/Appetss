@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Pet extends Model
+class Item extends Model
 {
     use HasFactory;
-    protected $table = 'pets';
+    protected $table = 'items';
     protected $fillable = [
         'user_id',
         'category_id',
@@ -17,10 +17,11 @@ class Pet extends Model
         'location',
         'price',
         'image',
+        'stock'
     ];
     public function user()
     {
-        return $this->belongsTo(User::class, 'pet_id', 'id');
+        return $this->belongsTo(User::class, 'item_id', 'id');
     }
     public function category()
     {
@@ -28,11 +29,10 @@ class Pet extends Model
     }
     public function transaction()
     {
-        return $this->hasMany(Transaction::class, 'pet_id', 'id');
+        return $this->hasMany(Transaction::class, 'item_id', 'id');
     }
     public function cart()
     {
-        return $this->hasMany(Cart::class, 'pet_id', 'id');
+        return $this->hasMany(Cart::class, 'item_id', 'id');
     }
-
 }

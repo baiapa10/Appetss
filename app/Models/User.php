@@ -47,9 +47,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
-    public function pet()
+    public function item()
     {
-        return $this->hasMany(Pet::class, 'user_id', 'user_id');
+        return $this->hasMany(Items::class, 'user_id', 'user_id');
     }
     public function transaction()
     {

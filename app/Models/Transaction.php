@@ -12,7 +12,7 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'category_id',
-        'pet_id',
+        'item_id',
         'quantity',
         'price',
     ];
@@ -24,9 +24,9 @@ public function seller()
 {
     return $this->belongsTo(User::class, 'seller_id', 'id');
 }
-    public function pet()
+    public function item()
     {
-        return $this->belongsTo(Pet::class, 'pet_id', 'id');
+        return $this->belongsTo(Item::class, 'item_id', 'id');
     }
 
 }

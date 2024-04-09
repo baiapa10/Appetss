@@ -5,7 +5,7 @@ import {
     Heading,
     Input,
     Button,
-    Link,
+    //Link,
     Text,
     Stack,
     SimpleGrid,
@@ -14,7 +14,7 @@ import {
     Center,
     Image,
 } from '@chakra-ui/react';
-import { Head,  } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 
@@ -108,23 +108,27 @@ const Homepages = (props) => {
             <Text fontFamily="Fredoka One" color="rgba(133, 81, 33, 1)" fontSize="38px" fontWeight="bold" ml={6}>Today's Offer</Text>
         </Flex>
         <Box display="flex" flexWrap="wrap"  >
-            {props.pets ? (
-                props.pets.map((data, i) => (
-                    <Box key={i} ml={8} mr={2} mb={4} flexBasis="calc(33.33% - 250px)" boxShadow="0px 0px 2px rgba(0, 0, 0, 0.2)" border="1px solid #ccc" borderRadius="xl" bg={useColorModeValue('gray.200', 'gray.700')} borderColor="black" p={4}>
-                        <Image
-                            src={`/storage/${data.image}`}
-                            alt={data.name}
-                            style={{ maxWidth: '100%', height: '150px' }}
-                        />
-                        <Heading size="md" mb={2}>Name: {data.name}</Heading>
-                        <Text mt={2}>Description: {data.description}</Text>
-                        <Text>Price: {data.price}</Text>
-                        <Text>Location: {data.location}</Text>
-                    </Box>
-                ))
-            ) : (
-                <Text>No pets found.</Text>
-            )}
+        {props.pets ? (
+    props.pets.map((data, i) => (
+        <Box key={i} ml={8} mr={2} mb={4} flexBasis="calc(33.33% - 250px)" boxShadow="0px 0px 2px rgba(0, 0, 0, 0.2)" border="1px solid #ccc" borderRadius="xl" bg={useColorModeValue('gray.200', 'gray.700')} borderColor="black" p={4}>
+            <Image
+                src={`/storage/${data.image}`}
+                alt={data.name}
+                style={{ maxWidth: '100%', height: '150px' }}
+            />
+            <Heading size="md" mb={2}>Name: {data.name}</Heading>
+            <Text mt={2}>Description: {data.description}</Text>
+            <Text>Price: {data.price}</Text>
+            <Text>Location: {data.location}</Text>
+            {/* Detail button using Inertia Link */}
+            <Link href={`/items/${data.id}`} style={{ marginTop: '10px', display: 'inline-block', textDecoration: 'underline', color: 'blue' }}>
+                View Details
+            </Link>
+        </Box>
+    ))
+) : (
+    <Text>No pets found.</Text>
+)}
         </Box>
         <Flex
             // bg={useColorModeValue('gray.200', 'gray.700')}

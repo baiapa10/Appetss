@@ -3,7 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\HomepagesController;
-use App\Http\Controllers\PetController;
+use App\Http\Controllers\ItemController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -37,9 +37,9 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/products', function () {
-    return Inertia::render('Products');
-})->middleware(['auth', 'verified'])->name('products');
+// Route::get('/products', function () {
+//     return Inertia::render('Products');
+// })->middleware(['auth', 'verified'])->name('products');
 
 Route::get('/homepages', [HomepagesController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
 });
 
 require __DIR__.'/auth.php';

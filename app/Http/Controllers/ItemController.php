@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Item;
+use Inertia\Inertia;
 use Illuminate\Http\Request;
 
 
@@ -43,11 +44,16 @@ class ItemController extends Controller
     }
     
 
-public function show($id)
+public function show($item)
 {
-    $item = Item::find($id);
+    $item = Item::find($item);
 
-    return response()->json($item);
+    if (!$item) {
+        // Handle the case where the item is not found
+        abort(404);
+    }
+
+    return Inertia::render('Item/Show', ['item' => $item]);
 }
 
 public function update(Request $request, $id)

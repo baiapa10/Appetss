@@ -11,11 +11,13 @@ class ItemController extends Controller
     //
     public function index()
     {
-        return Inertia::render('Items/Index', [
+        return Inertia::render('items/index', [
             'items' => Item::all(),
         ]);
     }
-    
+    public function create (){
+        return Inertia::render('items/create');
+    }
     public function store(Request $request)
     {
         $request->validate([
@@ -40,7 +42,7 @@ class ItemController extends Controller
             'stock' => $request->stock,
         ]);
     
-        return response()->json($item);
+        return redirect()->route('posts.index')->with('success', 'Item successfuly inserted!');
     }
     
 

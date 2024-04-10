@@ -90,6 +90,9 @@ const Homepages = (props) => {
             justifyContent="space-between"
             alignItems="center"
         >
+            {/* <Button as={Link} href="/items/create" colorScheme="teal" size="sm" mt="4">
+    Add New Item
+</Button> */}
             <Image
                 src="/storage/logo/iklan2.png"
                 alt="Appets iklan"

@@ -124,7 +124,7 @@ const Homepages = (props) => {
             <Text>Price: {data.price}</Text>
             <Text>Location: {data.location}</Text>
             {/* Detail button using Inertia Link */}
-            <Link href={`/items/${data.id}`} style={{ marginTop: '10px', display: 'inline-block', textDecoration: 'underline', color: 'blue' }}>
+            <Link href={`/item/${data.id}`} style={{ marginTop: '10px', display: 'inline-block', textDecoration: 'underline', color: 'blue' }}>
                 View Details
             </Link>
         </Box>

@@ -11,12 +11,12 @@ class ItemController extends Controller
     //
     public function index()
     {
-        return Inertia::render('items/index', [
+        return Inertia::render('item/index', [
             'items' => Item::all(),
         ]);
     }
     public function create (){
-        return Inertia::render('items/create');
+        return Inertia::render('item/create');
     }
     public function store(Request $request)
     {
@@ -42,7 +42,7 @@ class ItemController extends Controller
             'stock' => $request->stock,
         ]);
     
-        return redirect()->route('posts.index')->with('success', 'Item successfuly inserted!');
+        return redirect()->route('item.index')->with('success', 'Item successfuly inserted!');
     }
     
 

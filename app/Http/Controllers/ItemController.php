@@ -16,7 +16,7 @@ class ItemController extends Controller
         ]);
     }
     public function create (){
-        return Inertia::render('item/create');
+        return Inertia::render('Item/Create');
     }
     public function store(Request $request)
     {
@@ -29,10 +29,12 @@ class ItemController extends Controller
             'image' => 'required|image',
             'stock' => 'required|numeric',
         ]);
-    
+        
         $image = $request->file('image')->store('pet_images');
     
         $item = Item::create([
+            'user_id' => auth()->id(),
+            
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
@@ -42,7 +44,7 @@ class ItemController extends Controller
             'stock' => $request->stock,
         ]);
     
-        return redirect()->route('item.index')->with('success', 'Item successfuly inserted!');
+        return redirect()->route('Profile.Homepages')->with('success', 'Item successfuly inserted!');
     }
     
 

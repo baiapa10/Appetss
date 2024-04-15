@@ -6,7 +6,7 @@ export default function Dashboard(props) {
     const { data, setData, errors, post, progress } = useForm({
         name: "",
         description: "",
-        category: "",
+        category_id: "",
         price: "",
         location: "",
         image: null,
@@ -16,7 +16,7 @@ export default function Dashboard(props) {
         e.preventDefault();
         const formData = new FormData();
         Object.keys(data).forEach(key => formData.append(key, data[key]));
-        post(route("items.store"), formData, {
+        post(route("item.store"), formData, {
             forceFormData: true,
             onProgress: progressEvent => {
                 const percentage = progressEvent.loaded / progressEvent.total * 100;
@@ -37,7 +37,7 @@ export default function Dashboard(props) {
                     <div className="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                         <div className="p-6 bg-white border-b border-gray-200">
                             <div className="flex items-center justify-between mb-6">
-                                <Link className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none" href={route("items.index")}>Back</Link>
+                                <Link className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none" href={route("item.index")}>Back</Link>
                             </div>
                             <form name="createForm" onSubmit={handleSubmit}>
                                 <div className="flex flex-col">
@@ -56,14 +56,14 @@ export default function Dashboard(props) {
                                     {/* Category Dropdown */}
                                     <div className="mb-4">
                                         <label className="block">Category</label>
-                                        <select className="w-full px-4 py-2" name="category" value={data.category} onChange={(e) => setData("category", e.target.value)}>
+                                        <select className="w-full px-4 py-2" name="category_id" value={data.category_id} onChange={(e) => setData("category_id", e.target.value)}>
                                             {/* Example categories, replace with actual options */}
                                             <option value="">Select a category</option>
-                                            <option value="books">Books</option>
+                                            <option value="1">Books</option>
                                             <option value="electronics">Electronics</option>
                                             <option value="furniture">Furniture</option>
                                         </select>
-                                        {errors.category && <span className="text-red-600">{errors.category}</span>}
+                                        {errors.category_id && <span className="text-red-600">{errors.category_id}</span>}
                                     </div>
                                     {/* Price Field */}
                                     <div className="mb-4">

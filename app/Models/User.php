@@ -49,7 +49,7 @@ class User extends Authenticatable
     ];
     public function item()
     {
-        return $this->hasMany(Items::class, 'user_id', 'user_id');
+        return $this->hasMany(Item::class, 'user_id', 'user_id');
     }
     public function transaction()
     {

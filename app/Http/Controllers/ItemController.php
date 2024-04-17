@@ -11,8 +11,14 @@ class ItemController extends Controller
     //
     public function index()
     {
-        return Inertia::render('item/index', [
-            'items' => Item::all(),
+         // Assuming you're using Laravel's default authentication
+        $userId = auth()->id(); // Get the ID of the currently authenticated user
+
+        // Fetch only the items that belong to this user
+        $pets = Item::where('user_id', $userId)->get();
+      
+        return Inertia::render('Item/Index', [
+            'pets' => $pets,
         ]);
     }
     public function create (){
@@ -32,11 +38,12 @@ class ItemController extends Controller
             'stock' => 'required|numeric',
             'image' => 'required|image',
         ]);
-
+    
         $image = $request->file('image')->store('pet_images');
 
-        $item = Item::create([
+        Item::create([
             'user_id' => auth()->id(),
+            
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
@@ -45,10 +52,8 @@ class ItemController extends Controller
             'image' => $image,
             'stock' => $request->stock,
         ]);
-
-
-
-        return redirect()->route('item.index')->with('success', 'Item successfuly inserted!');
+    
+        return redirect()->route('Profile.Homepages')->with('success', 'Item successfuly inserted!');
     }
 
 
@@ -82,11 +87,25 @@ public function update(Request $request, $id)
     return response()->json($item);
 }
 
-public function destroy($id)
+public function destroy(Item $item)
 {
-    $item = Item::find($id);
+  
     $item->delete();
 
-    return response()->json(['message' => 'Item deleted']);
+    return redirect()->route('item.index')->with('success', 'Data Berhasil Dihapus!');
+}
+
+public function edit($id)
+{
+    $item = Item::find($id);
+
+    if (!$item) {
+        // Handle the case where the item does not exist
+        abort(404);
+    }
+
+    return Inertia::render('Item/Edit', ['item' => $item]);
 }
 }
+
+

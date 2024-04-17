@@ -160,7 +160,7 @@ const Creates = (props) => {
                                                     <option value="8">Bird - Adopt</option>
                                                     <option value="9">Other - Sell</option>
                                                     <option value="10">Other - Adopt</option>
-                                                    <option value="11">equipment - Sell</option>
+                                                    <option value="11">Equipment - Sell</option>
                                                 </Select>
                                                 <InputError message={errors.category_id} className="mt-2" />
                                             </Box>

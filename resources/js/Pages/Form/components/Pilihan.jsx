@@ -10,30 +10,30 @@ import {
     useToast,
 } from "@chakra-ui/react";
 
-const petListings = [
-    { id: 1, type: "Item", name: "Dog Food" },
-    { id: 2, type: "Pet", name: "Puppy" },
-    { id: 3, type: "Adopt", name: "Kitten" },
-];
+// const petListings = [
+//     { id: 1, type: "Item", name: "Dog Food" },
+//     { id: 2, type: "Pet", name: "Puppy" },
+//     { id: 3, type: "Adopt", name: "Kitten" },
+// ];
 
 const PetListings = () => {
-    const [searchTerm, setSearchTerm] = React.useState("");
-    const toast = useToast();
+    // const [searchTerm, setSearchTerm] = React.useState("");
+    // const toast = useToast();
 
-    const addListing = () => {
-        // Add your add listing logic here
-        toast({
-            title: "Added!",
-            description: "The listing has been added.",
-            status: "success",
-            duration: 3000,
-            isClosable: true,
-        });
-    };
+    // const addListing = () => {
+    //     // Add your add listing logic here
+    //     toast({
+    //         title: "Added!",
+    //         description: "The listing has been added.",
+    //         status: "success",
+    //         duration: 3000,
+    //         isClosable: true,
+    //     });
+    // };
 
-    const filteredListings = petListings.filter((listing) =>
-        listing.name.toLowerCase().includes(searchTerm.toLowerCase())
-    );
+    // const filteredListings = petListings.filter((listing) =>
+    //     listing.name.toLowerCase().includes(searchTerm.toLowerCase())
+    // );
 
     return (
         <Box p={4}>

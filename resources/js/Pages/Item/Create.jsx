@@ -75,7 +75,7 @@ const Creates = (props) => {
     }
 
       function handleImageChange(e) {
-        const file = e.target.files[0]; 
+        const file = e.target.files[0];
         if (file) {
             const imageUrl = URL.createObjectURL(file);
             setData('image', file);
@@ -91,7 +91,7 @@ const Creates = (props) => {
                     <Box bg="white" overflow="hidden" shadow="sm" rounded="lg">
                         <Box p={6} bg="white" borderBottom="1px" borderColor="gray.200">
                             <Flex alignItems="center" justifyContent="space-between" mb={6}>
-                                <Link className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none" href={route("item.index")}>
+                                <Link className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none" href={route("homepages")}>
                                     Back
                                 </Link>
                             </Flex>

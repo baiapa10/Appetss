@@ -15,8 +15,12 @@ import {
     Image,
 } from '@chakra-ui/react';
 import { Head, Link } from '@inertiajs/react';
+import { Inertia } from '@inertiajs/inertia';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
+const addToWishlist = (itemId) => {
+    Inertia.post('wishlist/store', { item_id: itemId });
+};
 
 const Homepages = (props) => {
     const { auth } = props;
@@ -127,6 +131,17 @@ const Homepages = (props) => {
             <Link href={`/item/${data.id}`} style={{ marginTop: '10px', display: 'inline-block', textDecoration: 'underline', color: 'blue' }}>
                 View Details
             </Link>
+              {/* Wishlist button */}
+              <Button
+                colorScheme="teal"
+                size="sm"
+                mt="4"
+                onClick={() => {
+                    addToWishlist(data.id)
+                }}
+            >
+                Add to Wishlist
+            </Button>
         </Box>
     ))
 ) : (

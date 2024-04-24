@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\HomepagesController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\WishlistController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -41,18 +42,26 @@ Route::get('/dashboard', function () {
 //     return Inertia::render('Products');
 // })->middleware(['auth', 'verified'])->name('products');
 
+
 Route::get('/homepages', [HomepagesController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('homepages');
-
+    
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
     Route::resource('/item', ItemController::class);
-    
-    Route::resource('/pilihan', ItemController::class);
+  //  Route::resource('/wishlist', WishlistController::class);
+  Route::post('/wishlist/store', [WishlistController::class, 'store']);
+
+  Route::get('/wishlist', [WishlistController::class, 'index']);
+  
+  Route::delete('/wishlist/{itemId}', [WishlistController::class, 'destroy']);
+
+
+    // Route::resource('/pilihan', ItemController::class);
 });
 
 require __DIR__.'/auth.php';

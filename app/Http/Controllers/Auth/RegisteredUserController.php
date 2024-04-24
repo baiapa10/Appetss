@@ -42,10 +42,10 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'is_seller' => false,
+            // 'is_seller' => false,
             'phone_number' => $request->phone_number,
-            'rating_count' => 0,
-          'seller_rating' => 0,
+        //     'rating_count' => 0,
+        //   'seller_rating' => 0,
 
         ]);
 

@@ -19,10 +19,10 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->boolean('is_seller'); //ngecek dia jual ngga
+            // $table->boolean('is_seller'); //ngecek dia jual ngga
             $table->bigInteger('phone_number');
-            $table->integer('seller_rating'); // average bintang seller
-            $table->integer('rating_count'); // total user yang ngasih bintang
+            // $table->integer('seller_rating'); // average bintang seller
+            // $table->integer('rating_count'); // total user yang ngasih bintang
         });
     }
 

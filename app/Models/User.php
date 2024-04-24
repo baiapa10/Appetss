@@ -21,10 +21,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'is_seller',
+        // 'is_seller',
         'phone_number',
-      'seller_rating',
-       'rating_count',
+    //   'seller_rating',
+    //    'rating_count',
        
     ];
 
@@ -59,6 +59,9 @@ class User extends Authenticatable
     public function cart()
     {
         return $this->hasMany(Cart::class, 'user_id', 'user_id');
+    }
+    public function wishlist(){
+        return $this->hasMany(Wishlist::class, 'user_id', 'user_id');
     }
 
 }

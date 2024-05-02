@@ -5,6 +5,8 @@ use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\HomepagesController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WishlistController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -19,7 +21,9 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::get('/dashboard', function () {
+    return Inertia::render('Homepages');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
 
 Route::get('/homepage', [HomepageController::class, 'index'] );
@@ -34,9 +38,9 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+// Route::get('/homepages', function () {
+//     return Inertia::render('Homepages');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 // Route::get('/products', function () {
 //     return Inertia::render('Products');
@@ -46,7 +50,7 @@ Route::get('/dashboard', function () {
 Route::get('/homepages', [HomepagesController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('homepages');
-    
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -54,12 +58,19 @@ Route::middleware('auth')->group(function () {
     //Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
     Route::resource('/item', ItemController::class);
   //  Route::resource('/wishlist', WishlistController::class);
-  Route::post('/wishlist/store', [WishlistController::class, 'store']);
+    Route::post('/wishlist/store', [WishlistController::class, 'store']);
 
-  Route::get('/wishlist', [WishlistController::class, 'index']);
-  
-  Route::delete('/wishlist/{itemId}', [WishlistController::class, 'destroy']);
+    Route::get('/wishlist', [WishlistController::class, 'index']);
 
+    Route::delete('/wishlist/{itemId}', [WishlistController::class, 'destroy']);
+    Route::get('/cart', [CartController::class, 'index']);
+    Route::delete('/cart/{itemId}', [CartController::class, 'destroy']);
+    Route::post('/cart/store', [CartController::class,'store']);
+// Route to show the payment page
+Route::get('/payment', [CartController::class, 'showPaymentPage'])->name('payment');
+
+// Route to handle the creation of transactions after payment validation
+Route::post('/create-transaction', [TransactionController::class, 'createFromCart'])->name('create.transaction');
 
     // Route::resource('/pilihan', ItemController::class);
 });

@@ -2,55 +2,77 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Item;
+use App\Models\Cart;
 
 use App\Models\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Inertia\Inertia;
 class CartController extends Controller
 {
-    public function add($id)
-    {
-        $item = Item::findOrFail($id);
 
-   
+public function index ()
+{
+    $userId = auth()->id();
+    $carts = Cart::where('user_id', $userId)->with('item')->get();
+    return Inertia::render('Cart', ['carts' => $carts]);
+}
 
-        $transaction = Transaction::create([
-            'user_id' => Auth::guard('users')->user()->id,
-            'item_id' => $item->id,
-            'amount' => $item->price
+public function store(Request $request)
+{
+    $userId = auth()->id();
+    $itemId = $request->input('item_id');
+    $quantity = $request->input('quantity');
+
+    // Check if the item is already in the wishlist
+    $exists = Cart::where('user_id', $userId)->where('item_id', $itemId)->exists();
+
+    if (!$exists) {
+        Cart::create([
+            'user_id' => $userId,
+            'item_id' => $itemId,
+            'quantity' => $quantity
         ]);
-
-        return redirect('/cart');
- 
-
+    }
+    else {
+        return redirect()->back()->with('message','Item already in Cart');
     }
 
-    public function cart()
-    {
-        $data = [
-            $carts = Transaction::where('user_id', Auth::guard('users')->user()->id)->get()
-        ];
+    return redirect()->back()->with('message', 'Item added to Cart successfully.');
+}
 
-        return view('cart', $data);
-        
-    }
 
-    public function remove($id)
+    public function destroy($id)
     {
-        $transaction = Transaction::findOrFail($id);
-        $transaction->delete();
+        $cart = Cart::find($id);
+        $cart->delete();
 
         return redirect('/cart');
     }
 
     public function order()
-    {
-        $carts = Transaction::where('user_id', Auth::guard('users')->user()->id)->get();
-        foreach ($carts as $cart) {
-            $cart->delete();
-        }
-        return redirect('/success');
+{
+    $userId = auth()->id;
+    $carts = Cart::where('user_id', $userId)->with('item')->get();
+
+    foreach ($carts as $cart) {
+        Transaction::create([
+            'user_id' => $userId,
+            'item_id' => $cart->item_id,
+            'quantity' => $cart->quantity,
+            'price' => $cart->item->price,
+        ]);
+
+        // Delete the cart item after creating the order
+        $cart->delete();
     }
+
+    return redirect('/success')->with('message', 'Order placed successfully.');
+}
+public function showPaymentPage()
+{
+    $userId = auth()->id();
+    $carts = Cart::where('user_id', $userId)->with('item')->get();
+    return Inertia::render('PaymentPage', ['carts' => $carts]);
+}
 }

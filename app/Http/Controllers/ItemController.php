@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Item;
-use Inertia\Inertia;
+        use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 
@@ -17,7 +17,7 @@ class ItemController extends Controller
 
         // Fetch only the items that belong to this user
         $pets = Item::where('user_id', $userId)->get();
-      
+
         return Inertia::render('Item/Index', [
             'pets' => $pets,
         ]);
@@ -39,7 +39,7 @@ class ItemController extends Controller
             'stock' => 'required|numeric',
             'image' => 'required|image',
         ]);
-    
+
         // $image = $request->file('image')->store('pet_images');
         // $imageName = time().'.'.$request->image->getClientOriginalExtension();
         // $request->image->storePublicly('pet_images');
@@ -51,7 +51,7 @@ class ItemController extends Controller
         }
         Item::create([
             'user_id' => auth()->id(),
-            
+
             'name' => $request->name,
             'description' => $request->description,
             'price' => $request->price,
@@ -60,7 +60,7 @@ class ItemController extends Controller
             'image' => $request->image,
             'stock' => $request->stock,
         ]);
-    
+
         return redirect()->route('Item.Index')->with('success', 'Item successfuly inserted!');
     }
 
@@ -94,7 +94,7 @@ public function update(Request $request, $id)
         $imageName = uniqid() . '' . $imageFile->getClientOriginalName();
         $imagePath = $imageFile->storeAs('pet_images', $imageName, 'public');
         $request->image = $imagePath;
-    
+
 
         Storage::delete($item->image);
 
@@ -103,11 +103,48 @@ public function update(Request $request, $id)
        $request->image = $item->image;
     }
 
-   
+
     $item->update($request->all());
 
     return response()->json($item);
 }
+
+// public function update(Request $request, $id)
+// {
+//     $item = Item::findOrFail($id);
+
+//     $request->validate([
+//         'name' => 'required',
+//         'description' => 'required',
+//         'price' => 'required|numeric',
+//         'category_id' => 'required|exists:categories,id',
+//         'location' => 'required',
+//         'stock' => 'required|numeric',
+//         'image' => 'nullable|image',
+//     ]);
+
+//     if ($request->file('image')) {
+//         $imageFile = $request->file('image');
+//         $imageName = uniqid() . '_' . $imageFile->getClientOriginalName();
+//         $imagePath = $imageFile->storeAs('pet_images', $imageName, 'public');
+
+//         // Delete old image if exists
+//         if ($item->image) {
+//             Storage::disk('public')->delete($item->image);
+//         }
+
+//         $item->image = $imagePath;
+//     }
+
+//     // Fill the item with new data
+//     $item->fill($request->except('image'));
+//     $item->save();
+
+//     return redirect()->route('Item.Index')->with('success', 'Item berhasil diperbarui!');
+// }
+
+
+
 // public function update1($id, Request $request)
 //     {
 
@@ -143,7 +180,7 @@ public function update(Request $request, $id)
 
 public function destroy(Item $item)
 {
-  
+
     $item->delete();
 
     return redirect()->route('Item.Index')->with('success', 'Data Berhasil Dihapus!');

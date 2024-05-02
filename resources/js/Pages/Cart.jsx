@@ -18,29 +18,29 @@ import { Head, Link } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import QuantitySelector from "./Item/partials/QuantitySelector";
 
-const Wishlist = ({ auth }) => {
+const Cart = ({ auth }) => {
     const { props } = usePage();
-    const { list } = props;
+    const { carts } = props || [];
     const [totalPrice, setTotalPrice] = useState(0);
 
 
     // Function to handle item removal from the wishlist
     const handleRemove = (itemId) => {
-        Inertia.delete(`/wishlist/${itemId}`);
+        Inertia.delete(`/cart/${itemId}`);
     };
 
     useEffect(() => {
         // Calculate total price whenever the list changes
         let totalPrice = 0;
 
-        if (list.length > 0) {
-            totalPrice = list.reduce((total, wishlistItem) => {
-                return total + parseFloat(wishlistItem.item.price); // Tambahkan harga setiap produk
+        if (carts && carts.length > 0) { // Menambahkan pengecekan untuk carts
+            totalPrice = carts.reduce((total, cart) => {
+                return total + parseFloat(cart.item.price); // Menggunakan nama variabel yang berbeda untuk menghindari konflik dengan nama parameter
             }, 0);
         }
 
         setTotalPrice(totalPrice);
-    }, [list]);
+    }, [carts]);
 
 
     const calculateTotalPrice = (wishlistItem) => {
@@ -75,30 +75,30 @@ const Wishlist = ({ auth }) => {
                     bgSize="250px"
                 >
                     <Heading>My Wishlist</Heading>
-                    {list.length > 0 ? (
+                    {carts.length > 0 ? (
                         <Table variant="striped" colorScheme="">
                         <Tbody>
-                            {list.map((wishlistItem) => (
-                                <Tr key={wishlistItem.id}>
+                            {carts.map((carts) => (
+                                <Tr key={carts.id}>
                                     <Td>
                                         <Flex alignItems="center">
                                             <Image
-                                                src={`/storage/${wishlistItem.item.image}`}
+                                                src={`/storage/${carts.item.image}`}
                                                 alt="wishlist item"
                                                 width={"90px"}
                                             />
-                                            <Text ml={4}>{wishlistItem.item.name} - {wishlistItem.item.description}</Text>
+                                            <Text ml={4}>{carts.item.name} - {carts.item.description}</Text>
                                         </Flex>
                                     </Td>
                                     <Td>
                                         <Flex alignItems="center" justifyContent="center">
-                                            <QuantitySelector initialStock={wishlistItem.item.stock} price={wishlistItem.item.price} />
+                                            <QuantitySelector initialStock={carts.item.stock} price={carts.item.price} />
                                         </Flex>
                                     </Td>
                                     <Td>
                                         <Button
                                             onClick={() => {
-                                                Inertia.delete(`/wishlist/${wishlistItem.id}`);
+                                                Inertia.delete(`/wishlist/${carts.id}`);
                                             }}
                                         >
                                             Remove
@@ -107,7 +107,7 @@ const Wishlist = ({ auth }) => {
                                 </Tr>
                             ))}
                             <Tr>
-                                <Td colSpan="2" textAlign="right">Total ({list.length} produk):</Td>
+                                <Td colSpan="2" textAlign="right">Total ({carts.length} produk):</Td>
                                 <Td>
                                     {totalPrice}
                                 </Td>
@@ -115,7 +115,7 @@ const Wishlist = ({ auth }) => {
                         </Tbody>
                     </Table>
                     ) : (
-                        <Text>Your wishlist is empty.</Text>
+                        <Text>Your Shopping Cart is empty.</Text>
                     )}
                 </Box>
             </AuthenticatedLayout>
@@ -123,4 +123,4 @@ const Wishlist = ({ auth }) => {
     );
 };
 
-export default Wishlist;
+export default Cart;

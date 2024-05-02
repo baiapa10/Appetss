@@ -13,6 +13,7 @@ import {
     ChakraProvider ,
     Center,
     Image,
+    Spacer,
 } from '@chakra-ui/react';
 import { Head, Link } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
@@ -125,15 +126,26 @@ const Homepages = (props) => {
             <Text>Price: {data.price}</Text>
             <Text>Location: {data.location}</Text>
             {/* Detail button using Inertia Link */}
-            <Link href={`/item/${data.id}`} style={{ marginTop: '10px', display: 'inline-block', textDecoration: 'underline', color: 'blue' }}>
+            <Link
+            href={`/item/${data.id}`}
+            style={{ marginTop: '10px', display: 'inline-block', textDecoration: 'underline', color: 'blue' }}
+            >
                 View Details
             </Link>
-            <Link href={`/item/${data.id}/edit`} style={{ marginTop: '10px', marginLeft: '10px', display: 'inline-block', textDecoration: 'underline', color: 'blue' }}>
-    Edit
-</Link
-><Button colorScheme="red" onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) Inertia.delete(`/item/${data.id}`); }}>
-    Delete
-</Button>
+            <Link
+            href={`/item/${data.id}/edit`}
+            style={{ marginTop: '10px', marginLeft: '10px', display: 'inline-block', textDecoration: 'underline', color: 'blue' }}
+            >
+                Edit
+            </Link>
+            {/* <Spacer/> */}
+            <Button
+            colorScheme="red"
+            onClick={() => { if (window.confirm('Are you sure you wish to delete this item?')) Inertia.delete(`/item/${data.id}`); }}
+            ml={4}
+            >
+                Delete
+            </Button>
         </Box>
     ))
 ) : (

@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 
 const Edit = (props) => {
-    const { data, setData, errors, processing, put, progress } = useForm({
+    const { data, setData, errors, processing, put, patch, recentlySuccessful, progress } = useForm({
         name: "",
         description: "",
         category_id: "",
@@ -27,6 +27,23 @@ const Edit = (props) => {
         stock: "",
         image: null,
     });
+
+    const redirectToWelcomePage = () => {
+        fetch('/homepages')
+            .then(response => {
+                if (response.ok) {
+                    // Jika permintaan berhasil, arahkan pengguna ke halaman homepages di Laravel
+                    window.location.href = '/item';
+                } else {
+                    // Handle jika ada kesalahan dalam permintaan
+                    console.error('Failed to redirect to /homepages');
+                }
+            })
+            .catch(error => {
+                // Handle kesalahan dalam melakukan permintaan
+                console.error('Error redirecting to /homepages:', error);
+            });
+    };
 
     // Assuming `item` is passed as a prop to this component or obtained from `usePage().props`
     const { item } = props;
@@ -41,18 +58,22 @@ const Edit = (props) => {
         }
     }, [item]);
 
+
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        put(route("item.update", item.id), {
+        patch(route("item.update", item.id), {
             onSuccess: () => {
                 console.log("Data berhasil diperbarui!");
-                Inertia.visit('/homepages'); // Redirect after success
+                Inertia.visit('/item');
             },
             onError: (errors) => {
                 console.error("Gagal memperbarui data:", errors);
             }
         });
     };
+
+
 
     function handleImageChange(e) {
         const file = e.target.files[0];
@@ -197,9 +218,13 @@ const Edit = (props) => {
                                         </GridItem>
                                     </Grid>
                                 </Flex>
-                                <PrimaryButton className="ms-4" disabled={processing} onClick={redirectToWelcomePage}>
+                                <PrimaryButton
+                                className="ms-4"
+                                disabled={processing}
+                                onClick={redirectToWelcomePage}
+                                >
                                     Save
-                                </PrimaryButton>  
+                                </PrimaryButton>
                                 </form>
                             </Box>
                         </Box>

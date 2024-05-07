@@ -37,14 +37,22 @@ public function index()
     return redirect()->back()->with('message', 'Item added to wishlist successfully.');
 }
 
+// public function destroy($itemId)
+// {
+//     $userId = auth()->id();
+
+//     Wishlist::where('user_id', $userId)->where('item_id', $itemId)->delete();
+
+//     return redirect()->back()->with('message', 'Item removed from wishlist successfully.');
+// }
 public function destroy($itemId)
 {
-    $userId = auth()->id();
-
-    Wishlist::where('user_id', $userId)->where('item_id', $itemId)->delete();
-
+    $itemId = Wishlist::find($itemId);
+    $itemId->delete();
     return redirect()->back()->with('message', 'Item removed from wishlist successfully.');
+
 }
+
 
 
 }

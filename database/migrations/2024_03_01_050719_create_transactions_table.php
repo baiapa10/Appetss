@@ -17,8 +17,7 @@ return new class extends Migration
             $table->string('status');
             $table->integer('quantity');
             $table->decimal('total_price'); 
-            $table->foreignId('seller_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
-            $table->foreignId('buyer_id')->constrained('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
             $table->string('address');
 

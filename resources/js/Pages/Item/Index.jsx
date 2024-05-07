@@ -1,4 +1,4 @@
-import React, {useEffect, useHistory, useRef  } from 'react';
+import React, {useEffect, useHistory, useRef, useState } from 'react';
 import {
     Box,
     Flex,
@@ -22,6 +22,22 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
 const Homepages = (props) => {
     const { auth } = props;
+    // ipe
+    const [modalDelete, setModalDelete] = useState(false)
+
+    const handleDelete = (e, id) => {
+        e.preventDefault();
+        if (window.confirm('Are you sure you wish to delete this item?')) {
+            Inertia.delete(`/item/${id}`).then(() => {
+                setModalDelete(true);
+                setTimeout(() => {
+                    setModalDelete(false);
+                }, 3000);
+            }).catch(error => {
+                console.error('Error deleting item:', error);
+            });
+        }
+    };
 
     const gridRef = useRef(null);
     // const navigate = useNavigate();
@@ -237,6 +253,9 @@ const Homepages = (props) => {
             ) : (
                 <Text>No pets found.</Text>
             )} */}
+            {modalDelete && (
+                   alert("berhasil dihapus")
+                )}
         </Box>
         </Box>
         </AuthenticatedLayout>

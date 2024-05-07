@@ -16,14 +16,11 @@ class Transaction extends Model
         'quantity',
         'price',
     ];
-    public function buyer()
+    public function user()
 {
-    return $this->belongsTo(User::class, 'buyer_id', 'id');
+    return $this->belongsTo(User::class, 'user_id', 'id');
 }
-public function seller()
-{
-    return $this->belongsTo(User::class, 'seller_id', 'id');
-}
+
     public function item()
     {
         return $this->belongsTo(Item::class, 'item_id', 'id');

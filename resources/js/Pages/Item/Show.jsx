@@ -1,4 +1,4 @@
-import React, { useEffect, useHistory, useRef, useState  } from "react";
+import React, { useEffect, useHistory, useRef, useState } from "react";
 import {
     Box,
     Flex,
@@ -21,8 +21,9 @@ import { Inertia } from "@inertiajs/inertia";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import QuantitySelector from "./partials/QuantitySelector";
 
-
-
+const addToCart = (itemId) => {
+    Inertia.post('/cart/store', { item_id: itemId, quantity: 1 });
+};
 const Show = ({ item, auth }) => {
     // const { auth } = props;
 
@@ -31,6 +32,7 @@ const Show = ({ item, auth }) => {
     const handleQuantityChange = (newQuantity) => {
         setQuantity(newQuantity);
     };
+
 
 
     return (
@@ -111,11 +113,11 @@ const Show = ({ item, auth }) => {
                                 Quantity:
                             </Text>
                             <QuantitySelector
-            id="quantity-selector"
-            initialStock={item.stock}
-            price={item.price}
-            onChange={handleQuantityChange} // Meneruskan fungsi handleQuantityChange sebagai prop
-        />
+                                id="quantity-selector"
+                                initialStock={item.stock}
+                                price={item.price}
+                                onChange={handleQuantityChange} // Meneruskan fungsi handleQuantityChange sebagai prop
+                            />
                             <Spacer />
                         </Flex>
                         <Text fontSize="lg" mt={2} ml={"202px"}>
@@ -138,20 +140,20 @@ const Show = ({ item, auth }) => {
                                 mr={2}
                             />
                             <IconButton
-    icon={
-        <Image
-            src="/storage/pet_images/addtocart.png"
-            width={"164"}
-            height={"96px"}
-        />
-    }
-    onClick={() => {
-        Inertia.post(route('cart.store'), { item_id: item.id, quantity: quantity });
-    }}
-    aria-label="Add to Cart"
-    variant="ghost"
-    size="md"
-/>
+                                icon={
+                                    <Image
+                                        src="/storage/pet_images/addtocart.png"
+                                        width={"164"}
+                                        height={"96px"}
+                                    />
+                                }
+                                onClick={() => {
+                                    addToCart(item.id)
+                                }}
+                                aria-label="Add to Cart"
+                                variant="ghost"
+                                size="md"
+                            />
                         </Flex>
                     </Flex>
                     <Box position="relative" display="inline-block" mt={"45px"}>

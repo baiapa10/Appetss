@@ -41,6 +41,29 @@ public function store(Request $request)
     return redirect()->back()->with('message', 'Item added to Cart successfully.');
 }
 
+// public function store(Request $request)
+// {
+//     $userId = auth()->id();
+//     $itemId = $request->input('item_id');
+//     $quantity = $request->input('quantity');
+
+//     // Check if the item is already in the wishlist
+//     $exists = Cart::where('user_id', $userId)->where('item_id', $itemId)->exists();
+
+//     if ($exists) {
+//         return response()->json(['message' => 'Item already in Cart'], 422);
+//     }
+
+//     Cart::create([
+//         'user_id' => $userId,
+//         'item_id' => $itemId,
+//         'quantity' => $quantity
+//     ]);
+
+//     return response()->json(['message' => 'Item added to Cart successfully'], 200);
+// }
+
+
 
     public function destroy($id)
     {
@@ -69,10 +92,25 @@ public function store(Request $request)
 
     return redirect('/success')->with('message', 'Order placed successfully.');
 }
+// public function showPaymentPage()
+// {
+//     $userId = auth()->id();
+//     $carts = Cart::where('user_id', $userId)->with('item')->get();
+//     return Inertia::render('PaymentPage', ['carts' => $carts]);
+// }
+
 public function showPaymentPage()
 {
     $userId = auth()->id();
     $carts = Cart::where('user_id', $userId)->with('item')->get();
-    return Inertia::render('PaymentPage', ['carts' => $carts]);
+
+    // Hitung total harga di sini
+    $totalPrice = 0;
+    foreach ($carts as $cart) {
+        $totalPrice += $cart->item->price * $cart->quantity;
+    }
+
+    return Inertia::render('PaymentPage', ['carts' => $carts, 'totalPrice' => $totalPrice]);
 }
+
 }

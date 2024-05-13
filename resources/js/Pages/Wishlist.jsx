@@ -91,9 +91,9 @@ const Wishlist = ({ auth }) => {
                                         </Flex>
                                     </Td>
                                     <Td>
-                                        <Flex alignItems="center" justifyContent="center">
+                                        {/* <Flex alignItems="center" justifyContent="center">
                                             <QuantitySelector initialStock={wishlistItem.item.stock} price={wishlistItem.item.price} />
-                                        </Flex>
+                                        </Flex> */}
                                     </Td>
                                     <Td>
                                         <Button

@@ -57,6 +57,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
     Route::resource('/item', ItemController::class);
+    Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
+
+
   //  Route::resource('/wishlist', WishlistController::class);
     Route::post('/wishlist/store', [WishlistController::class, 'store']);
 
@@ -66,8 +69,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index']);
     Route::delete('/cart/{itemId}', [CartController::class, 'destroy']);
     Route::post('/cart/store', [CartController::class,'store']);
+
 // Route to show the payment page
 Route::get('/payment', [CartController::class, 'showPaymentPage'])->name('payment');
+Route::post('/payment', [CartController::class, 'showPaymentPage'])->name('payment.show');
 
 // Route to handle the creation of transactions after payment validation
 Route::post('/create-transaction', [TransactionController::class, 'createFromCart'])->name('create.transaction');

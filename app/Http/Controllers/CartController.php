@@ -38,7 +38,7 @@ public function store(Request $request)
         return redirect()->back()->with('message','Item already in Cart');
     }
 
-    return redirect()->back()->with('message', 'Item added to Cart successfully.');
+    return redirect()->route('cart.index');
 }
 
 // public function store(Request $request)
@@ -99,18 +99,25 @@ public function store(Request $request)
 //     return Inertia::render('PaymentPage', ['carts' => $carts]);
 // }
 
-public function showPaymentPage()
+// public function showPaymentPage()
+// {
+//     $userId = auth()->id();
+//     $carts = Cart::where('user_id', $userId)->with('item')->get();
+
+//     // Hitung total harga di sini
+//     $totalPrice = 0;
+//     foreach ($carts as $cart) {
+//         $totalPrice += $cart->item->price * $cart->quantity;
+//     }
+
+//     return Inertia::render('PaymentPage', ['carts' => $carts, 'totalPrice' => $totalPrice]);
+// }
+public function showPaymentPage(Request $request)
 {
     $userId = auth()->id();
-    $carts = Cart::where('user_id', $userId)->with('item')->get();
+    $totalPrice = $request->input('totalPrice');
 
-    // Hitung total harga di sini
-    $totalPrice = 0;
-    foreach ($carts as $cart) {
-        $totalPrice += $cart->item->price * $cart->quantity;
-    }
-
-    return Inertia::render('PaymentPage', ['carts' => $carts, 'totalPrice' => $totalPrice]);
+    return Inertia::render('PaymentPage', ['totalPrice' => $totalPrice]);
 }
 
 }

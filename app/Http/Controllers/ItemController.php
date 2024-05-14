@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Item;
+use App\Models\Category;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
@@ -77,48 +78,38 @@ public function show($item)
     return Inertia::render('Item/Show', ['item' => $item]);
 }
 
+// ItemController.php
+
+
 public function update(Request $request, Item $item)
 {
-     //dd ($request->all());
-  
-    //dd($item);
     $request->validate([
         'name' => 'required',
-            'description' => 'required',
-            'price' => 'required|numeric',
-            'category_id' => 'required|exists:categories,id',
-            'location' => 'required',
-            'stock' => 'required|numeric',
-            'image' => 'nullable|image',
+        'description' => 'required',
+        'price' => 'required|numeric',
+        'category_id' => 'required|exists:categories,id',
+        'location' => 'required',
+        'stock' => 'required|numeric',
+        'image' => 'nullable|image',
     ]);
+
+    $requestData = $request->only(['name', 'description', 'price', 'category_id', 'location', 'stock']);
+    
     if ($request->file('image')) {
         $imageFile = $request->file('image');
         $imageName = uniqid() . '' . $imageFile->getClientOriginalName();
         $imagePath = $imageFile->storeAs('pet_images', $imageName, 'public');
-        $request->image = $imagePath;
-
-
+        $requestData['image'] = $imagePath;
         Storage::delete($item->image);
-
     } else {
-
-       $request->image = $item->image;
+        $requestData['image'] = $item->image;
     }
-   
-    $item->update([
-        'name' => $request->name,
-        'description' => $request->description,
-        'price' => $request->price,
-        'category_id' => $request->category_id,
-        'location' => $request->location,
-        'image' => $request->image,
-       'stock' => $request->stock,
-    ]);
-    
-    // $item->update($request->all());
 
-    return response()->json($item);
+    $item->update($requestData);
+
+    return redirect()->route('item.index')->with('success', 'Data Berhasil Diupdate!');
 }
+
 
 
 public function destroy(Item $item)
@@ -139,7 +130,7 @@ public function edit($id)
         // Handle the case where the item does not exist
         abort(404);
     }
-
+    //return view('update')->with('item', $item);
     return Inertia::render('Item/Edit', ['item' => $item]);
 }
 }

@@ -1,53 +1,64 @@
-import React from 'react';
-import { Head } from '@inertiajs/react';
-// import "./HomePage.css";
+import React from "react";
+import { Inertia } from "@inertiajs/inertia";
+import {
+    Box,
+    Heading,
+    Text,
+    useColorModeValue,
+    ChakraProvider,
+    Button,
+} from "@chakra-ui/react";
+import { Head } from "@inertiajs/react";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 
-export default function Homepage(props) {
-  return (
-    <div>
-      <Head title={props.title} />
-      {props.pets ? (
-        props.pets.map((data, i) => {
-          return (
-            <div key={i}>
-              <h1>name: {data.name}</h1>
-              <p>description: {data.description}</p>
-              <p>price: {data.price}</p>
-              <p>location: {data.location}</p>
-              {data.image && (
-                <img
-                  src={`/storage/${data.image}`}
-                  alt={data.name}
-                  style={{ maxWidth: '100%', height: '150px' }}
-                />
-              )}
-              <br />
-            </div>
-          );
-        })
-      ) : (
-        <p>No pets found.</p>
-      )}
+const PaymentPage = ({ auth, totalPrice, carts }) => {
+    const cartItems = carts.map(cart => ({
+        id: cart.id,
+        quantity: cart.quantity,
+        price: cart.item.price,
+        name: cart.item.name
+    }));
+    console.log(totalPrice)
 
-<Box display="flex" flexWrap="wrap">
-            {props.pets ? (
-                props.pets.map((data, i) => (
-                    <Box key={i} ml={8} mr={2} mb={4} flexBasis="calc(33.33% - 250px)" boxShadow="0px 0px 2px rgba(0, 0, 0, 0.2)" border="1px solid #ccc" borderRadius="xl" bg={useColorModeValue('gray.200', 'gray.700')} borderColor="black" p={4}>
-                        <Image
-                            src={`/storage/${data.image}`}
-                            alt={data.name}
-                            style={{ maxWidth: '100%', height: '150px' }}
-                        />
-                        <Heading size="md" mb={2}>Name: {data.name}</Heading>
-                        <Text mt={2}>Description: {data.description}</Text>
-                        <Text>Price: {data.price}</Text>
-                        <Text>Location: {data.location}</Text>
+    const handlePayment = () => {
+        Inertia.post('/process-payment', { totalPrice, cartItems });
+    };
+
+    // Check if totalPrice is null and provide a fallback value
+    const displayTotalPrice = totalPrice !== null ? totalPrice : '0';
+
+    return (
+        <ChakraProvider>
+            <AuthenticatedLayout
+                user={auth.user}
+                header={
+                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                        Payment
+                    </h2>
+                }
+            >
+                <Head title="Payment" />
+                <Box
+                    bg={useColorModeValue("rgba(253, 201, 152, 1)")}
+                    minH="100vh"
+                    id="random-background-box"
+                    bgImage={`url(/storage/logo/image.png)`}
+                    bgSize="250px"
+                >
+                    <Heading>Payment</Heading>
+                    <Box>
+                        <Text fontSize="lg" mb="4">
+                            Total Pembayaran: Rp.{displayTotalPrice}
+                        </Text>
+                        <Text mb="4">
+                            Silakan lakukan pembayaran dalam waktu 24 jam.
+                        </Text>
+                        <Button colorScheme="blue" onClick={handlePayment}>OK</Button>
                     </Box>
-                ))
-            ) : (
-                <Text>No pets found.</Text>
-            )}
-        </Box>
-    </div>
-  );
-}
+                </Box>
+            </AuthenticatedLayout>
+        </ChakraProvider>
+    );
+};
+
+export default PaymentPage;

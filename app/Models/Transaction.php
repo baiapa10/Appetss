@@ -14,7 +14,8 @@ class Transaction extends Model
         'category_id',
         'item_id',
         'quantity',
-        'price',
+        'total_price',
+        'address'
     ];
     public function user()
 {
@@ -23,7 +24,7 @@ class Transaction extends Model
 
     public function item()
     {
-        return $this->belongsTo(Item::class, 'item_id', 'id');
+        return $this->hasMany(Item::class, 'item_id', 'id');
     }
 
 }

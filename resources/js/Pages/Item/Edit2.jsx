@@ -71,17 +71,9 @@ const Edit = (props) => {
                 console.error("Gagal memperbarui data:", errors);
             }
         });
+    
     };
-    Inertia.patch(route("item.update", data.id), formData, {
-        onSuccess: () => {
-            console.log("Data berhasil diperbarui!");
-            Inertia.visit('/item');
-        },
-        onError: (errors) => {
-            console.error("Gagal memperbarui data:", errors);
-        }
-    });
-
+   
 
     function handleImageChange(e) {
         const file = e.target.files[0];
@@ -103,7 +95,7 @@ const Edit = (props) => {
                                         Back
                                     </Link>
                                 </Flex>
-                                <form name="editForm" onSubmit={handleSubmit}>
+                                <form name="editForm" onSubmit={handleSubmit} method="POST" action={route('item.update', item.id)} encType="multipart/form-data">
                                 <Flex flexDirection="column">
                                     <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                                         <GridItem colSpan={1}>
@@ -229,7 +221,7 @@ const Edit = (props) => {
                                 <PrimaryButton
                                 className="ms-4"
                                 disabled={processing}
-                                onClick={redirectToWelcomePage}
+                                type="submit" 
                                 >
                                     Save
                                 </PrimaryButton>

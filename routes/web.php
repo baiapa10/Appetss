@@ -49,7 +49,7 @@ Route::get('/', function () {
 
 Route::get('/homepages', [HomepagesController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->name('homepages');
+    ->name('homepages.search');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -66,16 +66,17 @@ Route::middleware('auth')->group(function () {
     Route::get('/wishlist', [WishlistController::class, 'index']);
 
     Route::delete('/wishlist/{itemId}', [WishlistController::class, 'destroy']);
-    Route::get('/cart', [CartController::class, 'index']);
+    Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::delete('/cart/{itemId}', [CartController::class, 'destroy']);
     Route::post('/cart/store', [CartController::class,'store']);
+    // Route::put ('/cart/{itemId}', [CartController::class, 'update']);
 
 // Route to show the payment page
-Route::get('/payment', [CartController::class, 'showPaymentPage'])->name('payment');
-Route::post('/payment', [CartController::class, 'showPaymentPage'])->name('payment.show');
 
-// Route to handle the creation of transactions after payment validation
-Route::post('/create-transaction', [TransactionController::class, 'createFromCart'])->name('create.transaction');
+Route::get('/payment', [TransactionController::class, 'showPaymentPage'])->name('payment.get');
+Route::post('/payment', [TransactionController::class, 'showPaymentPage'])->name('payment.post');
+Route::post('/process-payment', [TransactionController::class, 'processPayment']);
+
 
     // Route::resource('/pilihan', ItemController::class);
 });

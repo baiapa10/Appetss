@@ -4,21 +4,19 @@ import { usePage } from "@inertiajs/react";
 import {
     Box,
     Heading,
-    UnorderedList,
-    ListItem,
-    Button,
-    Text,
-    useColorModeValue,
-    ChakraProvider,
-    Image,
-    Flex,
     Table,
     Tbody,
     Tr,
     Td,
+    Button,
+    Text,
     Checkbox,
+    Image,
+    Flex,
+    useColorModeValue,
+    ChakraProvider,
 } from "@chakra-ui/react";
-import { Head, Link,  } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import QuantitySelector from "./Item/partials/QuantitySelector";
 
@@ -28,46 +26,41 @@ const Cart = ({ auth }) => {
     const [totalPrice, setTotalPrice] = useState(0);
     const [checkedItems, setCheckedItems] = useState([]);
 
-
     const handleProceedToPayment = () => {
-        Inertia.post(`/payment`, { props: { totalPrice: totalPrice } });
+        // Ensure you're passing both totalPrice and checkedItems to the backend
+        console.log('Proceed to payment:', { totalPrice, cartItems: checkedItems });
+        Inertia.post(route('payment.post'), { totalPrice });
+         Inertia.visit(`/payment`);
     };
 
-
-
-
-
-
-
-    // Function to handle item removal from the cart
     const handleRemove = (itemId) => {
-        const cartItem = carts.find((item) => item.id === itemId); // Cari item keranjang yang sesuai dengan itemId
+        const cartItem = carts.find((item) => item.id === itemId);
         Inertia.delete(`/cart/${itemId}`, {
             data: { quantity: cartItem.quantity },
         });
+        
     };
 
     const handleCheckboxChange = (itemId) => {
-        if (checkedItems.includes(itemId)) {
-            setCheckedItems(checkedItems.filter((item) => item !== itemId));
-        } else {
-            setCheckedItems([...checkedItems, itemId]);
-        }
+        setCheckedItems((prevCheckedItems) =>
+            prevCheckedItems.find(item => item.id === itemId)
+                ? prevCheckedItems.filter((item) => item.id !== itemId)
+                : [...prevCheckedItems, { id: itemId, quantity: carts.find(cart => cart.id === itemId).quantity }]
+        );
+        
     };
 
     useEffect(() => {
         let total = 0;
         carts.forEach((cart) => {
-            if (checkedItems.includes(cart.id)) {
+            if (checkedItems.find(item => item.id === cart.id)) {
                 total += parseFloat(cart.item.price) * cart.quantity;
             }
         });
         setTotalPrice(total);
     }, [checkedItems, carts]);
 
-
     const handleQuantityChange = (itemId, newQuantity) => {
-        // Update quantity in carts state
         const updatedCarts = carts.map((cart) => {
             if (cart.id === itemId) {
                 return { ...cart, quantity: newQuantity };
@@ -75,30 +68,15 @@ const Cart = ({ auth }) => {
             return cart;
         });
 
-        // Update total price based on quantity changes
         let total = 0;
         updatedCarts.forEach((cart) => {
-            if (checkedItems.includes(cart.id)) {
+            if (checkedItems.find(item => item.id === cart.id)) {
                 total += parseFloat(cart.item.price) * cart.quantity;
             }
         });
         setTotalPrice(total);
-    };
 
-    const calculateTotalPrice = (wishlistItem) => {
-        if (
-            wishlistItem.item &&
-            wishlistItem.item.price &&
-            wishlistItem.quantity
-        ) {
-            const price = parseFloat(wishlistItem.item.price); // Konversi ke tipe data float
-            const quantity = parseFloat(wishlistItem.quantity);
-
-            if (!isNaN(price) && !isNaN(quantity)) {
-                return price; // Mengembalikan harga, bukan harga * jumlah
-            }
-        }
-        return 0; // Return 0 if data is invalid
+        setCheckedItems(prevCheckedItems => prevCheckedItems.map(item => item.id === itemId ? { ...item, quantity: newQuantity } : item));
     };
 
     return (
@@ -129,14 +107,10 @@ const Cart = ({ auth }) => {
                                             <Flex alignItems="center">
                                                 <Checkbox
                                                     mr={4}
-                                                    isChecked={checkedItems.includes(
-                                                        cart.id
-                                                    )} // Tentukan status checked berdasarkan apakah item ada dalam array checkedItems
+                                                    isChecked={checkedItems.some(item => item.id === cart.id)}
                                                     onChange={() =>
-                                                        handleCheckboxChange(
-                                                            cart.id
-                                                        )
-                                                    } // Panggil fungsi handleCheckboxChange saat checkbox diubah
+                                                        handleCheckboxChange(cart.id)
+                                                    }
                                                 />
                                                 <Image
                                                     src={`/storage/${cart.item.image}`}
@@ -156,16 +130,12 @@ const Cart = ({ auth }) => {
                                                 justifyContent="center"
                                             >
                                                 <QuantitySelector
-                                                    initialStock={
-                                                        cart.item.stock
-                                                    }
+                                                    initialStock={cart.item.stock}
                                                     price={cart.item.price}
                                                     onChange={(newQuantity) =>
-                                                        handleQuantityChange(
-                                                            cart.id,
-                                                            newQuantity
-                                                        )
+                                                        handleQuantityChange(cart.id, newQuantity)
                                                     }
+                                                    initialQuantity={cart.quantity}
                                                 />
                                             </Flex>
                                         </Td>

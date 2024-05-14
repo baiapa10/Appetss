@@ -3,6 +3,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
 import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
+import { Inertia } from '@inertiajs/inertia';
 // import { InertiaLink } from '@inertiajs/inertia-react';
 // import { Link } from '@inertiajs/react';
 import {
@@ -23,8 +24,19 @@ import {
     VStack,
   } from '@chakra-ui/react';
 
-export default function Authenticated({ user, header, children }) {
+  export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
+    const [searchQuery, setSearchQuery] = useState('');
+
+    const handleSearch = (e) => {
+        e.preventDefault(); // Prevent the default form submission
+        console.log(searchQuery);
+        // Use Inertia's visit method to navigate to the route with the search query
+        Inertia.visit(route('homepages.search', { search: searchQuery }), {
+            preserveState: true,
+            method: 'get',
+        });
+    };
 
     return (
         <ChakraProvider >
@@ -45,26 +57,28 @@ export default function Authenticated({ user, header, children }) {
 
                             <Flex display={{ base: "none", sm: "flex" }} spaceX={8} mt={{ base: "-px", sm: "0" }} ml={{ base: "0", sm: 10 }}>
                                 {/* <NavLink href={route('dashboard')} active={route().current('dashboard')}>
-                                    Dashboarda
+                                    Dashboard
                                 </NavLink> */}
-                                <Flex
-                                    // bg={useColorModeValue('gray.200', 'gray.700')}
+                                  <Flex
                                     px={7}
-                                    // py={1}
                                     w="700px"
                                     justifyContent="space-between"
                                     alignItems="center"
                                     mb={5}
-                                    // mt={2}
                                 >
-                                    {/* <Heading size="md">appets</Heading> */}
-                                    <Input
-                                    placeholder="Search Products..."
-                                    borderRadius="40px"
-                                    flexGrow={20}
-                                    colorScheme="whiteAlpha"
-                                    backgroundColor="white"
-                                    />
+                                    <form onSubmit={handleSearch} style={{ display: 'flex', width: '100%' }}>
+                                        <Input
+                                            placeholder="Search Products..."
+                                            borderRadius="40px"
+                                            flexGrow={1}
+                                            backgroundColor="white"
+                                            value={searchQuery}
+                                            onChange={(e) => setSearchQuery(e.target.value)}
+                                        />
+                                        <Button onClick={handleSearch} ml={2}>
+                                            Search
+                                        </Button>
+                                    </form>
                                 </Flex>
                             </Flex>
                         </div>

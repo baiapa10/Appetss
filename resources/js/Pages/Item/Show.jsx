@@ -21,8 +21,9 @@ import { Inertia } from "@inertiajs/inertia";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import QuantitySelector from "./partials/QuantitySelector";
 
-const addToCart = (itemId) => {
-    Inertia.post('/cart/store', { item_id: itemId, quantity: 1 });
+const addToCart = (itemId, quantity) => {
+    Inertia.post('/cart/store', { item_id: itemId, quantity: quantity });
+    // Inertia.visit(`/cart`);
 };
 const Show = ({ item, auth }) => {
     // const { auth } = props;
@@ -148,7 +149,7 @@ const Show = ({ item, auth }) => {
                                     />
                                 }
                                 onClick={() => {
-                                    addToCart(item.id)
+                                    addToCart(item.id, quantity)
                                 }}
                                 aria-label="Add to Cart"
                                 variant="ghost"

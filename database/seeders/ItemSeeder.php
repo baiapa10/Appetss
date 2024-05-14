@@ -66,7 +66,7 @@ class ItemSeeder extends Seeder
             'location' => 'Austin',
             'price' => '30000',
             'image' => 'pet_images/slithers.jpg',
-            'stock' => 1,
+            'stock' => 5,
         ]);
 
         Item::create([

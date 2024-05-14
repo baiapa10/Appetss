@@ -29,7 +29,7 @@ class Item extends Model
     }
     public function transaction()
     {
-        return $this->hasMany(Transaction::class, 'item_id', 'id');
+        return $this->belongsTo(Transaction::class, 'item_id', 'id');
     }
     public function cart()
     {

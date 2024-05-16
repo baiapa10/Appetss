@@ -56,6 +56,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     //Route::get('/items/{item}', [ItemController::class, 'show'])->name('items.show');
+
     Route::resource('/item', ItemController::class);
     Route::post('/cart/store', [CartController::class, 'store'])->name('cart.store');
 
@@ -76,6 +77,13 @@ Route::middleware('auth')->group(function () {
 Route::get('/payment', [TransactionController::class, 'showPaymentPage'])->name('payment.get');
 Route::post('/payment', [TransactionController::class, 'showPaymentPage'])->name('payment.post');
 Route::post('/process-payment', [TransactionController::class, 'processPayment']);
+Route::post('/process-payment', [TransactionController::class, 'processPayment'])->name('processPayment');
+
+Route::get('/myorder1', [TransactionController::class, 'showMyOrder']);
+Route::get('/myorder', [TransactionController::class, 'showMyOrder'])->name('myorder');
+Route::get('/success', [TransactionController::class, 'success'])->name('success');
+
+
 
 
     // Route::resource('/pilihan', ItemController::class);

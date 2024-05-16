@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react';
 
 const Edit = (props) => {
+    
     const { data, setData, errors, processing, put, patch, recentlySuccessful, progress } = useForm({
         name: "",
         description: "",
@@ -71,9 +72,9 @@ const Edit = (props) => {
                 console.error("Gagal memperbarui data:", errors);
             }
         });
-    
+
     };
-   
+
 
     function handleImageChange(e) {
         const file = e.target.files[0];
@@ -221,7 +222,7 @@ const Edit = (props) => {
                                 <PrimaryButton
                                 className="ms-4"
                                 disabled={processing}
-                                type="submit" 
+                                type="submit"
                                 >
                                     Save
                                 </PrimaryButton>

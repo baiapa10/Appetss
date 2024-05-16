@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Inertia } from "@inertiajs/inertia";
+import { Inertia, } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/react";
 import {
     Box,
@@ -19,26 +19,29 @@ import {
 import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import QuantitySelector from "./Item/partials/QuantitySelector";
+import { InertiaLink } from '@inertiajs/inertia-react';
 
 const Cart = ({ auth }) => {
     const { props } = usePage();
     const { carts } = props || [];
     const [totalPrice, setTotalPrice] = useState(0);
     const [checkedItems, setCheckedItems] = useState([]);
+    const [updatedQuantities, setUpdatedQuantities] = useState({});
 
     const handleProceedToPayment = () => {
-        // Ensure you're passing both totalPrice and checkedItems to the backend
-        console.log('Proceed to payment:', { totalPrice, cartItems: checkedItems });
-        Inertia.post(route('payment.post'), { totalPrice });
-         Inertia.visit(`/payment`);
+        Inertia.visit(route('payment.post'), { props: { query: { totalPrice: totalPrice } } });
+
     };
+
+
+
 
     const handleRemove = (itemId) => {
         const cartItem = carts.find((item) => item.id === itemId);
         Inertia.delete(`/cart/${itemId}`, {
             data: { quantity: cartItem.quantity },
         });
-        
+
     };
 
     const handleCheckboxChange = (itemId) => {
@@ -47,7 +50,7 @@ const Cart = ({ auth }) => {
                 ? prevCheckedItems.filter((item) => item.id !== itemId)
                 : [...prevCheckedItems, { id: itemId, quantity: carts.find(cart => cart.id === itemId).quantity }]
         );
-        
+
     };
 
     useEffect(() => {
@@ -61,23 +64,13 @@ const Cart = ({ auth }) => {
     }, [checkedItems, carts]);
 
     const handleQuantityChange = (itemId, newQuantity) => {
-        const updatedCarts = carts.map((cart) => {
-            if (cart.id === itemId) {
-                return { ...cart, quantity: newQuantity };
-            }
-            return cart;
-        });
-
-        let total = 0;
-        updatedCarts.forEach((cart) => {
-            if (checkedItems.find(item => item.id === cart.id)) {
-                total += parseFloat(cart.item.price) * cart.quantity;
-            }
-        });
-        setTotalPrice(total);
-
-        setCheckedItems(prevCheckedItems => prevCheckedItems.map(item => item.id === itemId ? { ...item, quantity: newQuantity } : item));
+        // Update quantity in updatedQuantities state
+        setUpdatedQuantities(prevState => ({
+            ...prevState,
+            [itemId]: newQuantity
+        }));
     };
+
 
     return (
         <ChakraProvider>
@@ -161,6 +154,7 @@ const Cart = ({ auth }) => {
                     ) : (
                         <Text>Your Shopping Cart is empty.</Text>
                     )}
+                    <InertiaLink href={route('payment.post')} data={{ totalPrice }}>Proceed to Payment</InertiaLink>
                     <Button colorScheme="blue" onClick={handleProceedToPayment}>Lanjutkan ke Pembayaran</Button>
                 </Box>
             </AuthenticatedLayout>

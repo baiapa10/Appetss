@@ -59,7 +59,7 @@ import {
                                 {/* <NavLink href={route('dashboard')} active={route().current('dashboard')}>
                                     Dashboard
                                 </NavLink> */}
-                                  <Flex
+                                <Flex
                                     px={7}
                                     w="700px"
                                     justifyContent="space-between"
@@ -89,6 +89,7 @@ import {
                             mb={4}
 
                         >
+                        <Link href="/wishlist">
                             <Image
                                 src="/storage/logo/save.png"
                                 alt="Appets iklan"
@@ -96,6 +97,8 @@ import {
                                 width="41px"
                                 height="41px"
                             />
+                        </Link>
+                        <Link href="/cart">
                             <Image
                                 src="/storage/logo/shop.png"
                                 alt="Appets iklan"
@@ -103,6 +106,7 @@ import {
                                 width="61px"
                                 height="61px"
                             />
+                        </Link>
                             <div className="ms-3 relative ">
                                 <Dropdown>
                                     <Dropdown.Trigger>
@@ -127,9 +131,9 @@ import {
                                             </button>
                                         </span>
                                     </Dropdown.Trigger>
-
                                     <Dropdown.Content>
                                         <Dropdown.Link href={route('profile.edit')}>Profile</Dropdown.Link>
+                                        <Dropdown.Link href={route('item.index')}>My Store</Dropdown.Link>
                                         <Dropdown.Link href={route('logout')} method="post" as="button">
                                             Log Out
                                         </Dropdown.Link>

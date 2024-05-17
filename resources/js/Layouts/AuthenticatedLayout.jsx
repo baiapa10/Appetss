@@ -27,17 +27,21 @@ import {
   export default function Authenticated({ user, header, children }) {
     const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
     const [searchQuery, setSearchQuery] = useState('');
-
+    const handleCategoryClick2 = (category) => {
+        Inertia.get('/homepages', { category: category });
+    };
     const handleSearch = (e) => {
         e.preventDefault(); // Prevent the default form submission
-        console.log(searchQuery);
+       // console.log(searchQuery);
         // Use Inertia's visit method to navigate to the route with the search query
         Inertia.visit(route('homepages.search', { search: searchQuery }), {
             preserveState: true,
             method: 'get',
         });
     };
-
+    const handleCategoryClick = (type) => {
+        Inertia.get('/homepages', { type: type });
+    };
     return (
         <ChakraProvider >
         <Box minH="100vh"
@@ -96,6 +100,8 @@ import {
                                 mr={"3"}
                                 width="41px"
                                 height="41px"
+                                
+                                
                             />
                         </Link>
                         <Link href="/cart">
@@ -181,6 +187,7 @@ import {
                         </Box>
                         <Box mt={3} spacing={1}>
                             <ResponsiveNavLink href={route('profile.edit')}>Profile</ResponsiveNavLink>
+                            
                             <ResponsiveNavLink method="post" href={route('logout')} as="button">
                                 Log Out
                             </ResponsiveNavLink>
@@ -206,10 +213,10 @@ import {
                             fontWeight="bold"
                             borderTop=""
                             >
-                            <Link>Adopt</Link>
-                            <Link>Buy</Link>
-                            <Link>Equipment</Link>
-                            <Link>Food & Treats</Link>
+                            <Link onClick={() => handleCategoryClick('adopt')}>Adopt </Link>
+                            <Link onClick={() => handleCategoryClick('Sell')}>Buy</Link>
+                            <Link onClick={() => handleCategoryClick2('equipment')}>Equipment and Foods</Link>
+                            {/* <Link>Food & Treats</Link> */}
                         </Flex>
                     </Container>
                 </header>

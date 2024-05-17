@@ -29,15 +29,17 @@ Route::get('/dashboard', function () {
 Route::get('/homepage', [HomepageController::class, 'index'] );
 // Route::get('/homepages', [HomepagesController::class, 'index'] );
 
+// Route::get('/', function () {
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+// });
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return redirect('/login');
 });
-
 // Route::get('/homepages', function () {
 //     return Inertia::render('Homepages');
 // })->middleware(['auth', 'verified'])->name('dashboard');
@@ -64,7 +66,7 @@ Route::middleware('auth')->group(function () {
   //  Route::resource('/wishlist', WishlistController::class);
     Route::post('/wishlist/store', [WishlistController::class, 'store']);
 
-    Route::get('/wishlist', [WishlistController::class, 'index']);
+    Route::get('/wishlist', [WishlistController::class, 'index'])->name('wishlist.index');
 
     Route::delete('/wishlist/{itemId}', [WishlistController::class, 'destroy']);
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');

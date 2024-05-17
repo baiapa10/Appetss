@@ -20,6 +20,7 @@ public function index ()
 
 public function store(Request $request)
 {
+    
     $userId = auth()->id();
     $itemId = $request->input('item_id');
     $quantity = $request->input('quantity');

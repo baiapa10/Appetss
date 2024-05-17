@@ -131,7 +131,7 @@ public function edit($id)
         abort(404);
     }
     //return view('update')->with('item', $item);
-    return Inertia::render('Item/Edit', ['item' => $item]);
+    return Inertia::render('Item/Edit', ['item' => $item, 'title' => 'Edit Item']);
 }
 }
 

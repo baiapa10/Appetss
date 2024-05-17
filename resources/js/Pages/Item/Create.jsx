@@ -66,7 +66,7 @@ const Creates = (props) => {
             data: data,
             onSuccess: () => {
                 console.log("Data berhasil disimpan!");
-                Inertia.visit('/homepages');
+                Inertia.visit('/item');
             },
             onError: (errors) => {
                 console.error("Gagal menyimpan data:", errors);
@@ -142,7 +142,7 @@ const Creates = (props) => {
                                     <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                                         <GridItem colSpan={1}>
                                             <Box mb="4">
-                                                <InputLabel htmlFor="category_id" value="Category_id" style={{ fontFamily: "Fredoka One", color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Category</InputLabel>
+                                                <InputLabel htmlFor="category_id" value="Category" style={{ fontFamily: "Fredoka One", color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Category</InputLabel>
                                                 <Select
                                                     className="w-full px-4 py-2"
                                                     name="category_id"
@@ -157,10 +157,11 @@ const Creates = (props) => {
                                                     <option value="5">Fish - Sell</option>
                                                     <option value="6">Fish - Adopt</option>
                                                     <option value="7">Bird - Sell</option>
-                                                    <option value="8">Bird - Adopt</option>
-                                                    <option value="9">Other - Sell</option>
-                                                    <option value="10">Other - Adopt</option>
-                                                    <option value="11">Equipment - Sell</option>
+                                                    <option value="9">Reptile - Sell</option>
+                                                        <option value="10">Reptile - Adopt</option>
+                                                        <option value="11">Small Pets - Sell</option>
+                                                        <option value="12">Small Pets - Adopt</option>
+                                                        <option value="13">Equipment - Sell</option>
                                                 </Select>
                                                 <InputError message={errors.category_id} className="mt-2" />
                                             </Box>

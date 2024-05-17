@@ -73,7 +73,7 @@ class ItemSeeder extends Seeder
             'name' => 'wiskas catfood',
             'description' => 'A healthy catfood.',
             'user_id' => 2,
-            'category_id' => 10, // Assuming '10' is the ID for other equipment for sale
+            'category_id' => 13, // Assuming '10' is the ID for other equipment for sale
             'location' => 'Surakarta',
             'price' => '32450',
             'image' => 'pet_images/wiskas.jpg',

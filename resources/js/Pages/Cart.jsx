@@ -121,7 +121,7 @@ const Cart = ({ auth }) => {
                                             <Flex
                                                 alignItems="center"
                                                 justifyContent="center"
-                                            >
+                                            >Quantity     
                                                 <QuantitySelector
                                                     initialStock={cart.item.stock}
                                                     price={cart.item.price}

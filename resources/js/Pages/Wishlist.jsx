@@ -107,9 +107,9 @@ const Wishlist = ({ auth }) => {
                                 </Tr>
                             ))}
                             <Tr>
-                                <Td colSpan="2" textAlign="right">Total ({list.length} produk):</Td>
+                                <Td colSpan="2" textAlign="right">Total ({list.length} produk)</Td>
                                 <Td>
-                                    {totalPrice}
+                               
                                 </Td>
                             </Tr>
                         </Tbody>

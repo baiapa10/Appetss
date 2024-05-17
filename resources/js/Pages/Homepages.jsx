@@ -18,6 +18,7 @@ import { Head, Link } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 
+
 const addToWishlist = (itemId) => {
     Inertia.post('wishlist/store', { item_id: itemId });
 };
@@ -37,22 +38,7 @@ const Homepages = (props) => {
         }
     };
 
-    const redirectToWelcomePage = () => {
-        fetch('/homepages')
-            .then(response => {
-                if (response.ok) {
-                    // Jika permintaan berhasil, arahkan pengguna ke halaman homepages di Laravel
-                    window.location.href = '/dashboard';
-                } else {
-                    // Handle jika ada kesalahan dalam permintaan
-                    console.error('Failed to redirect to /homepages');
-                }
-            })
-            .catch(error => {
-                // Handle kesalahan dalam melakukan permintaan
-                console.error('Error redirecting to /homepages:', error);
-            });
-    };
+
 
     const backgroundImages = [
         "/storage/logo/image.png",
@@ -68,7 +54,9 @@ const Homepages = (props) => {
             }
             }, []);
 
-
+            const handleCategoryClick = (category) => {
+                Inertia.get('/homepages', { category: category });
+            };
     return (
         <ChakraProvider>
         <AuthenticatedLayout
@@ -127,6 +115,7 @@ const Homepages = (props) => {
             <Text mt={2}>Description: {data.description}</Text>
             <Text>Price: {data.price}</Text>
             <Text>Location: {data.location}</Text>
+            <Text>Type: {data.category_id}</Text>
             {/* Detail button using Inertia Link */}
             <Link href={`/item/${data.id}`} style={{ marginTop: '10px', display: 'inline-block', textDecoration: 'underline', color: 'blue' }}>
                 View Details
@@ -159,61 +148,12 @@ const Homepages = (props) => {
             {/* <Text>88</Text> */}
         </Flex>
         <Box display="flex" flexWrap="wrap">
-            <Image
-                src="/storage/logo/dog.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                mb={12}
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
-            <Image
-                src="/storage/logo/cat.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
-            <Image
-                src="/storage/logo/fish.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
-            <Image
-                src="/storage/logo/bird.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
-            <Image
-                src="/storage/logo/reptile.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
-            <Image
-                src="/storage/logo/smallpet.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
+        <Image src="/storage/logo/dog.png" alt="Dog Category" ml={9} width="191px" height="191px" mb={12} onClick={() => handleCategoryClick('Dog')} style={{ cursor: "pointer" }} />
+                        <Image src="/storage/logo/cat.png" alt="Cat Category" ml={9} width="191px" height="191px" onClick={() => handleCategoryClick('Cat')} style={{ cursor: "pointer" }} />
+                        <Image src="/storage/logo/fish.png" alt="Fish Category" ml={9} width="191px" height="191px" onClick={() => handleCategoryClick('Fish')} style={{ cursor: "pointer" }} />
+                        <Image src="/storage/logo/bird.png" alt="Bird Category" ml={9} width="191px" height="191px" onClick={() => handleCategoryClick('Bird')} style={{ cursor: "pointer" }} />
+                        <Image src="/storage/logo/reptile.png" alt="Reptile Category" ml={9} width="191px" height="191px" onClick={() => handleCategoryClick('Reptile')} style={{ cursor: "pointer" }} />
+                        <Image src="/storage/logo/smallpet.png" alt="Other Category" ml={9} width="191px" height="191px" onClick={() => handleCategoryClick('Other')} style={{ cursor: "pointer" }} />
 
             {/* <T/ext>Dog</Text> */}
             {/* {props.pets ? (

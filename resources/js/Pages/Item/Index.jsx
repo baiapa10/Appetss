@@ -111,10 +111,17 @@ const Homepages = (props) => {
             {/* <Button as={Link} href="/items/create" colorScheme="teal" size="sm" mt="4">
     Add New Item
 </Button> */}
-            <Image
-                src="/storage/logo/iklan2.png"
-                alt="Appets iklan"
-            />
+            <Link href={route('item.create')}>
+                            <Button
+                                colorScheme="teal"
+                                size="lg"
+                                borderRadius="full"
+                                boxShadow="0px 4px 6px rgba(133, 81, 33, 1)"
+                                style={{ fontSize: '24px', padding: '0 20px' }}
+                            >
+                               create new item +
+                            </Button>
+                        </Link>
             {/* <Text>Sitewide savings are here! Save 20% OFF Hands of part favorites</Text> */}
             {/* <Link color="teal.500">--Ads Sample</Link> */}
         </Flex>
@@ -126,7 +133,7 @@ const Homepages = (props) => {
             justifyContent="space-between"
             alignItems="center"
         >
-            <Text fontFamily="Fredoka One" color="rgba(133, 81, 33, 1)" fontSize="38px" fontWeight="bold" ml={6}>Today's Offer</Text>
+            <Text fontFamily="Fredoka One" color="rgba(133, 81, 33, 1)" fontSize="38px" fontWeight="bold" ml={6}>Your Items</Text>
         </Flex>
         <Box display="flex" flexWrap="wrap"  >
         {props.pets ? (
@@ -175,66 +182,11 @@ const Homepages = (props) => {
             justifyContent="space-between"
             alignItems="center"
         >
-            <Text fontFamily="Fredoka One" color="rgba(133, 81, 33, 1)" fontSize="38px" fontWeight="bold" ml={6}>Shop Category</Text>
+            
             {/* <Text>88</Text> */}
         </Flex>
         <Box display="flex" flexWrap="wrap">
-            <Image
-                src="/storage/logo/dog.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                mb={12}
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
-            <Image
-                src="/storage/logo/cat.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
-            <Image
-                src="/storage/logo/fish.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
-            <Image
-                src="/storage/logo/bird.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
-            <Image
-                src="/storage/logo/reptile.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
-            <Image
-                src="/storage/logo/smallpet.png"
-                alt="Appets iklan"
-                ml={9}
-                width="191px"
-                height="191px"
-                onClick={redirectToWelcomePage}
-                style={{ cursor: "pointer" }}
-            />
-
+         
             {/* <T/ext>Dog</Text> */}
             {/* {props.pets ? (
                 props.pets.map((data, i) => (

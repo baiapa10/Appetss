@@ -62,20 +62,34 @@ class CategorySeeder extends Seeder
             'type' => 'adopt',
         ]);
 
+        
+
         Category::create([
             'id' => 9,
-            'name' => 'Other',
+            'name' => 'Reptile',
             'type' => 'Sell',
         ]);
 
         Category::create([
             'id' => 10,
-            'name' => 'Other',
+            'name' => 'Reptile',
             'type' => 'adopt',
         ]);
 
         Category::create([
             'id' => 11,
+            'name' => 'Other',
+            'type' => 'Sell',
+        ]);
+
+        Category::create([
+            'id' => 12,
+            'name' => 'Other',
+            'type' => 'adopt',
+        ]);
+
+        Category::create([
+            'id' => 13,
             'name' => 'equipment',
             'type' => 'sell',
         ]);

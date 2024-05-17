@@ -85,7 +85,7 @@ const Edit = ({ auth, item }) => {
                                         <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                                             <GridItem colSpan={1}>
                                                 <Box mb="4">
-                                                    <InputLabel htmlFor="name" style={{ fontFamily: "Fredoka One", color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Category_id</InputLabel>
+                                                    <InputLabel htmlFor="name" style={{ fontFamily: "Fredoka One", color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Category</InputLabel>
                                                     <Select name="category_id" value={formData.category_id} onChange={handleChange} placeholder="Select Category">
                                                         <option value="1">Dog - Sell</option>
                                                         <option value="2">Dog - Adopt</option>
@@ -95,9 +95,11 @@ const Edit = ({ auth, item }) => {
                                                         <option value="6">Fish - Adopt</option>
                                                         <option value="7">Bird - Sell</option>
                                                         <option value="8">Bird - Adopt</option>
-                                                        <option value="9">Other - Sell</option>
-                                                        <option value="10">Other - Adopt</option>
-                                                        <option value="11">Equipment - Sell</option>
+                                                        <option value="9">Reptile - Sell</option>
+                                                        <option value="10">Reptile - Adopt</option>
+                                                        <option value="11">Small Pets - Sell</option>
+                                                        <option value="12">Small Pets - Adopt</option>
+                                                        <option value="13">Equipment - Sell</option>
                                                     </Select>
                                                 </Box>
                                             </GridItem>

@@ -27,27 +27,10 @@ Route::get('/dashboard', function () {
 
 
 Route::get('/homepage', [HomepageController::class, 'index'] );
-// Route::get('/homepages', [HomepagesController::class, 'index'] );
 
-// Route::get('/', function () {
-//     return Inertia::render('Welcome', [
-//         'canLogin' => Route::has('login'),
-//         'canRegister' => Route::has('register'),
-//         'laravelVersion' => Application::VERSION,
-//         'phpVersion' => PHP_VERSION,
-//     ]);
-// });
 Route::get('/', function () {
     return redirect('/login');
 });
-// Route::get('/homepages', function () {
-//     return Inertia::render('Homepages');
-// })->middleware(['auth', 'verified'])->name('dashboard');
-
-// Route::get('/products', function () {
-//     return Inertia::render('Products');
-// })->middleware(['auth', 'verified'])->name('products');
-
 
 Route::get('/homepages', [HomepagesController::class, 'index'])
     ->middleware(['auth', 'verified'])
@@ -72,23 +55,21 @@ Route::middleware('auth')->group(function () {
     Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
     Route::delete('/cart/{itemId}', [CartController::class, 'destroy']);
     Route::post('/cart/store', [CartController::class,'store']);
-    // Route::put ('/cart/{itemId}', [CartController::class, 'update']);
+   
 
 // Route to show the payment page
 
 Route::get('/payment', [TransactionController::class, 'showPaymentPage'])->name('payment.get');
 Route::post('/payment', [TransactionController::class, 'showPaymentPage'])->name('payment.post');
-Route::post('/process-payment', [TransactionController::class, 'processPayment']);
+//Route::post('/process-payment', [TransactionController::class, 'processPayment']);
 Route::post('/process-payment', [TransactionController::class, 'processPayment'])->name('processPayment');
 
-Route::get('/myorder1', [TransactionController::class, 'showMyOrder']);
+
 Route::get('/myorder', [TransactionController::class, 'showMyOrder'])->name('myorder');
-Route::get('/success', [TransactionController::class, 'success'])->name('success');
+Route::put('/transactions/{id}', [TransactionController::class, 'updateStatus']);
 
 
 
-
-    // Route::resource('/pilihan', ItemController::class);
 });
 
 require __DIR__.'/auth.php';

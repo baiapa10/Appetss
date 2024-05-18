@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import { usePage } from "@inertiajs/react";
+import FlashMessageHandler from './FlashMessageHandler';
 import {
     Box,
     Heading,
@@ -16,24 +17,28 @@ import {
 } from "@chakra-ui/react";
 import { Head, Link } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import FlashMessageHandler from './FlashMessageHandler';
+import QuantitySelector from "./Item/partials/QuantitySelector";
 
-const Wishlist = ({ auth }) => {
+const MyOrder = ({ auth }) => {
     const { props } = usePage();
-    const { list } = props;
- 
+    const { list = [] } = props;
+
+    // Function to handle item removal from the wishlist
+    const handleRemove = (itemId) => {
+        Inertia.delete(`/wishlist/${itemId}`);
+    };
+
     return (
         <ChakraProvider>
             <FlashMessageHandler>
-
             <AuthenticatedLayout
                 user={auth.user}
                 header={
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Wishlist
+                        My Order
                     </h2>
                 }
-                >
+            >
                 <Head title={props.title} />
                 <Box
                     bg={useColorModeValue("rgba(253, 201, 152, 1)")}
@@ -41,49 +46,41 @@ const Wishlist = ({ auth }) => {
                     id="random-background-box"
                     bgImage={`url(/storage/logo/image.png)`}
                     bgSize="250px"
-                    >
-                    <Heading>My Wishlist</Heading>
+                >
+                    <Heading>My Order</Heading>
                     {list.length > 0 ? (
                         <Table variant="striped" colorScheme="">
                         <Tbody>
-                            {list.map((wishlistItem) => (
-                                <Tr key={wishlistItem.id}>
+                            {list.map((myOrderItem) => (
+                                <Tr key={myOrderItem.id}>
                                     <Td>
                                         <Flex alignItems="center">
                                             <Image
-                                                src={`/storage/${wishlistItem.item.image}`}
-                                                alt="wishlist item"
+                                                src={`/storage/${myOrderItem.item.image}`}
+                                                alt="myOrder item"
                                                 width={"90px"}
-                                                />
-                                            <Text ml={4}>{wishlistItem.item.name} - {wishlistItem.item.description}</Text>
+                                            />
+                                            <Text ml={4}>{myOrderItem.item.name} - {myOrderItem.item.description}</Text>
                                         </Flex>
-                                    </Td>
-                                  
-                                    <Td>
-                                        <Button
-                                            onClick={() => {
-                                                Inertia.delete(`/wishlist/${wishlistItem.id}`);
-                                            }}
-                                            >
-                                            Remove
-                                        </Button>
                                     </Td>
                                 </Tr>
                             ))}
                             <Tr>
-                                <Td colSpan="2" textAlign="right">Total ({list.length} produk)</Td>
-                                
+                                <Td colSpan="2" textAlign="right">Total ({list.length} produk):</Td>
+                                <Td>
+                                    {totalPrice}
+                                </Td>
                             </Tr>
                         </Tbody>
                     </Table>
                     ) : (
-                        <Text>Your wishlist is empty.</Text>
+                        <Text>Your myOrderItem is empty.</Text>
                     )}
                 </Box>
             </AuthenticatedLayout>
-                    </FlashMessageHandler>
+            </FlashMessageHandler>
         </ChakraProvider>
     );
 };
 
-export default Wishlist;
+export default MyOrder;

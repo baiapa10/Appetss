@@ -12,7 +12,7 @@ public function index()
 {
     $userId = auth()->id();
     $list = Wishlist::where('user_id', $userId)->with('item')->get();
-    return Inertia::render('Wishlist', ['list' => $list]);
+    return Inertia::render('Wishlist', ['list' => $list, 'title' => 'Wishlist']);
 }
 
 
@@ -37,14 +37,7 @@ public function index()
     return redirect()->back()->with('message', 'Item added to wishlist successfully.');
 }
 
-// public function destroy($itemId)
-// {
-//     $userId = auth()->id();
 
-//     Wishlist::where('user_id', $userId)->where('item_id', $itemId)->delete();
-
-//     return redirect()->back()->with('message', 'Item removed from wishlist successfully.');
-// }
 public function destroy($itemId)
 {
     $itemId = Wishlist::find($itemId);

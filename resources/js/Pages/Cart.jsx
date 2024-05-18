@@ -20,16 +20,19 @@ import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import QuantitySelector from "./Item/partials/QuantitySelector";
 import { InertiaLink } from '@inertiajs/inertia-react';
+import FlashMessageHandler from './FlashMessageHandler';
 
 const Cart = ({ auth }) => {
+  
     const { props } = usePage();
     const { carts } = props || [];
     const [totalPrice, setTotalPrice] = useState(0);
     const [checkedItems, setCheckedItems] = useState([]);
     const [updatedQuantities, setUpdatedQuantities] = useState({});
+ 
 
     const handleProceedToPayment = () => {
-        Inertia.visit(route('payment.post'), { props: { query: { totalPrice: totalPrice } } });
+        Inertia.visit(route('payment.post'), { props: { query: { totalPrice: totalPrice, checkedItems } } });
 
     };
 
@@ -74,6 +77,7 @@ const Cart = ({ auth }) => {
 
     return (
         <ChakraProvider>
+            <FlashMessageHandler>
             <AuthenticatedLayout
                 user={auth.user}
                 header={
@@ -90,6 +94,7 @@ const Cart = ({ auth }) => {
                     bgImage={`url(/storage/logo/image.png)`}
                     bgSize="250px"
                 >
+                    
                     <Heading>My Cart</Heading>
                     {carts.length > 0 ? (
                         <Table variant="striped" colorScheme="">
@@ -154,10 +159,11 @@ const Cart = ({ auth }) => {
                     ) : (
                         <Text>Your Shopping Cart is empty.</Text>
                     )}
-                    <InertiaLink href={route('payment.post')} data={{ totalPrice }}>Proceed to Payment</InertiaLink>
+                    <InertiaLink href={route('payment.post')} data={{ totalPrice, checkedItems }}>Proceed to Payment</InertiaLink>
                     <Button colorScheme="blue" onClick={handleProceedToPayment}>Lanjutkan ke Pembayaran</Button>
                 </Box>
             </AuthenticatedLayout>
+            </FlashMessageHandler>
         </ChakraProvider>
     );
 };

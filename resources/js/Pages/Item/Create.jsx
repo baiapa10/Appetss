@@ -5,6 +5,8 @@ import InputError from '@/Components/InputError';
 import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
+
+
 import {
     Box,
     Flex,
@@ -28,7 +30,8 @@ import {
 } from '@chakra-ui/react';
 
 const Creates = (props) => {
-    const { data, setData, errors, processing, post, progress } = useForm({
+ 
+    const { data, setData, errors, processing, post } = useForm({
         name: "",
         description: "",
         category_id: "",
@@ -38,23 +41,7 @@ const Creates = (props) => {
         image: null,
     });
 
-    const redirectToWelcomePage = () => {
-        fetch('/homepages')
-            .then(response => {
-                if (response.ok) {
-                    // Jika permintaan berhasil, arahkan pengguna ke halaman homepages di Laravel
-                    window.location.href = '/homepages';
-                } else {
-                    // Handle jika ada kesalahan dalam permintaan
-                    console.error('Failed to redirect to /homepages');
-                }
-            })
-            .catch(error => {
-                // Handle kesalahan dalam melakukan permintaan
-                console.error('Error redirecting to /homepages:', error);
-            });
-    };
-
+    
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -83,8 +70,11 @@ const Creates = (props) => {
     }
 
     return (
+        
         <ChakraProvider >
+           
         <AuthenticatedLayout auth={props.auth} user={props.auth.user} errors={props.errors} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Create items</h2>}>
+       
             <Head title="Create Item" />
             <Box py={12}>
                 <Container maxW="7xl" mx="auto" px={{ base: 4, sm: 6, lg: 8 }}>
@@ -219,7 +209,7 @@ const Creates = (props) => {
                                         </GridItem>
                                     </Grid>
                                 </Flex>
-                                <PrimaryButton className="ms-4" disabled={processing} onClick={redirectToWelcomePage}>
+                                <PrimaryButton className="ms-4" disabled={processing} >
                                     Save
                                 </PrimaryButton>
                             </form>
@@ -228,6 +218,7 @@ const Creates = (props) => {
                 </Container>
             </Box>
                     </AuthenticatedLayout>
+        
                     </ChakraProvider>
     );
 }

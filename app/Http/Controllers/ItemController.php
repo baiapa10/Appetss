@@ -21,14 +21,13 @@ class ItemController extends Controller
 
         return Inertia::render('Item/Index', [
             'pets' => $pets,
+            'title' => ' Item Index'
         ]);
     }
     public function create (){
-        return Inertia::render('Item/Create');
+        return Inertia::render('Item/Create' , ['title' => 'Create Item']);
     }
-    public function pilihan (){
-        return Inertia::render('Pilihan');
-    }
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -41,9 +40,7 @@ class ItemController extends Controller
             'image' => 'required|image',
         ]);
 
-        // $image = $request->file('image')->store('pet_images');
-        // $imageName = time().'.'.$request->image->getClientOriginalExtension();
-        // $request->image->storePublicly('pet_images');
+       
         if ($request->file('image')) {
             $imageFile = $request->file('image');
             $imageName = uniqid() . '' . $imageFile->getClientOriginalName();
@@ -62,7 +59,7 @@ class ItemController extends Controller
             'stock' => $request->stock,
         ]);
     
-        return redirect()->route('item.index')->with('success', 'Item successfuly inserted!');
+        return redirect()->route('item.index')->with('message', 'Item successfuly inserted!');
     }
 
 
@@ -75,7 +72,7 @@ public function show($item)
         abort(404);
     }
 
-    return Inertia::render('Item/Show', ['item' => $item]);
+    return Inertia::render('Item/Show', ['item' => $item, 'title' => 'Item Details']);
 }
 
 // ItemController.php
@@ -107,7 +104,7 @@ public function update(Request $request, Item $item)
 
     $item->update($requestData);
 
-    return redirect()->route('item.index')->with('success', 'Data Berhasil Diupdate!');
+    return redirect()->route('item.index')->with('message', 'Item successfully updated!');
 }
 
 
@@ -119,7 +116,7 @@ public function destroy(Item $item)
     }
     $item->delete();
 
-    return redirect()->route('item.index')->with('success', 'Data Berhasil Dihapus!');
+    return redirect()->route('item.index')->with('message', 'Item successfully deleted!');
 }
 
 public function edit($id)

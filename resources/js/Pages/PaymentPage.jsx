@@ -23,12 +23,13 @@ import { InertiaLink } from '@inertiajs/inertia-react';
 
 const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
     // const { props } = usePage();
-
+    console.log(cartItems)
     // const { totalPrice } = props.query;
 
     const [shippingMethod, setShippingMethod] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const [shippingCost, setShippingCost] = useState(0);
-
+    const [address, setAddress] = useState("");
     const handleShippingMethodChange = (method) => {
         setShippingMethod(method);
         // Set shipping cost based on selected method
@@ -42,24 +43,21 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
     };
 
     const handleOKClick = () => {
+       // const { cartItems, totalPrice } = this.state;
         // Menyiapkan data keranjang belanja untuk dikirimkan
-        if (cartItems && cartItems.length > 0) ({
-            id: item.id,
-            quantity: item.quantity,
-        });
-
+        // if (cartItems && cartItems.length > 0) ({
+        //     id: item.id,
+        //     quantity: item.quantity,
+        // });
+        if (!shippingMethod) {
+            setErrorMessage("Please select a shipping method");
+            return;
+        }
         // Membuat permintaan untuk membuat transaksi
         Inertia.post(route("processPayment"), {
             cartItems: cartItems,
-            totalPrice: totalPrice,
-        }).then(() => {
-            // Mengarahkan pengguna ke halaman sukses setelah transaksi berhasil dibuat
-            Inertia.visit(route('/myorder'));
-        }).catch((error) => {
-            // Menangani kesalahan jika ada
-            console.error('Error creating transaction:', error);
-            // Tampilkan pesan kesalahan kepada pengguna
-            // Anda juga dapat menambahkan logika lain di sini, seperti menampilkan pesan kesalahan ke pengguna
+            totalPrice: Number(totalPrice) + Number(shippingCost),
+            address: address,
         });
     };
 
@@ -86,6 +84,7 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                     bgImage={`url(/storage/logo/image.png)`}
                     bgSize="250px"
                 >
+                    {errorMessage && <Text color="red">{errorMessage}</Text>}
 
                     <Box mt={8}>
                         <Text
@@ -104,7 +103,7 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                                         </Text>
                                         <HStack mt={2}>
                                         <Text>Address:</Text>
-                                        <Input/>
+                                             <Input value={address} onChange={(e) => setAddress(e.target.value)} />
                                         </HStack>
                                         <HStack mt={2}>
 
@@ -149,7 +148,7 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                                     <Button colorScheme="blue" onClick={handleOKClick}>
                                         OK
                                     </Button>
-                                    <InertiaLink
+                                    {/* <InertiaLink
                                         href={route('processPayment')}
                                         method="post"
                                         onSuccess={() => {
@@ -158,7 +157,7 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                                         }}
                                         >
                                         <Button colorScheme="blue">OK</Button>
-                                    </InertiaLink>
+                                    </InertiaLink> */}
                                 </VStack>
                             </Box>
                         </Box>

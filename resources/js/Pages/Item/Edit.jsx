@@ -52,6 +52,7 @@ const Edit = ({ auth, item }) => {
     };
 
     return (
+        <FlashMessageHandler>
         <AuthenticatedLayout user={auth.user} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit</h2>}>
             <Head title="Edit Item" />
             <Box py={12}>
@@ -147,6 +148,7 @@ const Edit = ({ auth, item }) => {
                 </Container>
             </Box>
         </AuthenticatedLayout>
+       </FlashMessageHandler>
     );
 };
 

@@ -17,7 +17,7 @@ import {
 import { Head, Link } from '@inertiajs/react';
 import { Inertia } from '@inertiajs/inertia';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-
+import FlashMessageHandler from './FlashMessageHandler';
 
 const addToWishlist = (itemId) => {
     Inertia.post('wishlist/store', { item_id: itemId });
@@ -59,6 +59,7 @@ const Homepages = (props) => {
             };
     return (
         <ChakraProvider>
+            <FlashMessageHandler>
         <AuthenticatedLayout
             user={auth.user}
             header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Homepages</h2>}
@@ -176,6 +177,7 @@ const Homepages = (props) => {
         </Box>
         </Box>
         </AuthenticatedLayout>
+        </FlashMessageHandler>
     </ChakraProvider>
   );
 };

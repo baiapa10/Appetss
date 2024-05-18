@@ -20,6 +20,7 @@ import { Head, Link } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import QuantitySelector from "./partials/QuantitySelector";
+import FlashMessageHandler from '../FlashMessageHandler';
 
 const addToCart = (itemId, quantity) => {
     Inertia.post('/cart/store', { item_id: itemId, quantity: quantity });
@@ -38,6 +39,7 @@ const Show = ({ item, auth }) => {
 
     return (
         <ChakraProvider>
+            <FlashMessageHandler>
             <AuthenticatedLayout
                 user={auth.user}
                 header={
@@ -190,6 +192,7 @@ const Show = ({ item, auth }) => {
                     </Box>
                 </Box>
             </AuthenticatedLayout>
+            </FlashMessageHandler>
         </ChakraProvider>
     );
 };

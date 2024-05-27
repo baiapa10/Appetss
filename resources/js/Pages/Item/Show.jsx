@@ -26,6 +26,7 @@ const addToCart = (itemId, quantity) => {
     Inertia.post("/cart/store", { item_id: itemId, quantity: quantity });
     // Inertia.visit(`/cart`);
 };
+
 const Show = ({ item, auth }) => {
     // const { auth } = props;
 
@@ -231,7 +232,7 @@ const Show = ({ item, auth }) => {
                                             height={"96px"}
                                         />
                                     }
-                                    onClick={() => {}}
+                                    onClick={() => {Inertia.visit(`/chatify/${item.user_id}`);}}
                                     aria-label="Chat"
                                     variant="ghost"
                                     mr={2}

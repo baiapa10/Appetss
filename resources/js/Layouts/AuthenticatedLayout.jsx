@@ -133,7 +133,18 @@ export default function Authenticated({ user, header, children }) {
                                 marginLeft="6"
                                 mb={4}
                             >
-                                <Link href="/wishlist">
+                                      <Link href="/chatify">
+                            <Image
+                                src="/storage/pet_images/chat.png"
+                                alt="Appets iklan"
+                                mr={"2"}
+                                width="70px"
+                                height="70px"
+                                
+                                
+                            />
+                        </Link>
+                        <Link href="/wishlist">
                                     <Image
                                         src="/storage/logo/save.png"
                                         alt="Appets iklan"

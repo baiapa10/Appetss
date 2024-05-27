@@ -17,22 +17,52 @@ class UserSeeder extends Seeder
             'name' => 'Kenneth Calvin',
             'email' => 'ken@gmail.com',
             'password' => '11223344',
-            // 'is_seller' => 0,
+  
             'phone_number' => '085108518529',
-          // 'seller_rating' => 0,
-          //  'rating_count' => 0,
+ 
         ]);
         
         User::create([
             'name' => 'seller lucu',
             'email' => 'seller@gmail.com',
             'password' => '11223344',
-            // 'is_seller' => 1,
             'phone_number' => '0851023132',
-          // 'seller_rating' => 4,
-          //  'rating_count' => 20,
+      
         ]);
-        
+        User::create([
+          'name' => 'Bryan Anderson',
+          'email' => 'user1@gmail.com',
+          'password' => 'password1',
+          'phone_number' => '0851000001',
+      ]);
+  
+      User::create([
+          'name' => 'Mohammad Farhan',
+          'email' => 'user2@gmail.com',
+          'password' => 'password2',
+          'phone_number' => '0851000002',
+      ]);
+  
+      User::create([
+          'name' => 'Benyamin Laksana',
+          'email' => 'user3@gmail.com',
+          'password' => 'password3',
+          'phone_number' => '0851000003',
+      ]);
+  
+      User::create([
+          'name' => 'Sutrisno Wibowo',
+          'email' => 'user4@gmail.com',
+          'password' => 'password4',
+          'phone_number' => '0851000004',
+      ]);
+  
+      User::create([
+          'name' => 'Jerry Yan',
+          'email' => 'user5@gmail.com',
+          'password' => 'password5',
+          'phone_number' => '0851000005',
+      ]);
         //
     }
 }

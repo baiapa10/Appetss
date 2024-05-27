@@ -14,17 +14,15 @@ import {
     Container,
     Image,
     Input,
-    Button
+    Button,
 } from "@chakra-ui/react";
 import { Head, Link } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { usePage } from "@inertiajs/inertia-react";
-import { InertiaLink } from '@inertiajs/inertia-react';
+import { InertiaLink } from "@inertiajs/inertia-react";
 
 const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
-    // const { props } = usePage();
-    console.log(cartItems)
-    // const { totalPrice } = props.query;
+    console.log(cartItems);
 
     const [shippingMethod, setShippingMethod] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -43,24 +41,16 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
     };
 
     const handleOKClick = () => {
-       // const { cartItems, totalPrice } = this.state;
-        // Menyiapkan data keranjang belanja untuk dikirimkan
-        // if (cartItems && cartItems.length > 0) ({
-        //     id: item.id,
-        //     quantity: item.quantity,
-        // });
         if (!shippingMethod) {
             setErrorMessage("Please select a shipping method");
             return;
         }
-        // Membuat permintaan untuk membuat transaksi
         Inertia.post(route("processPayment"), {
             cartItems: cartItems,
             totalPrice: Number(totalPrice) + Number(shippingCost),
             address: address,
         });
     };
-
 
     return (
         <ChakraProvider>
@@ -75,12 +65,7 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                 <Box
                     bg={useColorModeValue("rgba(253, 201, 152, 1)")}
                     minH="100vh"
-                    // bgImage={`url(/storage/logo/image.png)`}
-                    // bgSize="250px"
-                    // bgPosition="random"
-
                     id="random-background-box"
-                    // minH="100vh"
                     bgImage={`url(/storage/logo/image.png)`}
                     bgSize="250px"
                 >
@@ -94,19 +79,29 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                         >
                             Payment Page
                         </Text>
-                        <Box mt={4} p={4} borderWidth="1px" borderRadius="md">
-                            <Box p={6} bg="gray" borderBottom="1px" borderColor="gray.200">
+                        <Box mt={4} p={4} borderWidth="1px" borderRadius="45px">
+                            <Box
+                                p={6}
+                                bg="bisque"
+                                borderBottom="1px"
+                                borderColor="gray.200"
+                                borderRadius="45px"
+                            >
                                 <VStack spacing={4}>
                                     <Box>
                                         <Text fontSize="lg" fontWeight="bold">
                                             Shipping
                                         </Text>
                                         <HStack mt={2}>
-                                        <Text>Address:</Text>
-                                             <Input value={address} onChange={(e) => setAddress(e.target.value)} />
+                                            <Text>Address:</Text>
+                                            <Input
+                                                value={address}
+                                                onChange={(e) =>
+                                                    setAddress(e.target.value)
+                                                }
+                                            />
                                         </HStack>
                                         <HStack mt={2}>
-
                                             <Text>Choose:</Text>
                                             <Select
                                                 placeholder="Select method"
@@ -145,19 +140,25 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                                             ).toLocaleString()}
                                         </Text>
                                     </Box>
-                                    <Button colorScheme="blue" onClick={handleOKClick}>
+                                    <Button
+                                        colorScheme="blue"
+                                        onClick={handleOKClick}
+                                        fontFamily="Fredoka One"
+                                        fontSize="14px"
+                                        fontWeight="bold"
+                                        ml={4}
+                                        bg="rgba(133, 81, 33, 1)"
+                                        color="white"
+                                        size="sm"
+                                        _hover={{
+                                            bg: "rgba(133, 81, 33, 0.8)",
+                                        }}
+                                        _active={{
+                                            bg: "rgba(133, 81, 33, 0.6)",
+                                        }}
+                                    >
                                         OK
                                     </Button>
-                                    {/* <InertiaLink
-                                        href={route('processPayment')}
-                                        method="post"
-                                        onSuccess={() => {
-                                            // Redirect to /myorder on successful payment
-                                            Inertia.visit(route('/myorder'));
-                                        }}
-                                        >
-                                        <Button colorScheme="blue">OK</Button>
-                                    </InertiaLink> */}
                                 </VStack>
                             </Box>
                         </Box>

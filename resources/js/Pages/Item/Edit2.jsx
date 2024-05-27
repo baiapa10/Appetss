@@ -18,7 +18,7 @@ import {
 } from '@chakra-ui/react';
 
 const Edit = (props) => {
-    
+
     const { data, setData, errors, processing, put, patch, recentlySuccessful, progress } = useForm({
         name: "",
         description: "",
@@ -54,7 +54,7 @@ const Edit = (props) => {
         if (item) {
             setData({
                 ...item,
-                image: null, // Reset image field since it's a file input
+                image: null,
             });
         }
     }, [item]);

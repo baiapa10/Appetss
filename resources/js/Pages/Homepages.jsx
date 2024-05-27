@@ -1,4 +1,4 @@
-import React, {useEffect, useHistory, useRef  } from 'react';
+import React, { useEffect, useHistory, useRef } from "react";
 import {
     Box,
     Flex,
@@ -10,17 +10,17 @@ import {
     Stack,
     SimpleGrid,
     useColorModeValue,
-    ChakraProvider ,
+    ChakraProvider,
     Center,
     Image,
-} from '@chakra-ui/react';
-import { Head, Link } from '@inertiajs/react';
-import { Inertia } from '@inertiajs/inertia';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import FlashMessageHandler from './FlashMessageHandler';
+} from "@chakra-ui/react";
+import { Head, Link } from "@inertiajs/react";
+import { Inertia } from "@inertiajs/inertia";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import FlashMessageHandler from "./FlashMessageHandler";
 
 const addToWishlist = (itemId) => {
-    Inertia.post('wishlist/store', { item_id: itemId });
+    Inertia.post("wishlist/store", { item_id: itemId });
 };
 
 const Homepages = (props) => {
@@ -31,155 +31,241 @@ const Homepages = (props) => {
 
     const scrollRight = () => {
         if (gridRef.current) {
-        gridRef.current.scrollBy({
-            left: 200, // Adjust this value as needed
-            behavior: 'smooth',
-        });
+            gridRef.current.scrollBy({
+                left: 200, // Adjust this value as needed
+                behavior: "smooth",
+            });
         }
     };
 
+    const categoryMap = {
+        1: "Dog - Sell",
+        2: "Dog - Adopt",
+        3: "Cat - Sell",
+        4: "Cat - Adopt",
+        5: "Fish - Sell",
+        6: "Fish - Adopt",
+        7: "Bird - Sell",
+        9: "Reptile - Sell",
+        10: "Reptile - Adopt",
+        11: "Small Pets - Sell",
+        12: "Small Pets - Adopt",
+        13: "Equipment & Foods - Sell",
+    };
 
-
-    const backgroundImages = [
-        "/storage/logo/image.png",
-        "/storage/logo/image_copy.png"
-    ];
-
-        useEffect(() => {
-            const boxElement = document.getElementById("random-background-box");
-            if (boxElement) {
-                const randomX = Math.floor(Math.random() * 100) + 1; // Angka acak untuk posisi horizontal
-                const randomY = Math.floor(Math.random() * 200) + 1; // Angka acak untuk posisi vertikal
-                boxElement.style.backgroundPosition = `${randomX}% ${randomY}%`;
-            }
-            }, []);
-
-            const handleCategoryClick = (category) => {
-                Inertia.get('/homepages', { category: category });
-            };
+    const handleCategoryClick = (category) => {
+        Inertia.get("/homepages", { category: category });
+    };
     return (
         <ChakraProvider>
             <FlashMessageHandler>
-        <AuthenticatedLayout
-            user={auth.user}
-            header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Homepages</h2>}
-        >
-        <Head title={props.title} />
-        <Box bg={useColorModeValue("rgba(253, 201, 152, 1)")} minH="100vh"
-        // bgImage={`url(/storage/logo/image.png)`}
-        // bgSize="250px"
-        // bgPosition="random"
+                <AuthenticatedLayout
+                    user={auth.user}
+                    header={
+                        <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                            Homepages
+                        </h2>
+                    }
+                >
+                    <Head title={props.title} />
+                    <Box
+                        bg={useColorModeValue("rgba(253, 201, 152, 1)")}
+                        minH="100vh"
+                        id="random-background-box"
+                        bgImage={`url(/storage/logo/image.png)`}
+                        bgSize="250px"
 
-        id="random-background-box"
-        // minH="100vh"
-        bgImage={`url(/storage/logo/image.png)`}
-        bgSize="250px"
+                    >
+                        <Flex
+                            justifyContent="space-between"
+                            alignItems="center"
+                        >
+                            <Image
+                                src="/storage/logo/iklan2.png"
+                                alt="Appets iklan"
+                                boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
+                                borderRadius="45px"
+                            />
+                        </Flex>
+                        <Flex
+                            px={5}
+                            py={4}
+                            justifyContent="space-between"
+                            alignItems="center"
+                        >
+                            <Text
+                                fontFamily="Fredoka One"
+                                color="rgba(133, 81, 33, 1)"
+                                fontSize="38px"
+                                fontWeight="bold"
+                                ml={6}
+                            >
+                                Today's Offer
+                            </Text>
+                        </Flex>
+                        <Box display="flex" flexWrap="wrap">
+                            {props.pets ? (
+                                props.pets.map((data, i) => (
+                                    <Box
+                                        key={i}
+                                        ml={8}
+                                        mr={2}
+                                        mb={4}
+                                        flexBasis="calc(33.33% - 250px)"
+                                        boxShadow="0px 0px 2px rgba(0, 0, 0, 0.2)"
+                                        border="1px solid #ccc"
+                                        borderRadius="xl"
+                                        bg={useColorModeValue(
+                                            "gray.200",
+                                            "gray.700"
+                                        )}
+                                        borderColor="black"
+                                        p={4}
+                                    >
+                                        <Image
+                                            src={`/storage/${data.image}`}
+                                            alt={data.name}
+                                            style={{
+                                                maxWidth: "100%",
+                                                height: "150px",
+                                                borderRadius: "36px"
+                                            }}
 
-        >
-        <Flex
-            // bg={useColorModeValue('gray.200', 'gray.700')}
-            // px={5}
-            // py={4}
-            justifyContent="space-between"
-            alignItems="center"
-        >
-            {/* <Button as={Link} href="/items/create" colorScheme="teal" size="sm" mt="4">
-    Add New Item
-</Button> */}
-            <Image
-                src="/storage/logo/iklan2.png"
-                alt="Appets iklan"
-            />
-            {/* <Text>Sitewide savings are here! Save 20% OFF Hands of part favorites</Text> */}
-            {/* <Link color="teal.500">--Ads Sample</Link> */}
-        </Flex>
-
-        <Flex
-            // bg={useColorModeValue('gray.200', 'gray.700')}
-            px={5}
-            py={4}
-            justifyContent="space-between"
-            alignItems="center"
-        >
-            <Text fontFamily="Fredoka One" color="rgba(133, 81, 33, 1)" fontSize="38px" fontWeight="bold" ml={6}>Today's Offer</Text>
-        </Flex>
-        <Box display="flex" flexWrap="wrap"  >
-        {props.pets ? (
-    props.pets.map((data, i) => (
-        <Box key={i} ml={8} mr={2} mb={4} flexBasis="calc(33.33% - 250px)" boxShadow="0px 0px 2px rgba(0, 0, 0, 0.2)" border="1px solid #ccc" borderRadius="xl" bg={useColorModeValue('gray.200', 'gray.700')} borderColor="black" p={4}>
-            <Image
-                src={`/storage/${data.image}`}
-                alt={data.name}
-                style={{ maxWidth: '100%', height: '150px' }}
-            />
-            <Heading size="md" mb={2}>Name: {data.name}</Heading>
-            <Text mt={2}>Description: {data.description}</Text>
-            <Text>Price: {data.price}</Text>
-            <Text>Location: {data.location}</Text>
-            <Text>Type: {data.category_id}</Text>
-            {/* Detail button using Inertia Link */}
-            <Link href={`/item/${data.id}`} style={{ marginTop: '10px', display: 'inline-block', textDecoration: 'underline', color: 'blue' }}>
-                View Details
-            </Link>
-              {/* Wishlist button */}
-              <Button
-                colorScheme="teal"
-                size="sm"
-                mt="4"
-                onClick={() => {
-                    addToWishlist(data.id)
-                }}
-            >
-                Add to Wishlist
-            </Button>
-        </Box>
-    ))
-) : (
-    <Text>No pets found.</Text>
-)}
-        </Box>
-        <Flex
-            // bg={useColorModeValue('gray.200', 'gray.700')}
-            px={5}
-            py={4}
-            justifyContent="space-between"
-            alignItems="center"
-        >
-            <Text fontFamily="Fredoka One" color="rgba(133, 81, 33, 1)" fontSize="38px" fontWeight="bold" ml={6}>Shop Category</Text>
-            {/* <Text>88</Text> */}
-        </Flex>
-        <Box display="flex" flexWrap="wrap">
-        <Image src="/storage/logo/dog.png" alt="Dog Category" ml={9} width="191px" height="191px" mb={12} onClick={() => handleCategoryClick('Dog')} style={{ cursor: "pointer" }} />
-                        <Image src="/storage/logo/cat.png" alt="Cat Category" ml={9} width="191px" height="191px" onClick={() => handleCategoryClick('Cat')} style={{ cursor: "pointer" }} />
-                        <Image src="/storage/logo/fish.png" alt="Fish Category" ml={9} width="191px" height="191px" onClick={() => handleCategoryClick('Fish')} style={{ cursor: "pointer" }} />
-                        <Image src="/storage/logo/bird.png" alt="Bird Category" ml={9} width="191px" height="191px" onClick={() => handleCategoryClick('Bird')} style={{ cursor: "pointer" }} />
-                        <Image src="/storage/logo/reptile.png" alt="Reptile Category" ml={9} width="191px" height="191px" onClick={() => handleCategoryClick('Reptile')} style={{ cursor: "pointer" }} />
-                        <Image src="/storage/logo/smallpet.png" alt="Other Category" ml={9} width="191px" height="191px" onClick={() => handleCategoryClick('Other')} style={{ cursor: "pointer" }} />
-
-            {/* <T/ext>Dog</Text> */}
-            {/* {props.pets ? (
-                props.pets.map((data, i) => (
-                    <Box key={i} ml={8} mr={2} mb={4} flexBasis="calc(33.33% - 250px)" boxShadow="0px 0px 2px rgba(0, 0, 0, 0.2)" border="1px solid #ccc" borderRadius="xl" bg={useColorModeValue('gray.200', 'gray.700')} borderColor="black" p={4}>
-                        <Image
-                            src={`/storage/${data.image}`}
-                            alt={data.name}
-                            style={{ maxWidth: '100%', height: '150px' }}
-                        />
-                        <Heading size="md" mb={2}>Name: {data.name}</Heading>
-                        <Text mt={2}>Description: {data.description}</Text>
-                        <Text>Price: {data.price}</Text>
-                        <Text>Location: {data.location}</Text>
+                                        />
+                                        <Heading size="md" mb={2}>
+                                            Name: {data.name}
+                                        </Heading>
+                                        <Text mt={2}>
+                                            Description: {data.description}
+                                        </Text>
+                                        <Text>Price: {data.price}</Text>
+                                        <Text>Location: {data.location}</Text>
+                                        <Text>
+                                            Type:{" "}
+                                            {categoryMap[data.category_id]}
+                                        </Text>
+                                        <Link
+                                            href={`/item/${data.id}`}
+                                            style={{
+                                                marginTop: "10px",
+                                                display: "inline-block",
+                                                fontFamily: "Fredoka One",
+                                                textDecoration: "underline",
+                                                color: "rgba(133, 81, 33, 1)",
+                                            }}
+                                            fontFamily="Fredoka One"
+                                            color="rgba(133, 81, 33, 1)"
+                                            fontSize="38px"
+                                            fontWeight="bold"
+                                        >
+                                            View Details
+                                        </Link>
+                                        <Button
+                                            fontFamily="Fredoka One"
+                                            fontSize="14px"
+                                            fontWeight="bold"
+                                            ml={4}
+                                            bg="rgba(133, 81, 33, 1)"
+                                            color="white"
+                                            size="sm"
+                                            _hover={{
+                                                textDecoration: "underline",
+                                                color: "rgba(133, 81, 33, 0.8)",
+                                            }}
+                                            _active={{
+                                                textDecoration: "underline",
+                                                color: "rgba(133, 81, 33, 0.6)",
+                                            }}
+                                            onClick={() => {
+                                                addToWishlist(data.id);
+                                            }}
+                                        >
+                                            Add to Wishlist
+                                        </Button>
+                                    </Box>
+                                ))
+                            ) : (
+                                <Text>No pets found.</Text>
+                            )}
+                        </Box>
+                        <Flex
+                            px={5}
+                            py={4}
+                            justifyContent="space-between"
+                            alignItems="center"
+                        >
+                            <Text
+                                fontFamily="Fredoka One"
+                                color="rgba(133, 81, 33, 1)"
+                                fontSize="38px"
+                                fontWeight="bold"
+                                ml={6}
+                            >
+                                Shop Category
+                            </Text>
+                        </Flex>
+                        <Box display="flex" flexWrap="wrap">
+                            <Image
+                                src="/storage/logo/dog.png"
+                                alt="Dog Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                mb={12}
+                                onClick={() => handleCategoryClick("Dog")}
+                                style={{ cursor: "pointer" }}
+                            />
+                            <Image
+                                src="/storage/logo/cat.png"
+                                alt="Cat Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                onClick={() => handleCategoryClick("Cat")}
+                                style={{ cursor: "pointer" }}
+                            />
+                            <Image
+                                src="/storage/logo/fish.png"
+                                alt="Fish Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                onClick={() => handleCategoryClick("Fish")}
+                                style={{ cursor: "pointer" }}
+                            />
+                            <Image
+                                src="/storage/logo/bird.png"
+                                alt="Bird Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                onClick={() => handleCategoryClick("Bird")}
+                                style={{ cursor: "pointer" }}
+                            />
+                            <Image
+                                src="/storage/logo/reptile.png"
+                                alt="Reptile Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                onClick={() => handleCategoryClick("Reptile")}
+                                style={{ cursor: "pointer" }}
+                            />
+                            <Image
+                                src="/storage/logo/smallpet.png"
+                                alt="Other Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                onClick={() => handleCategoryClick("Other")}
+                                style={{ cursor: "pointer" }}
+                            />
+                        </Box>
                     </Box>
-                ))
-            ) : (
-                <Text>No pets found.</Text>
-            )} */}
-        </Box>
-        </Box>
-        </AuthenticatedLayout>
-        </FlashMessageHandler>
-    </ChakraProvider>
-  );
+                </AuthenticatedLayout>
+            </FlashMessageHandler>
+        </ChakraProvider>
+    );
 };
 
 export default Homepages;

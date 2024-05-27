@@ -12,76 +12,131 @@ import {
     ChakraProvider,
     Image,
     Flex,
-    Table, Tbody, Tr, Td
+    Table,
+    Tbody,
+    Tr,
+    Td,
+    Wrap,
 } from "@chakra-ui/react";
 import { Head, Link } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
-import FlashMessageHandler from './FlashMessageHandler';
+import FlashMessageHandler from "./FlashMessageHandler";
 
 const Wishlist = ({ auth }) => {
     const { props } = usePage();
     const { list } = props;
- 
+
     return (
         <ChakraProvider>
             <FlashMessageHandler>
-
-            <AuthenticatedLayout
-                user={auth.user}
-                header={
-                    <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Wishlist
-                    </h2>
-                }
+                <AuthenticatedLayout
+                    user={auth.user}
+                    header={
+                        <h2 className="font-semibold text-xl text-gray-800 leading-tight">
+                            Wishlist
+                        </h2>
+                    }
                 >
-                <Head title={props.title} />
-                <Box
-                    bg={useColorModeValue("rgba(253, 201, 152, 1)")}
-                    minH="100vh"
-                    id="random-background-box"
-                    bgImage={`url(/storage/logo/image.png)`}
-                    bgSize="250px"
+                    <Head title={props.title} />
+                    <Box
+                        bg={useColorModeValue("rgba(253, 201, 152, 1)")}
+                        minH="100vh"
+                        id="random-background-box"
+                        bgImage={`url(/storage/logo/image.png)`}
+                        bgSize="250px"
+                        justify="center"
+                        align="center"
+                        p={5}
                     >
-                    <Heading>My Wishlist</Heading>
-                    {list.length > 0 ? (
-                        <Table variant="striped" colorScheme="">
-                        <Tbody>
-                            {list.map((wishlistItem) => (
-                                <Tr key={wishlistItem.id}>
-                                    <Td>
-                                        <Flex alignItems="center">
-                                            <Image
-                                                src={`/storage/${wishlistItem.item.image}`}
-                                                alt="wishlist item"
-                                                width={"90px"}
-                                                />
-                                            <Text ml={4}>{wishlistItem.item.name} - {wishlistItem.item.description}</Text>
-                                        </Flex>
-                                    </Td>
-                                  
-                                    <Td>
-                                        <Button
-                                            onClick={() => {
-                                                Inertia.delete(`/wishlist/${wishlistItem.id}`);
-                                            }}
-                                            >
-                                            Remove
-                                        </Button>
-                                    </Td>
-                                </Tr>
-                            ))}
-                            <Tr>
-                                <Td colSpan="2" textAlign="right">Total ({list.length} produk)</Td>
-                                
-                            </Tr>
-                        </Tbody>
-                    </Table>
-                    ) : (
-                        <Text>Your wishlist is empty.</Text>
-                    )}
-                </Box>
-            </AuthenticatedLayout>
-                    </FlashMessageHandler>
+                        <Box
+                            bg="bisque"
+                            borderRadius="45px"
+                            p={5}
+                            w="full"
+                            maxW="1200px"
+                        >
+                            <Heading
+                                fontFamily="Fredoka One"
+                                fontSize="60px"
+                                fontWeight="bold"
+                                align="center"
+                                color="rgba(133, 81, 33, 0.8)"
+                            >
+                                My Wishlist
+                            </Heading>
+                            <Wrap justify="flex-start" spacing="30px">
+                                {list.length > 0 ? (
+                                    <Table variant="striped" colorScheme="">
+                                        <Tbody>
+                                            {list.map((wishlistItem) => (
+                                                <Tr key={wishlistItem.id}>
+                                                    <Td>
+                                                        <Flex alignItems="center">
+                                                            <Image
+                                                                src={`/storage/${wishlistItem.item.image}`}
+                                                                alt="wishlist item"
+                                                                width={"90px"}
+                                                            />
+                                                            <Text ml={4}>
+                                                                {
+                                                                    wishlistItem
+                                                                        .item
+                                                                        .name
+                                                                }{" "}
+                                                                -{" "}
+                                                                {
+                                                                    wishlistItem
+                                                                        .item
+                                                                        .description
+                                                                }
+                                                            </Text>
+                                                        </Flex>
+                                                    </Td>
+
+                                                    <Td>
+                                                        <Button
+                                                            fontFamily="Fredoka One"
+                                                            fontSize="14px"
+                                                            fontWeight="bold"
+                                                            ml={4}
+                                                            bg="rgba(133, 81, 33, 1)"
+                                                            color="white"
+                                                            size="sm"
+                                                            _hover={{
+                                                                bg: "rgba(133, 81, 33, 0.8)",
+                                                            }}
+                                                            _active={{
+                                                                bg: "rgba(133, 81, 33, 0.6)",
+                                                            }}
+                                                            onClick={() => {
+                                                                Inertia.delete(
+                                                                    `/wishlist/${wishlistItem.id}`
+                                                                );
+                                                            }}
+                                                        >
+                                                            Remove
+                                                        </Button>
+                                                    </Td>
+                                                </Tr>
+                                            ))}
+                                            <Tr>
+                                                <Td
+                                                    colSpan="2"
+                                                    textAlign="right"
+                                                >
+                                                    Total ({list.length} produk)
+                                                </Td>
+                                            </Tr>
+                                        </Tbody>
+                                    </Table>
+                                ) : (
+                                    <Text>Your wishlist is empty.</Text>
+                                )}
+                            </Wrap>
+                        </Box>
+                    </Box>
+                </AuthenticatedLayout>
+            </FlashMessageHandler>
         </ChakraProvider>
     );
 };

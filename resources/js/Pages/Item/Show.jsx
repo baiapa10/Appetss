@@ -265,7 +265,13 @@ const Show = ({ item, auth }) => {
                                         />
                                     }
                                     onClick={() => {
-                                        addToCart(item.id, quantity);
+                                        if (item.stock === 0) {
+                                            alert("This item is out of stock.");    
+                                        } else if (item.stock < quantity) {
+                                            alert("The selected quantity is greater than the available stock.");
+                                        } else {
+                                            addToCart(item.id, quantity);
+                                        }
                                     }}
                                     aria-label="Add to Cart"
                                     variant="ghost"

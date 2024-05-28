@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Inertia } from "@inertiajs/inertia";
 import {
     Box,
@@ -21,6 +21,9 @@ const MyOrder = ({ auth, transactions }) => {
     const handleReceive = (id) => {
         Inertia.put(`/transactions/${id}`, { status: 2 });
     };
+    useEffect(() => {
+        document.title = "My Order";
+    }, []);
 
     return (
         <ChakraProvider>
@@ -63,17 +66,19 @@ const MyOrder = ({ auth, transactions }) => {
                             spacing="30px"
                             mt={6}
                             align="center"
+                            
                         >
-                            {transactions.map((transaction) => (
+                            {transactions.map((transaction, index) => (
                                 <WrapItem key={transaction.id} maxW="360px">
                                     <Box
                                         borderWidth="6px"
                                         borderRadius="45px"
                                         p={4}
-                                        w="100%"
+                                        w="150%"
+                                       // h = "auto"
                                     >
                                         <Heading as="h2" size="md">
-                                            Transaction {transaction.id}
+                                            Transaction {index + 1}
                                         </Heading>
                                         <Text mt={2}>
                                             Total Price: Rp.{" "}
@@ -81,19 +86,28 @@ const MyOrder = ({ auth, transactions }) => {
                                                 transaction.total_price
                                             ).toLocaleString()}
                                         </Text>
+                                        <Text>
+                                            Date: {new Date(transaction.created_at).toLocaleDateString()}
+                                            </Text>
+                                         <Text>
+                                            Address: {transaction.address}
+                                            </Text>   
+                                    
                                         <Flex
-                                            align="center"
+                                        direction="column"
+                                            align="start"
                                             justify="space-between"
                                         >
-                                            <Text>
-                                                Status: {transaction.status}
+                                           <Text>
+                                                Status: {transaction.status === 1 ? "Not Received" : "Already Received"}
                                             </Text>
+                                           
                                             {transaction.status === 1 && (
                                                 <Button
                                                     fontFamily="Fredoka One"
                                                     fontSize="14px"
                                                     fontWeight="bold"
-                                                    ml={8}
+                                                  //  ml={}
                                                     bg="rgba(133, 81, 33, 1)"
                                                     color="white"
                                                     size="sm"
@@ -103,11 +117,11 @@ const MyOrder = ({ auth, transactions }) => {
                                                     _active={{
                                                         bg: "rgba(133, 81, 33, 0.6)",
                                                     }}
-                                                    onClick={() =>
-                                                        handleReceive(
-                                                            transaction.id
-                                                        )
-                                                    }
+                                                    onClick={() => {
+                                                        if (window.confirm("Are you sure you want to mark this item as received?")) {
+                                                            handleReceive(transaction.id);
+                                                        }
+                                                    }}
                                                 >
                                                     Item already received?
                                                 </Button>
@@ -116,7 +130,7 @@ const MyOrder = ({ auth, transactions }) => {
                                                 <Button
                                                     bg="green.500"
                                                     color="white"
-                                                    ml={4}
+                                                    //ml={4}
                                                     _hover={{ bg: "green.600" }}
                                                     isDisabled
                                                 >

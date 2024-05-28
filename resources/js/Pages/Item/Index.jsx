@@ -92,7 +92,7 @@ const Homepages = (props) => {
                             <Link href={route("item.create")}>
                                 <Button
                             
-                                    mr={1200}
+                                    mr={1150}
                                     bg="rgba(203, 142, 85, 1)"
                                     size="lg"
                                     borderRadius="full"

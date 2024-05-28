@@ -132,45 +132,63 @@ const Homepages = (props) => {
                                             }}
 
                                         />
+                                        <br />
                                         <Heading size="md" mb={2}>
-                                            Name: {data.name}
+                                           {data.name}
                                         </Heading>
                                         <Text mt={2}>
-                                            Description: {data.description}
+                                           {data.description}
                                         </Text>
-                                        <Text>Price: {data.price}</Text>
+                                      
+                                        <Text>
+                                             Price: Rp.{" "}
+                                            {Number(
+                                                data.price
+                                            ).toLocaleString()}
+                                        </Text>
                                         <Text>Location: {data.location}</Text>
                                         <Text>
                                             Type:{" "}
                                             {categoryMap[data.category_id]}
-                                        </Text>
-                                        <Link
+                                        </Text>                
+                                        <Text>
+                                        Posted at: {new Date(data.created_at).toLocaleDateString()}
+                                        </Text>                                                                                                                                                                                                                
+                                        <Button
+                                            as="a"
                                             href={`/item/${data.id}`}
                                             style={{
-                                                marginTop: "10px",
-                                                display: "inline-block",
+                                              
                                                 fontFamily: "Fredoka One",
-                                                textDecoration: "underline",
-                                                color: "rgba(133, 81, 33, 1)",
+                                                
+                                                color: "white   ",
                                             }}
                                             fontFamily="Fredoka One"
-                                            color="rgba(133, 81, 33, 1)"
-                                            fontSize="38px"
+                                            bg="rgba(133, 81, 33, 1)"
+                                            fontSize="14px"
                                             fontWeight="bold"
+                                            size={"sm"}
+                                            _hover={{
+                                                textDecoration: "underline",
+                                            }}
+                                            mt={2}
+                                            mb={2}
+                                            //ml={4}
+                                
                                         >
                                             View Details
-                                        </Link>
+                                        </Button>
+                                        
                                         <Button
                                             fontFamily="Fredoka One"
                                             fontSize="14px"
                                             fontWeight="bold"
-                                            ml={4}
+                                            ml={1}
                                             bg="rgba(133, 81, 33, 1)"
                                             color="white"
                                             size="sm"
                                             _hover={{
                                                 textDecoration: "underline",
-                                                color: "rgba(133, 81, 33, 0.8)",
                                             }}
                                             _active={{
                                                 textDecoration: "underline",

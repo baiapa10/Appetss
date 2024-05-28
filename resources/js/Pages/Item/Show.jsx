@@ -138,14 +138,16 @@ const Show = ({ item, auth }) => {
                                     {item.name}
                                 </Text>
                                 <Text
-                                    ml={8}
+                                    ml={4}
                                     mt={2}
-                                    fontSize="14px"
+                                    fontSize="lg"
                                     mb={4}
                                     color="black"
+                               
                                 >
-                                    {formatDate(item.created_at)}
+                                  Posted At:  {formatDate(item.created_at)}
                                 </Text>
+
                                 <Flex
                                     direction="row"
                                     alignItems="center"
@@ -178,13 +180,16 @@ const Show = ({ item, auth }) => {
                             mr={"40px"}
                             mt={"40px"}
                         >
+                            {item.category_id === 13 && (
                             <Flex alignItems="center">
+                                
                                 <Text
                                     mr={2}
                                     fontWeight="bold"
                                     color="rgba(133, 81, 33, 1)"
                                     fontFamily="Fredoka One"
                                     fontSize="30px"
+                                    
                                 >
                                     Quantity:
                                 </Text>
@@ -193,37 +198,50 @@ const Show = ({ item, auth }) => {
                                     initialStock={item.stock}
                                     price={item.price}
                                     onChange={handleQuantityChange}
+                                    
                                 />
                                 <Spacer />
-                            </Flex>
+                            </Flex> )}
+                            {item.category_id === 13 && (
                             <Text fontSize="lg" mt={2} ml={"202px"}>
                                 Stock: {item.stock} pc(s)
+                            </Text> )}
+                            <Text fontSize={"lg"} mr={2}>
+                                Price: Rp.{" "}
+                                {Number(
+                                 item.price
+                                 ).toLocaleString()}
                             </Text>
                             <Flex ml={2} mt={8}>
-                                <Button
-                                    fontFamily="Fredoka One"
-                                    fontSize="26px"
-                                    fontWeight="bold"
-                                    ml={4}
-                                    mt={-7}
-                                    bg="rgba(203, 142, 85, 1)"
-                                    color="rgba(133, 81, 33, 1)"
-                                    size="sm"
-                                    width={"164"}
-                                    height={"96px"}
-                                    mr={2}
-                                    onClick={() => {
-                                        addToWishlist(data.id);
-                                    }}
-                                    _hover={{
-                                        bg: "rgba(133, 81, 33, 0.8)",
-                                    }}
-                                    _active={{
-                                        bg: "rgba(133, 81, 33, 0.6)",
-                                    }}
-                                >
-                                    Add to Wishlist
-                                </Button>
+                            <IconButton
+                                fontFamily="Fredoka One"
+                                fontSize="26px"
+                                fontWeight="bold"
+                                ml={4}
+                                mt={-7}
+                                bg="rgba(203, 142, 85, 1)"
+                                color="rgba(133, 81, 33, 1)"
+                                size="sm"
+                                width={"164px"}
+                                height={"96px"}
+                                mr={2}
+                                onClick={() => {
+                                    addToWishlist(data.id);
+                                }}
+                                _hover={{
+                                    bg: "rgba(133, 81, 33, 0.8)",
+                                }}
+                                _active={{
+                                    bg: "rgba(133, 81, 33, 0.6)",
+                                }}
+                                icon={
+                                    <Image
+                                        src="/storage/logo/love.png"
+                                        width="70px"
+                                        height="70px"
+                                    />
+                                }
+                            />
                                 <IconButton
                                     icon={
                                         <Image

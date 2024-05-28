@@ -15,6 +15,7 @@ import {
     useColorModeValue,
 } from "@chakra-ui/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import FlashMessageHandler from "./FlashMessageHandler";
 
 const MyOrder = ({ auth, transactions }) => {
     const handleReceive = (id) => {
@@ -23,6 +24,7 @@ const MyOrder = ({ auth, transactions }) => {
 
     return (
         <ChakraProvider>
+            <FlashMessageHandler >
             <AuthenticatedLayout
                 user={auth.user}
                 header={
@@ -140,6 +142,7 @@ const MyOrder = ({ auth, transactions }) => {
                     </Box>
                 </Flex>
             </AuthenticatedLayout>
+            </FlashMessageHandler>
         </ChakraProvider>
     );
 };

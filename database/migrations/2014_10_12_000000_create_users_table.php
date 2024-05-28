@@ -21,6 +21,10 @@ return new class extends Migration
             $table->timestamps();
             // $table->boolean('is_seller'); //ngecek dia jual ngga
             $table->bigInteger('phone_number');
+            $table->string('avatar')->default('avatar.png');
+            $table->boolean('active_status')->default(0);
+            $table->boolean('dark_mode')->default(0);
+            $table->string('messenger_color')->nullable();
             // $table->integer('seller_rating'); // average bintang seller
             // $table->integer('rating_count'); // total user yang ngasih bintang
         });

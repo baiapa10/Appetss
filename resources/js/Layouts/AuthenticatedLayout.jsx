@@ -137,8 +137,7 @@ export default function Authenticated({ user, header, children }) {
                             <Image
                                 src="/storage/pet_images/chat.png"
                                 alt="Appets iklan"
-                                mr={"2"}
-                                width="70px"
+                                width="110px"
                                 height="70px"
                                 
                                 
@@ -146,7 +145,7 @@ export default function Authenticated({ user, header, children }) {
                         </Link>
                         <Link href="/wishlist">
                                     <Image
-                                        src="/storage/logo/save.png"
+                                        src="/storage/logo/love.png"
                                         alt="Appets iklan"
                                         mr={"3"}
                                         width="41px"

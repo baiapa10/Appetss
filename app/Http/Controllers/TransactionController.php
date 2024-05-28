@@ -69,6 +69,8 @@ public function processPayment(Request $request)
                 'id' => $transaction->id,
                 'total_price' => $transaction->total_price,
                 'status' => $transaction->status,
+                'address' => $transaction->address,
+                'created_at' => $transaction->created_at->format('Y-m-d H:i:s'),
                 'items' => $transaction->transactionItems->map(function ($transactionItem) {
                     return [
                         'id' => $transactionItem->item->id,

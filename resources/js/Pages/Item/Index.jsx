@@ -1,4 +1,4 @@
-import React, { useEffect, useHistory, useState } from "react";
+    import React, { useEffect, useHistory, useState } from "react";
 import {
     Box,
     Flex,
@@ -72,22 +72,6 @@ const Homepages = (props) => {
                             alignItems="center"
                             p={4}
                         >
-                            <Link href={route("item.create")}>
-                                <Button
-                                    mt={4}
-                                    mr={4}
-                                    bg="rgba(203, 142, 85, 1)"
-                                    size="lg"
-                                    borderRadius="full"
-                                    boxShadow="0px 4px 6px rgba(133, 81, 33, 1)"
-                                    style={{
-                                        fontSize: "24px",
-                                        padding: "0 20px",
-                                    }}
-                                >
-                                    create new item +
-                                </Button>
-                            </Link>
                         </Flex>
                         <Flex
                             px={5}
@@ -104,6 +88,24 @@ const Homepages = (props) => {
                             >
                                 Your Items
                             </Text>
+
+                            <Link href={route("item.create")}>
+                                <Button
+                            
+                                    mr={1200}
+                                    bg="rgba(203, 142, 85, 1)"
+                                    size="lg"
+                                    borderRadius="full"
+                                    boxShadow="0px 4px 6px rgba(133, 81, 33, 1)"
+                                    style={{
+                                        fontSize: "24px",
+                                        padding: "0 20px",
+                                    }}
+                                    >
+                                     +
+                                </Button>
+                            </Link>
+                                    
                         </Flex>
                         <Box display="flex" flexWrap="wrap">
                             {props.pets ? (
@@ -132,56 +134,75 @@ const Homepages = (props) => {
                                                 height: "150px",
                                             }}
                                         />
-                                        <Heading size="md" mb={2}>
-                                            Name: {data.name}
+                                        <Heading size="md" mb={2} mt={4}>
+                                            {data.name}
                                         </Heading>
                                         <Text mt={2}>
-                                            Description: {data.description}
+                                           {data.description}
                                         </Text>
-                                        <Text>Price: {data.price}</Text>
+                                        <Text>
+                                             Price: Rp.{" "}
+                                            {Number(
+                                                data.price
+                                            ).toLocaleString()}
+                                        </Text>
                                         <Text>Location: {data.location}</Text>
                                         <Text>
                                             Type:{" "}
                                             {categoryMap[data.category_id]}
                                         </Text>
-                                        <Link
+                                        <Text>
+                                        Posted at: {new Date(data.created_at).toLocaleDateString()}
+                                        </Text>
+                                        <Button
+                                            as="a"
                                             href={`/item/${data.id}`}
-                                            style={{
-                                                marginTop: "10px",
-                                                display: "inline-block",
-                                                fontFamily: "Fredoka One",
-                                                textDecoration: "underline",
-                                                color: "rgba(133, 81, 33, 1)",
-                                            }}
+                                            mt={4}
+                                           // mb={2}
                                             fontFamily="Fredoka One"
-                                            color="rgba(133, 81, 33, 1)"
-                                            fontSize="38px"
+                                            
+                                            bg="rgba(133, 81, 33, 1)"
+                                            color="white"
+                                            fontSize="12px"
                                             fontWeight="bold"
+                                            _hover={{
+                                                bg: "rgba(133, 81, 33, 0.8)",
+                                            }}
+                                            _active={{
+                                                bg: "rgba(133, 81, 33, 0.6)",
+                                            }}
                                         >
                                             View Details
-                                        </Link>
-                                        <Link
+                                        </Button>
+                                        <Button
+                                            as="a"
                                             href={`/item/${data.id}/edit`}
-                                            style={{
-                                                marginTop: "10px",
-                                                marginLeft: "10px",
-                                                display: "inline-block",
-                                                fontFamily: "Fredoka One",
-                                                textDecoration: "underline",
-                                                color: "rgba(133, 81, 33, 1)",
-                                            }}
+                                            mt={4}
+                                            ml={1}
+                                            //mb={2}
+                                            
                                             fontFamily="Fredoka One"
-                                            color="rgba(133, 81, 33, 1)"
-                                            fontSize="38px"
+                                            
+                                            bg="rgba(133, 81, 33, 1)"
+                                            color="white"
+                                            fontSize="12px"
                                             fontWeight="bold"
+                                            _hover={{
+                                                bg: "rgba(133, 81, 33, 0.8)",
+                                            }}
+                                            _active={{
+                                                bg: "rgba(133, 81, 33, 0.6)",
+                                            }}
+
                                         >
                                             Edit
-                                        </Link>
+                                        </Button>
                                         <Button
                                             fontFamily="Fredoka One"
-                                            fontSize="17px"
+                                            fontSize="12px"
                                             fontWeight="bold"
-                                            ml={4}
+                                           ml={1}
+                                           mt={4}
                                             bg="rgba(133, 81, 33, 1)"
                                             color="white"
                                             onClick={() => {

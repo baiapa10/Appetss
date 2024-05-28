@@ -45,6 +45,10 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
             setErrorMessage("Please select a shipping method");
             return;
         }
+        if (!address) {
+            setErrorMessage("Please input your address");
+            return;
+        }
         Inertia.post(route("processPayment"), {
             cartItems: cartItems,
             totalPrice: Number(totalPrice) + Number(shippingCost),

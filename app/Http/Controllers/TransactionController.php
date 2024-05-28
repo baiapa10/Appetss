@@ -86,9 +86,12 @@ public function processPayment(Request $request)
 }
     public function showPaymentPage(Request $request)
     {
+    
     $totalPrice = $request->input('totalPrice');
     $carts = $request->input('checkedItems');
-
+    if (empty($carts)) {
+        return redirect()->route('cart.index') ->with('message', 'Please select items to checkout.');
+    }
     return Inertia::render('PaymentPage', [
         'totalPrice' => $totalPrice,
         'cartItems' => $carts,

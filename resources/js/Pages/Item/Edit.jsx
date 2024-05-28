@@ -19,6 +19,7 @@ import {
 } from '@chakra-ui/react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import InputLabel from '@/Components/InputLabel';
+import FlashMessageHandler from '../FlashMessageHandler';
 
 const Edit = ({ auth, item }) => {
     const [formData, setFormData] = useState({

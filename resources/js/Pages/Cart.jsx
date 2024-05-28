@@ -218,6 +218,8 @@ const Cart = ({ auth }) => {
                                 ) : (
                                     <Text>Your Shopping Cart is empty.</Text>
                                 )}
+                                
+                                {carts.length > 0 && ( 
                                 <InertiaLink
                                     href={route("payment.post")}
                                     data={{ totalPrice, checkedItems }}
@@ -240,10 +242,12 @@ const Cart = ({ auth }) => {
                                         p={2}
                                         borderRadius="md"
                                         display="inline-block"
+                                        
                                     >
                                         Proceed to Payment
                                     </Box>
                                 </InertiaLink>
+                                )}
                             </Wrap>
                         </Box>
                     </Box>

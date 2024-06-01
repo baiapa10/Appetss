@@ -31,7 +31,7 @@ const QuantitySelector = ({ initialStock, price, onChange, initialQuantity }) =>
 
     return (
         <>
-            <Button size="sm" colorScheme="blue" mr={2} onClick={handleIncrement}>
+            <Button size="sm" colorScheme="blue" ml={2} mr={2} onClick={handleIncrement}>
                 +
             </Button>
             <Input type="number" value={quantity} onChange={handleInputChange} size="sm" w="60px" textAlign="center" />

@@ -72,18 +72,13 @@ export default function Login({ status, canResetPassword }) {
                                     fontWeight="bold"
                                     color="black"
                                 >
-                                    Selamat Datang
+                                    Welcome
                                 </Text>
                                 <Text
                                     fontSize={{ base: "sm", md: "md" }}
                                     textAlign="center"
                                 >
-                                    Selamat datang di halaman login kami! Kami
-                                    senang Anda memilih kami sebagai platform
-                                    untuk memperluas pengetahuan dan
-                                    keterampilan Anda. Melalui platform ini,
-                                    informasi yang berguna untuk membantu Anda
-                                    mencapai tujuan Anda.
+                                    Welcome to our login page! We are delighted that you have chosen us as the platform to expand your knowledge and skills. Through this platform, you will find useful information to help you achieve your goals.
                                 </Text>
                             </Flex>
                         </GridItem>
@@ -108,16 +103,13 @@ export default function Login({ status, canResetPassword }) {
                                     fontWeight="bold"
                                     color="black"
                                 >
-                                    Hello, Selamat Datang 👋👋👋
+                                    Hello, Welcome 👋👋👋
                                 </Text>
                                 <Text
                                     fontSize={{ base: "sm", md: "md" }}
                                     textAlign="center"
                                 >
-                                    Di sini, Anda akan menemukan tempat
-                                    penjualan hewan yang menawarkan pengalaman
-                                    belanja unik untuk memenuhi kebutuhan hewan
-                                    peliharaan Anda.
+                                    Here, you will find a pet sales place that offers a unique shopping experience to meet your pet's needs.
                                 </Text>
                                 {status && (
                                     <div className="mb-4 font-medium text-sm text-green-600">
@@ -141,16 +133,17 @@ export default function Login({ status, canResetPassword }) {
                                         htmlFor="email"
                                         value="Email"
                                         style={{
-                                            fontFamily: "Fredoka One",
                                             color: "rgba(133, 81, 33, 1)",
                                             fontSize: "16px",
                                             fontWeight: "bold",
+
                                         }}
                                     />
                                     <TextInput
                                         id="email"
                                         type="email"
                                         name="email"
+                                        placeholder="Input email..."
                                         value={data.email}
                                         className="mt-1 block w-full"
                                         autoComplete="username"
@@ -174,7 +167,6 @@ export default function Login({ status, canResetPassword }) {
                                         htmlFor="password"
                                         value="Password"
                                         style={{
-                                            fontFamily: "Fredoka One",
                                             color: "rgba(133, 81, 33, 1)",
                                             fontSize: "16px",
                                             fontWeight: "bold",
@@ -184,6 +176,7 @@ export default function Login({ status, canResetPassword }) {
                                         id="password"
                                         type="password"
                                         name="password"
+                                        placeholder="Input password..."
                                         value={data.password}
                                         className="mt-1 block w-full"
                                         autoComplete="current-password"
@@ -211,7 +204,6 @@ export default function Login({ status, canResetPassword }) {
                                         <span
                                             className="ms-2 text-sm text-gray-600"
                                             style={{
-                                                fontFamily: "Fredoka One",
                                                 color: "rgba(133, 81, 33, 1)",
                                                 fontSize: "16px",
                                                 fontWeight: "bold",
@@ -230,7 +222,6 @@ export default function Login({ status, canResetPassword }) {
                                         href={route("register")}
                                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                         style={{
-                                            fontFamily: "Fredoka One",
                                             color: "rgba(133, 81, 33, 1)",
                                             fontSize: "16px",
                                             fontWeight: "bold",
@@ -245,7 +236,6 @@ export default function Login({ status, canResetPassword }) {
                                             href={route("password.request")}
                                             className="mr-7 underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                             style={{
-                                                fontFamily: "Fredoka One",
                                                 color: "rgba(133, 81, 33, 1)",
                                                 fontSize: "16px",
                                                 fontWeight: "bold",
@@ -258,7 +248,6 @@ export default function Login({ status, canResetPassword }) {
                                         className="ms-4"
                                         disabled={processing}
                                         style={{
-                                            fontFamily: "Fredoka One",
                                             fontSize: "12px",
                                         }}
                                     >

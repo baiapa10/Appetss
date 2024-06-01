@@ -70,6 +70,17 @@ const Cart = ({ auth }) => {
         }));
     };
 
+    const formatDate = (dateString) => {
+        const options = {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+        };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+
     return (
         <ChakraProvider>
             <FlashMessageHandler>
@@ -100,7 +111,6 @@ const Cart = ({ auth }) => {
                             maxW="1200px"
                         >
                             <Heading
-                                fontFamily="Fredoka One"
                                 fontSize="60px"
                                 fontWeight="bold"
                                 align="center"
@@ -118,6 +128,18 @@ const Cart = ({ auth }) => {
                                                         <Flex alignItems="center">
                                                             <Checkbox
                                                                 mr={4}
+                                                                sx={{
+                                                                    "& .chakra-checkbox__control": {
+                                                                        borderColor: "rgba(133, 81, 33, 0.8)", 
+                                                                    },
+                                                                    "& .chakra-checkbox__control[data-checked]": {
+                                                                        borderColor: "rgba(133, 81, 33, 0.8)",
+                                                                    },
+                                                                    "& .chakra-checkbox__control:hover": {
+                                                                        bg: "rgba(133, 81, 33, 0.8)",
+                                                                        borderColor: "rgba(133, 81, 33, 0.8)",
+                                                                    },
+                                                                }}
                                                                 isChecked={checkedItems.some(
                                                                     (item) =>
                                                                         item.id ===
@@ -133,6 +155,7 @@ const Cart = ({ auth }) => {
                                                                 src={`/storage/${cart.item.image}`}
                                                                 alt="wishlist item"
                                                                 width={"90px"}
+                                                                borderRadius={36}
                                                             />
                                                             <Text ml={4}>
                                                                 {cart.item.name}{" "}
@@ -145,41 +168,23 @@ const Cart = ({ auth }) => {
                                                         </Flex>
                                                     </Td>
                                                     <Td>
-                                                        Rp.{cart.item.price}
-                                                        /(pcs)
+                                                        Rp.
+                                                        {Number(
+                                                            cart.item.price
+                                                            ).toLocaleString()}
+                                                            /(pcs)
                                                     </Td>
                                                     <Td>
                                                         <Flex
                                                             alignItems="center"
                                                             justifyContent="center"
+                                                            // mr="4px"
                                                         >
-                                                            Quantity
-                                                            <QuantitySelector
-                                                                initialStock={
-                                                                    cart.item
-                                                                        .stock
-                                                                }
-                                                                price={
-                                                                    cart.item
-                                                                        .price
-                                                                }
-                                                                onChange={(
-                                                                    newQuantity
-                                                                ) =>
-                                                                    handleQuantityChange(
-                                                                        cart.id,
-                                                                        newQuantity
-                                                                    )
-                                                                }
-                                                                initialQuantity={
-                                                                    cart.quantity
-                                                                }
-                                                            />
+                                                            Quantity:  {cart.quantity}
                                                         </Flex>
                                                     </Td>
                                                     <Td>
                                                         <Button
-                                                            fontFamily="Fredoka One"
                                                             fontSize="14px"
                                                             fontWeight="bold"
                                                             ml={4}
@@ -218,8 +223,8 @@ const Cart = ({ auth }) => {
                                 ) : (
                                     <Text>Your Shopping Cart is empty.</Text>
                                 )}
-                                
-                                {carts.length > 0 && ( 
+
+                                {carts.length > 0 && (
                                 <InertiaLink
                                     href={route("payment.post")}
                                     data={{ totalPrice, checkedItems }}
@@ -232,7 +237,6 @@ const Cart = ({ auth }) => {
                                         _active={{
                                             bg: "rgba(133, 81, 33, 0.6)",
                                         }}
-                                        fontFamily="Fredoka One"
                                         fontSize="14px"
                                         fontWeight="bold"
                                         ml={4}
@@ -242,7 +246,7 @@ const Cart = ({ auth }) => {
                                         p={2}
                                         borderRadius="md"
                                         display="inline-block"
-                                        
+
                                     >
                                         Proceed to Payment
                                     </Box>

@@ -27,7 +27,7 @@ class ItemController extends Controller
     public function create (){
         return Inertia::render('Item/Create' , ['title' => 'Create Item']);
     }
-    
+
     public function store(Request $request)
     {
         $request->validate([
@@ -40,7 +40,7 @@ class ItemController extends Controller
             'image' => 'required|image',
         ]);
 
-       
+
         if ($request->file('image')) {
             $imageFile = $request->file('image');
             $imageName = uniqid() . '' . $imageFile->getClientOriginalName();
@@ -58,14 +58,15 @@ class ItemController extends Controller
             'image' => $request->image,
             'stock' => $request->stock,
         ]);
-    
+
         return redirect()->route('item.index')->with('message', 'Item successfuly inserted!');
     }
 
 
 public function show($item)
 {
-    $item = Item::find($item);
+    $item = Item::with('user')->find($item);
+    // $item = Item::find($item);
 
     if (!$item) {
         // Handle the case where the item is not found
@@ -91,7 +92,7 @@ public function update(Request $request, Item $item)
     ]);
 
     $requestData = $request->only(['name', 'description', 'price', 'category_id', 'location', 'stock']);
-    
+
     if ($request->file('image')) {
         $imageFile = $request->file('image');
         $imageName = uniqid() . '' . $imageFile->getClientOriginalName();

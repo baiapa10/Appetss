@@ -18,6 +18,7 @@ import { Head, Link } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import FlashMessageHandler from "./FlashMessageHandler";
+import AdBanner from "./AdBanner";
 
 const addToWishlist = (itemId) => {
     Inertia.post("wishlist/store", { item_id: itemId });
@@ -76,16 +77,8 @@ const Homepages = (props) => {
                         bgSize="250px"
 
                     >
-                        <Flex
-                            justifyContent="space-between"
-                            alignItems="center"
-                        >
-                            <Image
-                                src="/storage/logo/iklan2.png"
-                                alt="Appets iklan"
-                                boxShadow="0px 4px 8px rgba(0, 0, 0, 0.1)"
-                                borderRadius="45px"
-                            />
+                        <Flex>
+                            <AdBanner />
                         </Flex>
                         <Flex
                             px={5}
@@ -94,7 +87,6 @@ const Homepages = (props) => {
                             alignItems="center"
                         >
                             <Text
-                                fontFamily="Fredoka One"
                                 color="rgba(133, 81, 33, 1)"
                                 fontSize="38px"
                                 fontWeight="bold"
@@ -115,12 +107,14 @@ const Homepages = (props) => {
                                         boxShadow="0px 0px 2px rgba(0, 0, 0, 0.2)"
                                         border="1px solid #ccc"
                                         borderRadius="xl"
-                                        bg={useColorModeValue(
-                                            "gray.200",
-                                            "gray.700"
-                                        )}
+                                        bg={useColorModeValue("gray.200", "gray.700")}
                                         borderColor="black"
                                         p={4}
+                                        transition="transform 0.2s, box-shadow 0.2s"
+                                        _hover={{
+                                            transform: "scale(1.05)",
+                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
+                                        }}
                                     >
                                         <Image
                                             src={`/storage/${data.image}`}
@@ -139,7 +133,7 @@ const Homepages = (props) => {
                                         <Text mt={2}>
                                            {data.description}
                                         </Text>
-                                      
+
                                         <Text>
                                              Price: Rp.{" "}
                                             {Number(
@@ -150,22 +144,18 @@ const Homepages = (props) => {
                                         <Text>
                                             Type:{" "}
                                             {categoryMap[data.category_id]}
-                                        </Text>                
+                                        </Text>
                                         <Text>
                                         Posted at: {new Date(data.created_at).toLocaleDateString()}
-                                        </Text>                                                                                                                                                                                                                
+                                        </Text>
                                         <Button
                                             as="a"
                                             href={`/item/${data.id}`}
                                             style={{
-                                              
-                                                fontFamily: "Fredoka One",
-                                                
                                                 color: "white   ",
                                             }}
-                                            fontFamily="Fredoka One"
                                             bg="rgba(133, 81, 33, 1)"
-                                            fontSize="14px"
+                                            fontSize="10px"
                                             fontWeight="bold"
                                             size={"sm"}
                                             _hover={{
@@ -173,15 +163,12 @@ const Homepages = (props) => {
                                             }}
                                             mt={2}
                                             mb={2}
-                                            //ml={4}
-                                
                                         >
                                             View Details
                                         </Button>
-                                        
+
                                         <Button
-                                            fontFamily="Fredoka One"
-                                            fontSize="14px"
+                                            fontSize="10px"
                                             fontWeight="bold"
                                             ml={1}
                                             bg="rgba(133, 81, 33, 1)"
@@ -213,7 +200,6 @@ const Homepages = (props) => {
                             alignItems="center"
                         >
                             <Text
-                                fontFamily="Fredoka One"
                                 color="rgba(133, 81, 33, 1)"
                                 fontSize="38px"
                                 fontWeight="bold"
@@ -232,6 +218,12 @@ const Homepages = (props) => {
                                 mb={12}
                                 onClick={() => handleCategoryClick("Dog")}
                                 style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                        _hover={{
+                                            transform: "scale(1.05)",
+                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
+                                        }}
                             />
                             <Image
                                 src="/storage/logo/cat.png"
@@ -241,6 +233,12 @@ const Homepages = (props) => {
                                 height="191px"
                                 onClick={() => handleCategoryClick("Cat")}
                                 style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                        _hover={{
+                                            transform: "scale(1.05)",
+                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
+                                        }}
                             />
                             <Image
                                 src="/storage/logo/fish.png"
@@ -250,6 +248,12 @@ const Homepages = (props) => {
                                 height="191px"
                                 onClick={() => handleCategoryClick("Fish")}
                                 style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                        _hover={{
+                                            transform: "scale(1.05)",
+                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
+                                        }}
                             />
                             <Image
                                 src="/storage/logo/bird.png"
@@ -259,6 +263,12 @@ const Homepages = (props) => {
                                 height="191px"
                                 onClick={() => handleCategoryClick("Bird")}
                                 style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                        _hover={{
+                                            transform: "scale(1.05)",
+                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
+                                        }}
                             />
                             <Image
                                 src="/storage/logo/reptile.png"
@@ -268,6 +278,12 @@ const Homepages = (props) => {
                                 height="191px"
                                 onClick={() => handleCategoryClick("Reptile")}
                                 style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                        _hover={{
+                                            transform: "scale(1.05)",
+                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
+                                        }}
                             />
                             <Image
                                 src="/storage/logo/smallpet.png"
@@ -277,6 +293,12 @@ const Homepages = (props) => {
                                 height="191px"
                                 onClick={() => handleCategoryClick("Other")}
                                 style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                        _hover={{
+                                            transform: "scale(1.05)",
+                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
+                                        }}
                             />
                         </Box>
                     </Box>

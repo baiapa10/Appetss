@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Inertia } from "@inertiajs/inertia";
-import { usePage } from "@inertiajs/react";
+import { usePage, Link as InertiaLink } from "@inertiajs/react";
 import {
     Box,
     Heading,
@@ -18,7 +18,7 @@ import {
     Td,
     Wrap,
 } from "@chakra-ui/react";
-import { Head, Link } from "@inertiajs/react";
+import { Head } from "@inertiajs/react";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import FlashMessageHandler from "./FlashMessageHandler";
 
@@ -56,7 +56,6 @@ const Wishlist = ({ auth }) => {
                             maxW="1200px"
                         >
                             <Heading
-                                fontFamily="Fredoka One"
                                 fontSize="60px"
                                 fontWeight="bold"
                                 align="center"
@@ -71,31 +70,40 @@ const Wishlist = ({ auth }) => {
                                             {list.map((wishlistItem) => (
                                                 <Tr key={wishlistItem.id}>
                                                     <Td>
-                                                        <Flex alignItems="center">
-                                                            <Image
-                                                                src={`/storage/${wishlistItem.item.image}`}
-                                                                alt="wishlist item"
-                                                                width={"90px"}
-                                                            />
-                                                            <Text ml={4}>
-                                                                {
-                                                                    wishlistItem
-                                                                        .item
-                                                                        .name
-                                                                }{" "}
-                                                                -{" "}
-                                                                {
-                                                                    wishlistItem
-                                                                        .item
-                                                                        .description
-                                                                }
-                                                            </Text>
-                                                        </Flex>
+                                                        <InertiaLink href={`/item/${wishlistItem.item.id}`}>
+                                                            <Flex
+                                                                alignItems="center"
+                                                                borderRadius={36}
+                                                                transition="transform 0.2s, box-shadow 0.2s"
+                                                                _hover={{
+                                                                    transform: "scale(1.05)",
+                                                                    boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
+                                                                }}
+                                                            >
+                                                                <Image
+                                                                    src={`/storage/${wishlistItem.item.image}`}
+                                                                    alt="wishlist item"
+                                                                    width={"90px"}
+                                                                    borderRadius={36}
+                                                                />
+                                                                <Text ml={4}>
+                                                                    {
+                                                                        wishlistItem
+                                                                            .item
+                                                                            .name
+                                                                    }{" "}
+                                                                    -{" "}
+                                                                    {
+                                                                        wishlistItem
+                                                                            .item
+                                                                            .description
+                                                                    }
+                                                                </Text>
+                                                            </Flex>
+                                                        </InertiaLink>
                                                     </Td>
-
                                                     <Td>
                                                         <Button
-                                                            fontFamily="Fredoka One"
                                                             fontSize="14px"
                                                             fontWeight="bold"
                                                             ml={4}

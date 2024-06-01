@@ -42,7 +42,7 @@ const MyOrder = ({ auth, transactions }) => {
                     bgImage={`url(/storage/logo/image.png)`}
                     bgSize="250px"
                     justify="center"
-                    align="center"
+                    align="flex-start"
                     p={5}
                 >
                     <Box
@@ -53,11 +53,11 @@ const MyOrder = ({ auth, transactions }) => {
                         maxW="1200px"
                     >
                         <Heading
-                            fontFamily="Fredoka One"
                             fontSize="60px"
                             fontWeight="bold"
                             align="center"
                             color="rgba(133, 81, 33, 0.8)"
+                            mb={4}
                         >
                             My Order
                         </Heading>
@@ -65,17 +65,15 @@ const MyOrder = ({ auth, transactions }) => {
                             justify="center"
                             spacing="30px"
                             mt={6}
-                            align="center"
-                            
                         >
                             {transactions.map((transaction, index) => (
-                                <WrapItem key={transaction.id} maxW="360px">
+                                <WrapItem key={transaction.id} maxW="360px" >
                                     <Box
                                         borderWidth="6px"
                                         borderRadius="45px"
                                         p={4}
                                         w="150%"
-                                       // h = "auto"
+                                        align="flex-start"
                                     >
                                         <Heading as="h2" size="md">
                                             Transaction {index + 1}
@@ -89,22 +87,21 @@ const MyOrder = ({ auth, transactions }) => {
                                         <Text>
                                             Date: {new Date(transaction.created_at).toLocaleDateString()}
                                             </Text>
-                                         <Text>
+                                        <Text>
                                             Address: {transaction.address}
-                                            </Text>   
-                                    
+                                            </Text>
+
                                         <Flex
-                                        direction="column"
+                                            direction="column"
                                             align="start"
                                             justify="space-between"
                                         >
                                            <Text>
                                                 Status: {transaction.status === 1 ? "Not Received" : "Already Received"}
                                             </Text>
-                                           
+
                                             {transaction.status === 1 && (
                                                 <Button
-                                                    fontFamily="Fredoka One"
                                                     fontSize="14px"
                                                     fontWeight="bold"
                                                   //  ml={}

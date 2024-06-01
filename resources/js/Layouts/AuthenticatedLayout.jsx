@@ -133,17 +133,15 @@ export default function Authenticated({ user, header, children }) {
                                 marginLeft="6"
                                 mb={4}
                             >
-                                      <Link href="/chatify">
+                        <Link href="/chatify" target="_blank">
                             <Image
                                 src="/storage/pet_images/chat.png"
                                 alt="Appets iklan"
                                 width="110px"
                                 height="70px"
-                                
-                                
                             />
-                        </Link>
-                        <Link href="/wishlist">
+                            </Link>
+                                <Link href="/wishlist">
                                     <Image
                                         src="/storage/logo/love.png"
                                         alt="Appets iklan"
@@ -328,7 +326,6 @@ export default function Authenticated({ user, header, children }) {
                         >
                             <Flex
                                 justifyContent="space-between"
-                                fontFamily="Fredoka One"
                                 color="rgba(255, 255, 255, 1)"
                                 fontSize="38px"
                                 fontWeight="bold"

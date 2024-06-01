@@ -27,6 +27,11 @@ const addToCart = (itemId, quantity) => {
     // Inertia.visit(`/cart`);
 };
 
+const addToWishlist = (itemId) => {
+    Inertia.post("/wishlist/store", { item_id: itemId });
+};
+
+
 const Show = ({ item, auth }) => {
     // const { auth } = props;
 
@@ -120,7 +125,7 @@ const Show = ({ item, auth }) => {
                                 objectFit="cover"
                                 ml={8}
                                 mt={"40px"}
-                                borderRadius={"40px"}
+                                borderRadius={"36px"}
                                 borderBlockEndColor={"red"}
                                 width="600px"
                                 height="450px"
@@ -130,12 +135,16 @@ const Show = ({ item, auth }) => {
                                 <Text
                                     fontSize="60px"
                                     color="rgba(133, 81, 33, 1)"
-                                    fontFamily="Fredoka One"
                                     mt={"40px"}
                                     ml={4}
                                     fontWeight="bold"
                                 >
                                     {item.name}
+                                </Text>
+                                <Text ml={4} mt={2} fontSize="lg" mb={4} color="black">
+                                    by
+                                    <Text as="span" color="blue"> {item.user.name}</Text>
+                                    <Text as="span" color="blue"> Store</Text>
                                 </Text>
                                 <Text
                                     ml={4}
@@ -143,7 +152,7 @@ const Show = ({ item, auth }) => {
                                     fontSize="lg"
                                     mb={4}
                                     color="black"
-                               
+
                                 >
                                   Posted At:  {formatDate(item.created_at)}
                                 </Text>
@@ -156,7 +165,7 @@ const Show = ({ item, auth }) => {
                                     {renderStars(rating)}
                                 </Flex>
                                 <Flex direction="row" alignItems="center">
-                                    <Box mt={"40px"}>
+                                    <Box mt={"20px"}>
                                         <Image
                                             src={`/storage/pet_images/location.png`}
                                             alt="Location"
@@ -165,7 +174,7 @@ const Show = ({ item, auth }) => {
                                             ml={4}
                                         />
                                     </Box>
-                                    <Box ml={1} mt={"40px"}>
+                                    <Box ml={1} mt={"20px"}>
                                         <Text fontSize="lg">
                                             {item.location}
                                         </Text>
@@ -182,14 +191,13 @@ const Show = ({ item, auth }) => {
                         >
                             {item.category_id === 13 && (
                             <Flex alignItems="center">
-                                
+
                                 <Text
                                     mr={2}
                                     fontWeight="bold"
                                     color="rgba(133, 81, 33, 1)"
-                                    fontFamily="Fredoka One"
                                     fontSize="30px"
-                                    
+
                                 >
                                     Quantity:
                                 </Text>
@@ -198,7 +206,7 @@ const Show = ({ item, auth }) => {
                                     initialStock={item.stock}
                                     price={item.price}
                                     onChange={handleQuantityChange}
-                                    
+
                                 />
                                 <Spacer />
                             </Flex> )}
@@ -209,12 +217,11 @@ const Show = ({ item, auth }) => {
                             <Text fontSize={"lg"} mr={2}>
                                 Price: Rp.{" "}
                                 {Number(
-                                 item.price
-                                 ).toLocaleString()}
+                                item.price
+                                ).toLocaleString()}
                             </Text>
                             <Flex ml={2} mt={8}>
                             <IconButton
-                                fontFamily="Fredoka One"
                                 fontSize="26px"
                                 fontWeight="bold"
                                 ml={4}
@@ -226,7 +233,7 @@ const Show = ({ item, auth }) => {
                                 height={"96px"}
                                 mr={2}
                                 onClick={() => {
-                                    addToWishlist(data.id);
+                                    addToWishlist(item.id);
                                 }}
                                 _hover={{
                                     bg: "rgba(133, 81, 33, 0.8)",
@@ -242,19 +249,21 @@ const Show = ({ item, auth }) => {
                                     />
                                 }
                             />
-                                <IconButton
-                                    icon={
-                                        <Image
-                                            src="/storage/pet_images/chat.png"
-                                            width={"164"}
-                                            height={"96px"}
-                                        />
-                                    }
-                                    onClick={() => {Inertia.visit(`/chatify/${item.user_id}`);}}
-                                    aria-label="Chat"
-                                    variant="ghost"
-                                    mr={2}
-                                />
+                            <IconButton
+                                icon={
+                                    <Image
+                                        src="/storage/pet_images/chat.png"
+                                        width={"164"}
+                                        height={"96px"}
+                                    />
+                                }
+                                onClick={() => {
+                                    window.open(`/chatify/${item.user_id}`, '_blank');
+                                }}
+                                aria-label="Chat"
+                                variant="ghost"
+                                mr={2}
+                            />
                                 <IconButton
                                     icon={
                                         <Image
@@ -266,7 +275,7 @@ const Show = ({ item, auth }) => {
                                     }
                                     onClick={() => {
                                         if (item.stock === 0) {
-                                            alert("This item is out of stock.");    
+                                            alert("This item is out of stock.");
                                         } else if (item.stock < quantity) {
                                             alert("The selected quantity is greater than the available stock.");
                                         } else {
@@ -308,10 +317,9 @@ const Show = ({ item, auth }) => {
                                 <Text
                                     fontSize="40px"
                                     color="rgba(133, 81, 33, 1)"
-                                    fontFamily="Fredoka One"
                                     fontWeight="bold"
                                 >
-                                    Deskripsi
+                                    Description
                                 </Text>
                                 <Text>{item.description}</Text>
                             </Box>

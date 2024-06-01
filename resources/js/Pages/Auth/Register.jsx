@@ -78,18 +78,13 @@ export default function Register() {
                                     fontWeight="bold"
                                     color="black"
                                 >
-                                    Selamat Datang
+                                    Welcome
                                 </Text>
                                 <Text
                                     fontSize={{ base: "sm", md: "md" }}
                                     textAlign="center"
                                 >
-                                    Selamat datang di halaman login kami! Kami
-                                    senang Anda memilih kami sebagai platform
-                                    untuk memperluas pengetahuan dan
-                                    keterampilan Anda. Melalui platform ini,
-                                    informasi yang berguna untuk membantu Anda
-                                    mencapai tujuan Anda.
+                                    Welcome to our register page! We are delighted that you have chosen us as the platform to expand your knowledge and skills. Through this platform, you will find useful information to help you achieve your goals.
                                 </Text>
                             </Flex>
                         </GridItem>
@@ -114,16 +109,13 @@ export default function Register() {
                                     fontWeight="bold"
                                     color="black"
                                 >
-                                    Hello, Selamat Datang 👋👋👋
+                                    Hello, Welcome 👋👋👋
                                 </Text>
                                 <Text
                                     fontSize={{ base: "sm", md: "md" }}
                                     textAlign="center"
                                 >
-                                    Di sini, Anda akan menemukan tempat
-                                    penjualan hewan yang menawarkan pengalaman
-                                    belanja unik untuk memenuhi kebutuhan hewan
-                                    peliharaan Anda.
+                                    Here, you will find a pet sales place offering a unique shopping experience to meet all your pet's needs.
                                 </Text>
                             </Flex>
                             <form
@@ -142,7 +134,6 @@ export default function Register() {
                                         htmlFor="name"
                                         value="Name"
                                         style={{
-                                            fontFamily: "Fredoka One",
                                             color: "rgba(133, 81, 33, 1)",
                                             fontSize: "16px",
                                             fontWeight: "bold",
@@ -152,6 +143,7 @@ export default function Register() {
                                     <TextInput
                                         id="name"
                                         name="name"
+                                        placeholder="Input name..."
                                         value={data.name}
                                         className="mt-1 block w-full"
                                         autoComplete="name"
@@ -173,7 +165,6 @@ export default function Register() {
                                         htmlFor="email"
                                         value="Email"
                                         style={{
-                                            fontFamily: "Fredoka One",
                                             color: "rgba(133, 81, 33, 1)",
                                             fontSize: "16px",
                                             fontWeight: "bold",
@@ -184,6 +175,7 @@ export default function Register() {
                                         id="email"
                                         type="email"
                                         name="email"
+                                        placeholder="Input email..."
                                         value={data.email}
                                         className="mt-1 block w-full"
                                         autoComplete="username"
@@ -204,7 +196,6 @@ export default function Register() {
                                         htmlFor="password"
                                         value="Password"
                                         style={{
-                                            fontFamily: "Fredoka One",
                                             color: "rgba(133, 81, 33, 1)",
                                             fontSize: "16px",
                                             fontWeight: "bold",
@@ -215,6 +206,7 @@ export default function Register() {
                                         id="password"
                                         type="password"
                                         name="password"
+                                        placeholder="Input password..."
                                         value={data.password}
                                         className="mt-1 block w-full"
                                         autoComplete="new-password"
@@ -235,7 +227,6 @@ export default function Register() {
                                         htmlFor="password_confirmation"
                                         value="Confirm Password"
                                         style={{
-                                            fontFamily: "Fredoka One",
                                             color: "rgba(133, 81, 33, 1)",
                                             fontSize: "16px",
                                             fontWeight: "bold",
@@ -246,6 +237,7 @@ export default function Register() {
                                         id="password_confirmation"
                                         type="password"
                                         name="password_confirmation"
+                                        placeholder="Input password_confirmation..."
                                         value={data.password_confirmation}
                                         className="mt-1 block w-full"
                                         autoComplete="new-password"
@@ -269,7 +261,6 @@ export default function Register() {
                                         htmlFor="phone_number"
                                         value="Phone Number"
                                         style={{
-                                            fontFamily: "Fredoka One",
                                             color: "rgba(133, 81, 33, 1)",
                                             fontSize: "16px",
                                             fontWeight: "bold",
@@ -280,6 +271,7 @@ export default function Register() {
                                         id="phone_number"
                                         type="text"
                                         name="phone_number"
+                                        placeholder="Input phone_number..."
                                         value={data.phone_number}
                                         className="mt-1 block w-full"
                                         autoComplete="tel"
@@ -303,7 +295,6 @@ export default function Register() {
                                         href={route("login")}
                                         className="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                                         style={{
-                                            fontFamily: "Fredoka One",
                                             color: "rgba(133, 81, 33, 1)",
                                             fontSize: "16px",
                                             fontWeight: "bold",
@@ -316,7 +307,6 @@ export default function Register() {
                                         className="ms-4"
                                         disabled={processing}
                                         style={{
-                                            fontFamily: "Fredoka One",
                                             fontSize: "12px",
                                         }}
                                     >

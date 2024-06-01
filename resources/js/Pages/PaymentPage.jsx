@@ -56,13 +56,24 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
         });
     };
 
+    const formatDate = (dateString) => {
+        const options = {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+        };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    };
+
     return (
         <ChakraProvider>
             <AuthenticatedLayout
                 user={auth.user}
                 header={
                     <h2 className="font-semibold text-xl text-gray-800 leading-tight">
-                        Wishlist
+                        Payment Page
                     </h2>
                 }
             >
@@ -76,13 +87,6 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                     {errorMessage && <Text color="red">{errorMessage}</Text>}
 
                     <Box mt={8}>
-                        <Text
-                            textAlign="center"
-                            fontSize="xl"
-                            fontWeight="bold"
-                        >
-                            Payment Page
-                        </Text>
                         <Box mt={4} p={4} borderWidth="1px" borderRadius="45px">
                             <Box
                                 p={6}
@@ -91,6 +95,14 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                                 borderColor="gray.200"
                                 borderRadius="45px"
                             >
+                                <Text
+                                    textAlign="center"
+                                    fontSize="xl"
+                                    fontWeight="bold"
+                                    mb={8}
+                                >
+                                    Payment Page
+                                </Text>
                                 <VStack spacing={4}>
                                     <Box>
                                         <Text fontSize="lg" fontWeight="bold">
@@ -147,7 +159,6 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                                     <Button
                                         colorScheme="blue"
                                         onClick={handleOKClick}
-                                        fontFamily="Fredoka One"
                                         fontSize="14px"
                                         fontWeight="bold"
                                         ml={4}

@@ -76,23 +76,21 @@ const Homepages = (props) => {
                         <Flex
                             px={5}
                             py={4}
-                            justifyContent="space-between"
+                            justifyContent="flex-start"
                             alignItems="center"
                         >
                             <Text
-                                fontFamily="Fredoka One"
                                 color="rgba(133, 81, 33, 1)"
                                 fontSize="38px"
                                 fontWeight="bold"
                                 ml={6}
+                                mr={6}
                             >
                                 Your Items
                             </Text>
 
-                            <Link href={route("item.create")}>
+                            <Link href={route("item.create")} >
                                 <Button
-                            
-                                    mr={1150}
                                     bg="rgba(203, 142, 85, 1)"
                                     size="lg"
                                     borderRadius="full"
@@ -105,7 +103,6 @@ const Homepages = (props) => {
                                      +
                                 </Button>
                             </Link>
-                                    
                         </Flex>
                         <Box display="flex" flexWrap="wrap">
                             {props.pets ? (
@@ -117,14 +114,19 @@ const Homepages = (props) => {
                                         mb={4}
                                         flexBasis="calc(33.33% - 250px)"
                                         boxShadow="0px 0px 2px rgba(0, 0, 0, 0.2)"
-                                        border="1px solid #ccc"
+                                        border="3px solid #ccc"
                                         borderRadius="xl"
                                         bg={useColorModeValue(
                                             "gray.200",
                                             "gray.700"
                                         )}
-                                        borderColor="black"
+                                        borderColor="rgba(133, 81, 33, 0.6)"
                                         p={4}
+                                        transition="transform 0.2s, box-shadow 0.2s"
+                                        _hover={{
+                                            transform: "scale(1.05)",
+                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
+                                        }}
                                     >
                                         <Image
                                             src={`/storage/${data.image}`}
@@ -158,12 +160,9 @@ const Homepages = (props) => {
                                             as="a"
                                             href={`/item/${data.id}`}
                                             mt={4}
-                                           // mb={2}
-                                            fontFamily="Fredoka One"
-                                            
                                             bg="rgba(133, 81, 33, 1)"
                                             color="white"
-                                            fontSize="12px"
+                                            fontSize="10px"
                                             fontWeight="bold"
                                             _hover={{
                                                 bg: "rgba(133, 81, 33, 0.8)",
@@ -179,13 +178,9 @@ const Homepages = (props) => {
                                             href={`/item/${data.id}/edit`}
                                             mt={4}
                                             ml={1}
-                                            //mb={2}
-                                            
-                                            fontFamily="Fredoka One"
-                                            
                                             bg="rgba(133, 81, 33, 1)"
                                             color="white"
-                                            fontSize="12px"
+                                            fontSize="10px"
                                             fontWeight="bold"
                                             _hover={{
                                                 bg: "rgba(133, 81, 33, 0.8)",
@@ -198,11 +193,10 @@ const Homepages = (props) => {
                                             Edit
                                         </Button>
                                         <Button
-                                            fontFamily="Fredoka One"
-                                            fontSize="12px"
+                                            fontSize="10px"
                                             fontWeight="bold"
-                                           ml={1}
-                                           mt={4}
+                                            ml={1}
+                                            mt={4}
                                             bg="rgba(133, 81, 33, 1)"
                                             color="white"
                                             onClick={() => {

@@ -56,8 +56,22 @@ const Edit = ({ auth, item }) => {
         <FlashMessageHandler>
         <AuthenticatedLayout user={auth.user} header={<h2 className="font-semibold text-xl text-gray-800 leading-tight">Edit</h2>}>
             <Head title="Edit Item" />
-            <Box py={12}>
+            <Box py={12}
+            bg={useColorModeValue("rgba(253, 201, 152, 1)")}
+            minH="100vh"
+            id="random-background-box"
+            bgImage={`url(/storage/logo/image.png)`}
+            bgSize="250px">
                 <Container maxW="7xl" mx="auto" px={{ base: 4, sm: 6, lg: 8 }}>
+                    <Text
+                        textAlign="center"
+                        fontSize="48px"
+                        fontWeight="bold"
+                        mb={4}
+                        color="rgba(133, 81, 33, 0.8)"
+                    >
+                        Edit Item Form
+                    </Text>
                     <Box bg="white" overflow="hidden" shadow="sm" rounded="lg">
                         <Box p={6} bg="white" borderBottom="1px" borderColor="gray.200">
                             <Flex alignItems="center" justifyContent="space-between" mb={6}>
@@ -69,15 +83,15 @@ const Edit = ({ auth, item }) => {
                                 <Flex flexDirection="column">
                                     <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                                         <GridItem colSpan={1}>
-                                            <InputLabel htmlFor="name" style={{ fontFamily: "Fredoka One", color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Name</InputLabel>
+                                            <InputLabel htmlFor="name" style={{  color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Name</InputLabel>
                                                 <Input type="text" name="name" value={formData.name} onChange={handleChange} placeholder="Name" />
                                             <Box mt="4" mb={4}>
-                                                <InputLabel htmlFor="name" style={{ fontFamily: "Fredoka One", color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Description</InputLabel>
+                                                <InputLabel htmlFor="name" style={{ color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Description</InputLabel>
                                                     <Input type="text" name="description" value={formData.description} onChange={handleChange} placeholder="Description" />
                                             </Box>
                                         </GridItem>
                                         <Box mb="4">
-                                            <InputLabel htmlFor="name" style={{ fontFamily: "Fredoka One", color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Image</InputLabel>
+                                            <InputLabel htmlFor="name" style={{ color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Image</InputLabel>
                                                 <Input type="file" name="image" onChange={handleImageChange} />
                                                 {formData.image && (
                                                             <Image src={URL.createObjectURL(formData.image)} alt="Uploaded Image" mt="2" maxW="200px" />
@@ -87,7 +101,7 @@ const Edit = ({ auth, item }) => {
                                         <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                                             <GridItem colSpan={1}>
                                                 <Box mb="4">
-                                                    <InputLabel htmlFor="name" style={{ fontFamily: "Fredoka One", color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Category</InputLabel>
+                                                    <InputLabel htmlFor="name" style={{  color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Category</InputLabel>
                                                     <Select name="category_id" value={formData.category_id} onChange={handleChange} placeholder="Select Category">
                                                         <option value="1">Dog - Sell</option>
                                                         <option value="2">Dog - Adopt</option>
@@ -107,7 +121,7 @@ const Edit = ({ auth, item }) => {
                                             </GridItem>
                                             <GridItem colSpan={1}>
                                                 <Box mb="4">
-                                                    <InputLabel htmlFor="name" style={{ fontFamily: "Fredoka One", color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Price</InputLabel>
+                                                    <InputLabel htmlFor="name" style={{  color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Price</InputLabel>
                                                         <Input
                                                             type="number"
                                                             name="price"
@@ -120,7 +134,7 @@ const Edit = ({ auth, item }) => {
                                         <Grid templateColumns="repeat(2, 1fr)" gap={6}>
                                             <GridItem colSpan={1}>
                                                 <Box mb="4">
-                                                    <InputLabel htmlFor="name" style={{ fontFamily: "Fredoka One", color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Location</InputLabel>
+                                                    <InputLabel htmlFor="name" style={{ color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Location</InputLabel>
                                                         <Input
                                                             type="text"
                                                             name="location"
@@ -131,7 +145,7 @@ const Edit = ({ auth, item }) => {
                                             </GridItem>
                                             <GridItem colSpan={1}>
                                                 <Box mb="4">
-                                                    <InputLabel htmlFor="name" style={{ fontFamily: "Fredoka One", color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Stock</InputLabel>
+                                                    <InputLabel htmlFor="name" style={{  color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Stock</InputLabel>
                                                         <Input
                                                             type="number"
                                                             name="stock"

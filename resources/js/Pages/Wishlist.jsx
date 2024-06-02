@@ -86,19 +86,14 @@ const Wishlist = ({ auth }) => {
                                                                     width={"90px"}
                                                                     borderRadius={36}
                                                                 />
-                                                                <Text ml={4}>
-                                                                    {
-                                                                        wishlistItem
-                                                                            .item
-                                                                            .name
-                                                                    }{" "}
-                                                                    -{" "}
-                                                                    {
-                                                                        wishlistItem
-                                                                            .item
-                                                                            .description
-                                                                    }
-                                                                </Text>
+                                                                <Box ml={4}>
+                                                                    <Text fontWeight="bold">
+                                                                        {wishlistItem.item.name}
+                                                                    </Text>
+                                                                    <Text fontSize="sm" color="gray.600">
+                                                                        {wishlistItem.item.description}
+                                                                    </Text>
+                                                                </Box>
                                                             </Flex>
                                                         </InertiaLink>
                                                     </Td>
@@ -106,7 +101,7 @@ const Wishlist = ({ auth }) => {
                                                         <Button
                                                             fontSize="14px"
                                                             fontWeight="bold"
-                                                            ml={4}
+                                                            ml={-14}
                                                             bg="rgba(133, 81, 33, 1)"
                                                             color="white"
                                                             size="sm"

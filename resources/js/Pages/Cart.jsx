@@ -130,7 +130,7 @@ const Cart = ({ auth }) => {
                                                                 mr={4}
                                                                 sx={{
                                                                     "& .chakra-checkbox__control": {
-                                                                        borderColor: "rgba(133, 81, 33, 0.8)", 
+                                                                        borderColor: "rgba(133, 81, 33, 0.8)",
                                                                     },
                                                                     "& .chakra-checkbox__control[data-checked]": {
                                                                         borderColor: "rgba(133, 81, 33, 0.8)",
@@ -157,14 +157,14 @@ const Cart = ({ auth }) => {
                                                                 width={"90px"}
                                                                 borderRadius={36}
                                                             />
-                                                            <Text ml={4}>
-                                                                {cart.item.name}{" "}
-                                                                -{" "}
-                                                                {
-                                                                    cart.item
-                                                                        .description
-                                                                }
-                                                            </Text>
+                                                            <Box ml={4}>
+                                                                <Text fontWeight="bold">
+                                                                    {cart.item.name}
+                                                                </Text>
+                                                                <Text fontSize="sm" color="gray.600">
+                                                                    {cart.item.description}
+                                                                </Text>
+                                                            </Box>
                                                         </Flex>
                                                     </Td>
                                                     <Td>
@@ -210,7 +210,7 @@ const Cart = ({ auth }) => {
                                             ))}
                                             <Tr>
                                                 <Td
-                                                    colSpan="2"
+                                                    colSpan="3"
                                                     textAlign="right"
                                                 >
                                                     Total ({checkedItems.length}{" "}

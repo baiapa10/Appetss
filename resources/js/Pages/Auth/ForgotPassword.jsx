@@ -61,18 +61,13 @@ export default function ForgotPassword({ status }) {
                                     fontWeight="bold"
                                     color="black"
                                 >
-                                    Selamat Datang
+                                    Welcome
                                 </Text>
                                 <Text
                                     fontSize={{ base: "sm", md: "md" }}
                                     textAlign="center"
                                 >
-                                    Selamat datang di halaman login kami! Kami
-                                    senang Anda memilih kami sebagai platform
-                                    untuk memperluas pengetahuan dan
-                                    keterampilan Anda. Melalui platform ini,
-                                    informasi yang berguna untuk membantu Anda
-                                    mencapai tujuan Anda.
+                                    Welcome to our Forgot Password page! We are delighted that you have chosen us as the platform to expand your knowledge and skills. Through this platform, you will find useful information to help you achieve your goals.
                                 </Text>
                             </Flex>
                         </GridItem>
@@ -98,16 +93,13 @@ export default function ForgotPassword({ status }) {
                                     fontWeight="bold"
                                     color="black"
                                 >
-                                    Hello, Selamat Datang 👋👋👋
+                                    Hello, Welcome 👋👋👋
                                 </Text>
                                 <Text
                                     fontSize={{ base: "sm", md: "md" }}
                                     textAlign="center"
                                 >
-                                    Di sini, Anda akan menemukan tempat
-                                    penjualan hewan yang menawarkan pengalaman
-                                    belanja unik untuk memenuhi kebutuhan hewan
-                                    peliharaan Anda.
+                                    Here, you will find a pet sales place that offers a unique shopping experience to meet your pet's needs.
                                 </Text>
                             </Flex>
                             <div

@@ -23,6 +23,7 @@ export default function Register() {
         password: "",
         password_confirmation: "",
         phone_number: "",
+        address: "",
     });
 
     useEffect(() => {

@@ -20,8 +20,8 @@ import { Inertia } from "@inertiajs/inertia";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import FlashMessageHandler from "../FlashMessageHandler";
 
-const Homepages = (props) => {
-    const { auth } = props;
+const Index = (props) => {
+    const { auth,address } = props;
     const [modalDelete, setModalDelete] = useState(false);
 
     const categoryMap = {
@@ -160,7 +160,7 @@ const Homepages = (props) => {
                                                 data.price
                                             ).toLocaleString()}
                                         </Text>
-                                        <Text>Location: {data.location}</Text>
+                                        <Text>Location: {address}</Text>
                                         <Text>
                                             Type:{" "}
                                             {categoryMap[data.category_id]}
@@ -252,4 +252,4 @@ const Homepages = (props) => {
     );
 };
 
-export default Homepages;
+export default Index;

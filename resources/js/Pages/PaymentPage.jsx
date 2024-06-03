@@ -27,7 +27,7 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
     const [shippingMethod, setShippingMethod] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [shippingCost, setShippingCost] = useState(0);
-    const [address, setAddress] = useState("");
+  
     const handleShippingMethodChange = (method) => {
         setShippingMethod(method);
         // Set shipping cost based on selected method
@@ -45,14 +45,11 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
             setErrorMessage("Please select a shipping method");
             return;
         }
-        if (!address) {
-            setErrorMessage("Please input your address");
-            return;
-        }
+      
         Inertia.post(route("processPayment"), {
             cartItems: cartItems,
             totalPrice: Number(totalPrice) + Number(shippingCost),
-            address: address,
+       
         });
     };
 
@@ -109,13 +106,8 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                                             Shipping
                                         </Text>
                                         <HStack mt={2}>
-                                            <Text>Address:</Text>
-                                            <Text
-                                                value={address}
-                                                onChange={(e) =>
-                                                    setAddress(e.target.value)
-                                                }
-                                            />
+                                            <Text> Shipping Address: {auth.user.address}</Text>
+                                           
                                         </HStack>
                                         <HStack mt={2}>
                                             <Text>Choose:</Text>
@@ -156,6 +148,7 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                                             ).toLocaleString()}
                                         </Text>
                                     </Box>
+                                    <Text>Transfer gopay to : {auth.user.phone_number}</Text>
                                     <Button
                                         colorScheme="blue"
                                         onClick={handleOKClick}
@@ -172,7 +165,7 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                                             bg: "rgba(133, 81, 33, 0.6)",
                                         }}
                                     >
-                                        OK
+                                        I already paid
                                     </Button>
                                 </VStack>
                             </Box>

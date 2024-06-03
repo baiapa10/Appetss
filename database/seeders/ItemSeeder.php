@@ -19,7 +19,7 @@ class ItemSeeder extends Seeder
             'description' => 'A fluffy, adorable cat.',
             'user_id' => 1,
             'category_id' => 3,
-            'location' => 'London',
+          
             'price' => '10000',
             'image' => 'pet_images/fluffy.jpg',
             'stock' => '1',
@@ -31,7 +31,7 @@ class ItemSeeder extends Seeder
         'description' => 'A spiky, adorable dog.',
         'user_id' => 2,
         'category_id' => 2,
-        'location' => 'New York',
+        
         'price' => '5000',
         'image' => 'pet_images/spike.jpg',
         'stock' => 1,
@@ -41,7 +41,7 @@ class ItemSeeder extends Seeder
             'description' => 'A cheerful little bird.',
             'user_id' => 2,
             'category_id' => 7, // Assuming '7' is the ID for birds for sale
-            'location' => 'San Francisco',
+           
             'price' => '15000',
             'image' => 'pet_images/chirpy.jpg',
             'stock' => 1,
@@ -52,7 +52,7 @@ class ItemSeeder extends Seeder
             'description' => 'A beautiful goldfish.',
             'user_id' => 2,
             'category_id' => 5, // Assuming '5' is the ID for fish for sale
-            'location' => 'Miami',
+         
             'price' => '20000',
             'image' => 'pet_images/goldie.jpg',
             'stock' => 5,
@@ -63,7 +63,7 @@ class ItemSeeder extends Seeder
             'description' => 'A friendly snake.',
             'user_id' => 2,
             'category_id' => 9, // Assuming '9' is the ID for other pets for sale
-            'location' => 'Austin',
+       
             'price' => '30000',
             'image' => 'pet_images/slithers.jpg',
             'stock' => 5,
@@ -74,10 +74,50 @@ class ItemSeeder extends Seeder
             'description' => 'A healthy catfood.',
             'user_id' => 2,
             'category_id' => 13, // Assuming '10' is the ID for other equipment for sale
-            'location' => 'Surakarta',
+            
             'price' => '32450',
             'image' => 'pet_images/wiskas.jpg',
-            'stock' => 1,
+            'stock' => 100,
+        ]);
+        Item::create([
+            'name' => 'Cat Cage',
+            'description' => 'Brand new Cat cage for medium kitten.',
+            'user_id' => 2,
+            'category_id' => 13, // Assuming '10' is the ID for other equipment for sale
+      
+            'price' => '200000',
+            'image' => 'pet_images/kandang1.jpg',
+            'stock' => 100,
+        ]);
+        Item::create([
+            'name' => 'Bird Cage',
+            'description' => 'Brand new bird cage for murai only.',
+            'user_id' => 2,
+            'category_id' => 13, // Assuming '10' is the ID for other equipment for sale
+           
+            'price' => '160000',
+            'image' => 'pet_images/kandang2.jpg',
+            'stock' => 100,
+        ]);
+        Item::create([
+            'name' => 'Bolt dogfood',
+            'description' => 'the best dogfood.',
+            'user_id' => 2,
+            'category_id' => 13, // Assuming '10' is the ID for other equipment for sale
+        
+            'price' => '26750',
+            'image' => 'pet_images/bolt.jpg',
+            'stock' => 100,
+        ]);
+        Item::create([
+            'name' => 'Dog food bowl',
+            'description' => 'A place to place your dogfood and water for your dog.',
+            'user_id' => 2,
+            'category_id' => 13, // Assuming '10' is the ID for other equipment for sale
+            
+            'price' => '40000',
+            'image' => 'pet_images/mangkok.jpg',
+            'stock' => 100,
         ]);
         
     }

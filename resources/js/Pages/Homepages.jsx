@@ -267,7 +267,7 @@ const Homepages = (props) => {
                                                 data.price
                                             ).toLocaleString()}
                                         </Text>
-                                        <Text>Location: {data.location}</Text>
+                                        <Text>Location: {data.user.address}</Text>
                                         <Text>
                                             Type:{" "}
                                             {categoryMap[data.category_id]}

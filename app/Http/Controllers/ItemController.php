@@ -6,7 +6,7 @@ use App\Models\Category;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
-
+use App\Models\User;
 
 class ItemController extends Controller
 {
@@ -18,16 +18,17 @@ class ItemController extends Controller
 
         // Fetch only the items that belong to this user
         $pets = Item::where('user_id', $userId)->get();
-
+        $address = User::find($userId)->address;
         return Inertia::render('Item/Index', [
             'pets' => $pets,
-            'title' => ' Item Index'
+            'title' => ' Item Index',
+            'address' => $address,
         ]);
     }
     public function create (){
         return Inertia::render('Item/Create' , ['title' => 'Create Item']);
     }
-
+    
     public function store(Request $request)
     {
         $request->validate([
@@ -35,12 +36,12 @@ class ItemController extends Controller
             'description' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required|exists:categories,id',
-            'location' => 'required',
+            
             'stock' => 'required|numeric',
             'image' => 'required|image',
         ]);
 
-
+        $user = auth()->user();
         if ($request->file('image')) {
             $imageFile = $request->file('image');
             $imageName = uniqid() . '' . $imageFile->getClientOriginalName();
@@ -54,20 +55,19 @@ class ItemController extends Controller
             'description' => $request->description,
             'price' => $request->price,
             'category_id' => $request->category_id,
-            'location' => $request->location,
+            //'location' => $request->location,
             'image' => $request->image,
             'stock' => $request->stock,
         ]);
-
+    
         return redirect()->route('item.index')->with('message', 'Item successfuly inserted!');
     }
 
 
 public function show($item)
 {
+   // $item = Item::find($item);
     $item = Item::with('user')->find($item);
-    // $item = Item::find($item);
-
     if (!$item) {
         // Handle the case where the item is not found
         abort(404);
@@ -86,13 +86,13 @@ public function update(Request $request, Item $item)
         'description' => 'required',
         'price' => 'required|numeric',
         'category_id' => 'required|exists:categories,id',
-        'location' => 'required',
+       
         'stock' => 'required|numeric',
         'image' => 'nullable|image',
     ]);
 
-    $requestData = $request->only(['name', 'description', 'price', 'category_id', 'location', 'stock']);
-
+    $requestData = $request->only(['name', 'description', 'price', 'category_id', 'stock']);
+    
     if ($request->file('image')) {
         $imageFile = $request->file('image');
         $imageName = uniqid() . '' . $imageFile->getClientOriginalName();

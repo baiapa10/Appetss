@@ -18,12 +18,13 @@ import ApplicationLoginImage from "@/Components/ApplicationLoginImage";
 export default function ForgotPassword({ status }) {
     const { data, setData, post, processing, errors } = useForm({
         email: "",
+        password: "",
     });
 
     const submit = (e) => {
         e.preventDefault();
 
-        post(route("password.email"));
+        post(route("password.reset"));
     };
 
     return (
@@ -204,11 +205,13 @@ export default function ForgotPassword({ status }) {
                                             fontFamily: "Fredoka One",
                                             fontSize: "12px",
                                         }}
+                                        onClick={submit}
                                     >
-                                        Email Password Reset Link
+                                        reset password
                                     </PrimaryButton>
                                 </div>
                             </form>
+                            
                         </GridItem>
                     </Grid>
                 </Flex>

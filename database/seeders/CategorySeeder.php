@@ -91,7 +91,7 @@ class CategorySeeder extends Seeder
         Category::create([
             'id' => 13,
             'name' => 'equipment',
-            'type' => 'sell',
+            'type' => '',
         ]);
         
       

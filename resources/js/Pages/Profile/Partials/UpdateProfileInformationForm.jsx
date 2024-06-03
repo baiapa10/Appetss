@@ -12,6 +12,7 @@ export default function UpdateProfileInformation({ mustVerifyEmail, status, clas
         name: user.name,
         email: user.email,
         phone_number: user.phone_number,
+        address: user.address,
     });
 
     const submit = (e) => {

@@ -27,7 +27,7 @@ const Edit = ({ auth, item }) => {
         description: item.description || '',
         price: item.price || '',
         category_id: item.category_id || '',
-        location: item.location || '',
+        
         stock: item.stock || '',
         image: null,
     });
@@ -132,7 +132,7 @@ const Edit = ({ auth, item }) => {
                                             </GridItem>
                                         </Grid>
                                         <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-                                            <GridItem colSpan={1}>
+                                            {/* <GridItem colSpan={1}>
                                                 <Box mb="4">
                                                     <InputLabel htmlFor="name" style={{ color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Location</InputLabel>
                                                         <Input
@@ -142,7 +142,7 @@ const Edit = ({ auth, item }) => {
                                                             onChange={handleChange}
                                                             placeholder="Location" />
                                                 </Box>
-                                            </GridItem>
+                                            </GridItem> */}
                                             <GridItem colSpan={1}>
                                                 <Box mb="4">
                                                     <InputLabel htmlFor="name" style={{  color: "rgba(133, 81, 33, 1)", fontSize: "16px", fontWeight: "bold" }}>Stock</InputLabel>

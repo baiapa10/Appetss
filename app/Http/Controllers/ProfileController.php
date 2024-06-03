@@ -31,12 +31,12 @@ class ProfileController extends Controller
     {
         $request->user()->fill($request->validated());
 
-        if ($request->user()->isDirty('email')) {
-            $request->user()->email_verified_at = null;
-        }
-        
+     
     if ($request->has('phone_number')) {
         $request->user()->phone_number = $request->get('phone_number');
+    }
+    if ($request->has('address')) {
+        $request->user()->address = $request->get('address');
     }
 
         $request->user()->save();

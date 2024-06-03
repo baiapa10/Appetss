@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\HomepageController;
 use App\Http\Controllers\HomepagesController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\WishlistController;
@@ -26,7 +25,7 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::get('/homepage', [HomepageController::class, 'index'] );
+
 
 Route::get('/', function () {
     return redirect('/login');

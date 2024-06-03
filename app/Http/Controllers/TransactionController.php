@@ -9,6 +9,7 @@ use App\Models\Transaction;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use App\Models\TransactionItem;
+use App\Models\User;
 
 class TransactionController extends Controller
 {
@@ -20,14 +21,16 @@ public function processPayment(Request $request)
     $userId = Auth::id();
     $totalPrice = $request->input('totalPrice');
     $cartItems = $request->input('cartItems');
-    $address = $request->input('address');
+  //  $address = $request->input('address');
     //dd($cartItems, $totalPrice, $address);
     // Create a new transaction
+    $user = Auth::user();
+   
     $transaction = Transaction::create([
         'user_id' => $userId,
         'total_price' => $totalPrice,
         'status' => 1,
-        'address' => $address,
+        'address' => $user->address,
     ]);
 
     // Loop through the cart items and create a new TransactionItem for each one
@@ -88,7 +91,8 @@ public function processPayment(Request $request)
 }
     public function showPaymentPage(Request $request)
     {
-    
+    $userId = Auth::id();
+     $address = User::find($userId)->address;
     $totalPrice = $request->input('totalPrice');
     $carts = $request->input('checkedItems');
     if (empty($carts)) {
@@ -98,6 +102,7 @@ public function processPayment(Request $request)
         'totalPrice' => $totalPrice,
         'cartItems' => $carts,
         'title' => 'Payment Page',
+        'address' => $address,
     ]);
 }
 

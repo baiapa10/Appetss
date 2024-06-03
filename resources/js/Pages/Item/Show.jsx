@@ -132,7 +132,7 @@ const Show = ({ item, auth }) => {
                                     </Box>
                                     <Box ml={1} mt={-2}>
                                         <Text fontSize="lg">
-                                            {item.location}
+                                            {item.user.address}
                                         </Text>
                                     </Box>
                                 </Flex>

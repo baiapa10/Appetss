@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         // 'is_seller',
         'phone_number',
+        'address',
     //   'seller_rating',
     //    'rating_count',
     //'avatar',

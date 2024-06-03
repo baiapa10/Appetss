@@ -23,16 +23,18 @@ Route::middleware('guest')->group(function () {
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
-                ->name('password.request');
+    ->name('password.request');
 
-    Route::post('forgot-password', [PasswordResetLinkController::class, 'store'])
-                ->name('password.email');
+// Change this route to use your custom password reset controller
+Route::post('forgot-password', [PasswordResetLinkController::class, 'reset'])
+    ->name('password.reset');
 
-    Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
-                ->name('password.reset');
+// Remove these two routes
+// Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
+//             ->name('password.reset');
 
-    Route::post('reset-password', [NewPasswordController::class, 'store'])
-                ->name('password.store');
+// Route::post('reset-password', [NewPasswordController::class, 'store'])
+//             ->name('password.store');
 });
 
 Route::middleware('auth')->group(function () {

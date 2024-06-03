@@ -34,7 +34,6 @@ const Creates = (props) => {
         description: "",
         category_id: "",
         price: "",
-        location: "",
         stock: "",
         image: null,
     });
@@ -349,7 +348,7 @@ const Creates = (props) => {
                                             templateColumns="repeat(2, 1fr)"
                                             gap={6}
                                         >
-                                            <GridItem colSpan={1}>
+                                            {/* <GridItem colSpan={1}>
                                                 <Box mb="4">
                                                     <InputLabel
                                                         htmlFor="location"
@@ -384,7 +383,7 @@ const Creates = (props) => {
                                                         className="mt-2"
                                                     />
                                                 </Box>
-                                            </GridItem>
+                                            </GridItem> */}
                                             <GridItem colSpan={1}>
                                                 {/* Stock Field */}
                                                 <Box mb="4">

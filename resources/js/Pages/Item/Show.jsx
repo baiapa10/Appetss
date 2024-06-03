@@ -48,43 +48,6 @@ const Show = ({ item, auth }) => {
         setRating(randomRating);
     }, []);
 
-    const renderStars = (rating) => {
-        const stars = [];
-        for (let i = 1; i <= 5; i++) {
-            if (i <= rating) {
-                stars.push(
-                    <Image
-                        key={i}
-                        src={`/storage/logo/bintang.png`}
-                        alt="Filled Star"
-                        width={"32px"}
-                        ml={3}
-                    />
-                );
-            } else if (i - 0.5 === rating) {
-                stars.push(
-                    <Image
-                        key={i}
-                        src={`/storage/logo/setengahbintang.png`}
-                        alt="Half Star"
-                        width={"34px"}
-                        ml={3}
-                    />
-                );
-            } else {
-                stars.push(
-                    <Image
-                        key={i}
-                        src={`/storage/logo/bintangkosong.png`}
-                        alt="Empty Star"
-                        width={"32px"}
-                        ml={3}
-                    />
-                );
-            }
-        }
-        return stars;
-    };
 
     const formatDate = (dateString) => {
         const options = {
@@ -141,14 +104,15 @@ const Show = ({ item, auth }) => {
                                 >
                                     {item.name}
                                 </Text>
-                                <Text ml={4} mt={2} fontSize="lg" mb={4} color="black">
+                                <Text ml={4} mt={2} fontSize="lg" mb={4} color="black">{item.description}</Text>
+                                <Text ml={4} mt={-4} fontSize="lg" mb={4} color="black">
                                     by
                                     <Text as="span" color="blue"> {item.user.name}</Text>
                                     <Text as="span" color="blue"> Store</Text>
                                 </Text>
                                 <Text
                                     ml={4}
-                                    mt={2}
+                                    mt={-4}
                                     fontSize="lg"
                                     mb={4}
                                     color="black"
@@ -156,16 +120,8 @@ const Show = ({ item, auth }) => {
                                 >
                                   Posted At:  {formatDate(item.created_at)}
                                 </Text>
-
-                                <Flex
-                                    direction="row"
-                                    alignItems="center"
-                                    mt={2}
-                                >
-                                    {renderStars(rating)}
-                                </Flex>
                                 <Flex direction="row" alignItems="center">
-                                    <Box mt={"20px"}>
+                                    <Box mt={-2}>
                                         <Image
                                             src={`/storage/pet_images/location.png`}
                                             alt="Location"
@@ -174,7 +130,7 @@ const Show = ({ item, auth }) => {
                                             ml={4}
                                         />
                                     </Box>
-                                    <Box ml={1} mt={"20px"}>
+                                    <Box ml={1} mt={-2}>
                                         <Text fontSize="lg">
                                             {item.location}
                                         </Text>
@@ -294,36 +250,6 @@ const Show = ({ item, auth }) => {
                                 />
                             </Flex>
                         </Flex>
-                        <Box
-                            position="relative"
-                            display="inline-block"
-                            mt="45px"
-                            bg="white"
-                            width={["100%", "100%", "80%", "70%"]}
-                            height={["auto", "auto", "200px", "200px"]}
-                            padding={["10px", "20px", "30px", "40px"]}
-                            ml={["0", "0", "10%", "15%"]}
-                            borderRadius="52px"
-                        >
-                            <Box
-                                position="absolute"
-                                top="50%"
-                                left="50%"
-                                transform="translate(-50%, -50%)"
-                                textAlign="center"
-                                padding="10px"
-                                borderRadius="5px"
-                            >
-                                <Text
-                                    fontSize="40px"
-                                    color="rgba(133, 81, 33, 1)"
-                                    fontWeight="bold"
-                                >
-                                    Description
-                                </Text>
-                                <Text>{item.description}</Text>
-                            </Box>
-                        </Box>
                     </Box>
                 </AuthenticatedLayout>
             </FlashMessageHandler>

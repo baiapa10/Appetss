@@ -258,6 +258,40 @@ export default function Register() {
 
                                 <div className="mt-4">
                                     <InputLabel
+                                        htmlFor="address"
+                                        value="Address"
+                                        style={{
+                                            color: "rgba(133, 81, 33, 1)",
+                                            fontSize: "16px",
+                                            fontWeight: "bold",
+                                        }}
+                                    />
+
+                                    <TextInput
+                                        id="address"
+                                        type="text"
+                                        name="address"
+                                        placeholder="Input address..."
+                                        value={data.address}
+                                        className="mt-1 block w-full"
+                                        autoComplete="tel"
+                                        onChange={(e) =>
+                                            setData(
+                                                "address",
+                                                e.target.value
+                                            )
+                                        }
+                                        required
+                                    />
+
+                                    <InputError
+                                        message={errors.address}
+                                        className="mt-2"
+                                    />
+                                </div>
+
+                                <div className="mt-4">
+                                    <InputLabel
                                         htmlFor="phone_number"
                                         value="Phone Number"
                                         style={{

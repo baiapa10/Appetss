@@ -13,6 +13,7 @@ import {
     ChakraProvider,
     Center,
     Image,
+    Spacer,
 } from "@chakra-ui/react";
 import { Head, Link } from "@inertiajs/react";
 import { Inertia } from "@inertiajs/inertia";
@@ -75,119 +76,124 @@ const Homepages = (props) => {
                         id="random-background-box"
                         bgImage={`url(/storage/logo/image.png)`}
                         bgSize="250px"
-
                     >
                         <Flex>
                             <AdBanner />
                         </Flex>
-                                        <Flex
-                                            px={5}
-                                            py={4}
-                                            justifyContent="space-between"
-                                            alignItems="center"
-                                        >
-                                            <Text
-                                                color="rgba(133, 81, 33, 1)"
-                                                fontSize="38px"
-                                                fontWeight="bold"
-                                                ml={6}
-                                            >
-                                                Shop Category
-                                            </Text>
-                                        </Flex>
-                                        <Box display="flex" flexWrap="wrap">
-                                            <Image
-                                                src="/storage/logo/dog.png"
-                                                alt="Dog Category"
-                                                ml={9}
-                                                width="191px"
-                                                height="191px"
-                                                mb={12}
-                                                onClick={() => handleCategoryClick("Dog")}
-                                                style={{ cursor: "pointer" }}
-                                                borderRadius={25}
-                                                transition="transform 0.2s, box-shadow 0.2s"
-                                                        _hover={{
-                                                            transform: "scale(1.05)",
-                                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
-                                                        }}
-                                            />
-                                            <Image
-                                                src="/storage/logo/cat.png"
-                                                alt="Cat Category"
-                                                ml={9}
-                                                width="191px"
-                                                height="191px"
-                                                onClick={() => handleCategoryClick("Cat")}
-                                                style={{ cursor: "pointer" }}
-                                                borderRadius={25}
-                                                transition="transform 0.2s, box-shadow 0.2s"
-                                                        _hover={{
-                                                            transform: "scale(1.05)",
-                                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
-                                                        }}
-                                            />
-                                            <Image
-                                                src="/storage/logo/fish.png"
-                                                alt="Fish Category"
-                                                ml={9}
-                                                width="191px"
-                                                height="191px"
-                                                onClick={() => handleCategoryClick("Fish")}
-                                                style={{ cursor: "pointer" }}
-                                                borderRadius={25}
-                                                transition="transform 0.2s, box-shadow 0.2s"
-                                                        _hover={{
-                                                            transform: "scale(1.05)",
-                                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
-                                                        }}
-                                            />
-                                            <Image
-                                                src="/storage/logo/bird.png"
-                                                alt="Bird Category"
-                                                ml={9}
-                                                width="191px"
-                                                height="191px"
-                                                onClick={() => handleCategoryClick("Bird")}
-                                                style={{ cursor: "pointer" }}
-                                                borderRadius={25}
-                                                transition="transform 0.2s, box-shadow 0.2s"
-                                                        _hover={{
-                                                            transform: "scale(1.05)",
-                                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
-                                                        }}
-                                            />
-                                            <Image
-                                                src="/storage/logo/reptile.png"
-                                                alt="Reptile Category"
-                                                ml={9}
-                                                width="191px"
-                                                height="191px"
-                                                onClick={() => handleCategoryClick("Reptile")}
-                                                style={{ cursor: "pointer" }}
-                                                borderRadius={25}
-                                                transition="transform 0.2s, box-shadow 0.2s"
-                                                        _hover={{
-                                                            transform: "scale(1.05)",
-                                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
-                                                        }}
-                                            />
-                                            <Image
-                                                src="/storage/logo/smallpet.png"
-                                                alt="Other Category"
-                                                ml={9}
-                                                width="191px"
-                                                height="191px"
-                                                onClick={() => handleCategoryClick("Other")}
-                                                style={{ cursor: "pointer" }}
-                                                borderRadius={25}
-                                                transition="transform 0.2s, box-shadow 0.2s"
-                                                        _hover={{
-                                                            transform: "scale(1.05)",
-                                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
-                                                        }}
-                                            />
-                                        </Box>
+                        <Flex
+                            px={5}
+                            py={4}
+                            justifyContent="space-between"
+                            alignItems="center"
+                        >
+                            <Text
+                                color="rgba(133, 81, 33, 1)"
+                                fontSize="38px"
+                                fontWeight="bold"
+                                ml={6}
+                            >
+                                Shop Category
+                            </Text>
+                        </Flex>
+                        <Box display="flex" flexWrap="wrap">
+                            <Image
+                                src="/storage/logo/dog.png"
+                                alt="Dog Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                mb={12}
+                                onClick={() => handleCategoryClick("Dog")}
+                                style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                _hover={{
+                                    transform: "scale(1.05)",
+                                    boxShadow:
+                                        "6px 0px 10px rgba(0, 0, 0, 0.3)",
+                                }}
+                            />
+                            <Image
+                                src="/storage/logo/cat.png"
+                                alt="Cat Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                onClick={() => handleCategoryClick("Cat")}
+                                style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                _hover={{
+                                    transform: "scale(1.05)",
+                                    boxShadow:
+                                        "6px 0px 10px rgba(0, 0, 0, 0.3)",
+                                }}
+                            />
+                            <Image
+                                src="/storage/logo/fish.png"
+                                alt="Fish Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                onClick={() => handleCategoryClick("Fish")}
+                                style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                _hover={{
+                                    transform: "scale(1.05)",
+                                    boxShadow:
+                                        "6px 0px 10px rgba(0, 0, 0, 0.3)",
+                                }}
+                            />
+                            <Image
+                                src="/storage/logo/bird.png"
+                                alt="Bird Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                onClick={() => handleCategoryClick("Bird")}
+                                style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                _hover={{
+                                    transform: "scale(1.05)",
+                                    boxShadow:
+                                        "6px 0px 10px rgba(0, 0, 0, 0.3)",
+                                }}
+                            />
+                            <Image
+                                src="/storage/logo/reptile.png"
+                                alt="Reptile Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                onClick={() => handleCategoryClick("Reptile")}
+                                style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                _hover={{
+                                    transform: "scale(1.05)",
+                                    boxShadow:
+                                        "6px 0px 10px rgba(0, 0, 0, 0.3)",
+                                }}
+                            />
+                            <Image
+                                src="/storage/logo/smallpet.png"
+                                alt="Other Category"
+                                ml={9}
+                                width="191px"
+                                height="191px"
+                                onClick={() => handleCategoryClick("Other")}
+                                style={{ cursor: "pointer" }}
+                                borderRadius={25}
+                                transition="transform 0.2s, box-shadow 0.2s"
+                                _hover={{
+                                    transform: "scale(1.05)",
+                                    boxShadow:
+                                        "6px 0px 10px rgba(0, 0, 0, 0.3)",
+                                }}
+                            />
+                        </Box>
                         <Flex
                             px={5}
                             py={4}
@@ -211,40 +217,52 @@ const Homepages = (props) => {
                                         ml={8}
                                         mr={2}
                                         mb={4}
-                                        flexBasis="calc(33.33% - 250px)"
+                                        flexBasis="calc(32.33% - 250px)"
                                         boxShadow="0px 0px 2px rgba(0, 0, 0, 0.2)"
                                         border="1px solid #ccc"
                                         borderRadius="xl"
-                                        bg={useColorModeValue("gray.200", "gray.700")}
+                                        bg={useColorModeValue(
+                                            "gray.200",
+                                            "gray.700"
+                                        )}
                                         borderColor="black"
                                         p={4}
                                         transition="transform 0.2s, box-shadow 0.2s"
                                         _hover={{
                                             transform: "scale(1.05)",
-                                            boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
+                                            boxShadow:
+                                                "6px 0px 10px rgba(0, 0, 0, 0.3)",
                                         }}
                                     >
-                                        <Image
-                                            src={`/storage/${data.image}`}
-                                            alt={data.name}
+                                        <Box
+                                            display="flex"
+                                            justifyContent="center"
                                             alignItems="center"
-                                            style={{
-                                                maxWidth: "100%",
-                                                height: "150px",
-                                                borderRadius: "36px"
-                                            }}
-
-                                        />
+                                            overflow="hidden"
+                                            borderRadius="36px"
+                                            width="100%"
+                                            height="150px"
+                                        >
+                                            <Image
+                                                src={`/storage/${data.image}`}
+                                                alt={data.name}
+                                                alignItems="center"
+                                                style={{
+                                                    maxWidth: "100%",
+                                                    height: "150px",
+                                                    objectFit: "cover",
+                                                    borderRadius: "36px",
+                                                }}
+                                            />
+                                        </Box>
                                         <br />
                                         <Heading size="md" mb={2}>
-                                           {data.name}
+                                            {data.name}
                                         </Heading>
-                                        <Text mt={2}>
-                                           {data.description}
-                                        </Text>
+                                        <Text mt={2}>{data.description}</Text>
 
                                         <Text>
-                                             Price: Rp.{" "}
+                                            Price: Rp.{" "}
                                             {Number(
                                                 data.price
                                             ).toLocaleString()}
@@ -255,7 +273,10 @@ const Homepages = (props) => {
                                             {categoryMap[data.category_id]}
                                         </Text>
                                         <Text>
-                                        Posted at: {new Date(data.created_at).toLocaleDateString()}
+                                            Posted at:{" "}
+                                            {new Date(
+                                                data.created_at
+                                            ).toLocaleDateString()}
                                         </Text>
                                         <Button
                                             as="a"

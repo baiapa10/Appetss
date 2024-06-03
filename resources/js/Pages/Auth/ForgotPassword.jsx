@@ -2,6 +2,7 @@ import GuestLayout from "@/Layouts/GuestLayout";
 import InputError from "@/Components/InputError";
 import PrimaryButton from "@/Components/PrimaryButton";
 import TextInput from "@/Components/TextInput";
+import InputLabel from "@/Components/InputLabel";
 import { Head, useForm } from "@inertiajs/react";
 import {
     Grid,
@@ -134,22 +135,66 @@ export default function ForgotPassword({ status }) {
                                     padding: "40px 20px",
                                 }}
                             >
+                                <InputLabel
+                                        htmlFor="email"
+                                        value="Email"
+                                        style={{
+                                            color: "rgba(133, 81, 33, 1)",
+                                            fontSize: "16px",
+                                            fontWeight: "bold",
+
+                                        }}
+                                    />
                                 <TextInput
                                     id="email"
                                     type="email"
                                     name="email"
                                     value={data.email}
-                                    className="mt-1 block w-full"
+                                    className=" block w-full"
                                     isFocused={true}
                                     onChange={(e) =>
                                         setData("email", e.target.value)
                                     }
                                 />
-
                                 <InputError
                                     message={errors.email}
                                     className="mt-2"
                                 />
+                                <div>
+                                    <InputLabel
+                                        htmlFor="password"
+                                        value="Password"
+                                        className="mt-4 block w-full"
+                                        style={{
+                                            color: "rgba(133, 81, 33, 1)",
+                                            fontSize: "16px",
+                                            fontWeight: "bold",
+
+                                        }}
+                                    />
+                                    <TextInput
+                                        id="password"
+                                        type="password"
+                                        name="password"
+                                        placeholder="Input password..."
+                                        value={data.password}
+                                        className=" block w-full"
+                                        // autoComplete="password"
+                                        isFocused={true}
+                                        onChange={(e) =>
+                                            setData("password", e.target.value)
+                                        }
+                                        borderColor="rgba(253, 201, 152, 1)"
+                                        _focus={{
+                                            borderColor:
+                                                "rgba(253, 201, 152, 1)",
+                                        }}
+                                    />
+                                    <InputError
+                                        message={errors.password}
+                                        className="mt-2"
+                                    />
+                                </div>
 
                                 <div className="flex items-center justify-end mt-4">
                                     <PrimaryButton

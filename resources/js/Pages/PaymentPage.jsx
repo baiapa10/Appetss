@@ -110,7 +110,7 @@ const PaymentPage = ({ auth, totalPrice, props, cartItems }) => {
                                         </Text>
                                         <HStack mt={2}>
                                             <Text>Address:</Text>
-                                            <Input
+                                            <Text
                                                 value={address}
                                                 onChange={(e) =>
                                                     setAddress(e.target.value)

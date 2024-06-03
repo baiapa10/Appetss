@@ -128,14 +128,26 @@ const Homepages = (props) => {
                                             boxShadow: "6px 0px 10px rgba(0, 0, 0, 0.3)"
                                         }}
                                     >
+                                        <Box
+                                            display="flex"
+                                            justifyContent="center"
+                                            alignItems="center"
+                                            overflow="hidden"
+                                            borderRadius="36px"
+                                            width="100%"
+                                            height="150px"
+                                        >
                                         <Image
                                             src={`/storage/${data.image}`}
                                             alt={data.name}
                                             style={{
                                                 maxWidth: "100%",
                                                 height: "150px",
+                                                objectFit: "cover",
+                                                borderRadius: "36px",
                                             }}
                                         />
+                                        </Box>
                                         <Heading size="md" mb={2} mt={4}>
                                             {data.name}
                                         </Heading>

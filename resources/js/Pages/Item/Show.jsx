@@ -93,7 +93,6 @@ const Show = ({ item, auth }) => {
                                 width="600px"
                                 height="450px"
                             />
-
                             <Flex direction="column" alignItems="flex-start">
                                 <Text
                                     fontSize="60px"
@@ -104,7 +103,7 @@ const Show = ({ item, auth }) => {
                                 >
                                     {item.name}
                                 </Text>
-                                <Text ml={4} mt={2} fontSize="lg" mb={4} color="black">{item.description}</Text>
+                                <Text ml={4} mt={-2} fontSize="25px" mb={16} color="black">{item.description}</Text>
                                 <Text ml={4} mt={-4} fontSize="lg" mb={4} color="black">
                                     by
                                     <Text as="span" color="blue"> {item.user.name}</Text>

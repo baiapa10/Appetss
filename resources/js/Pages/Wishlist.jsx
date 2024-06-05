@@ -73,6 +73,7 @@ const Wishlist = ({ auth }) => {
                                                         <InertiaLink href={`/item/${wishlistItem.item.id}`}>
                                                             <Flex
                                                                 alignItems="center"
+                                                                mr={12}
                                                                 borderRadius={36}
                                                                 transition="transform 0.2s, box-shadow 0.2s"
                                                                 _hover={{

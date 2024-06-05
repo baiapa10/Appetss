@@ -55,19 +55,26 @@ const Cart = ({ auth }) => {
     useEffect(() => {
         let total = 0;
         carts.forEach((cart) => {
+            const quantity =
+                updatedQuantities[cart.id] ?? cart.quantity;
             if (checkedItems.find((item) => item.id === cart.id)) {
-                total += parseFloat(cart.item.price) * cart.quantity;
+                total += parseFloat(cart.item.price) * quantity;
             }
         });
         setTotalPrice(total);
-    }, [checkedItems, carts]);
+    }, [checkedItems, carts, updatedQuantities]);
 
     const handleQuantityChange = (itemId, newQuantity) => {
-        // Update quantity in updatedQuantities state
         setUpdatedQuantities((prevState) => ({
             ...prevState,
             [itemId]: newQuantity,
         }));
+        // Update the quantity in checkedItems
+        setCheckedItems((prevCheckedItems) =>
+            prevCheckedItems.map((item) =>
+                item.id === itemId ? { ...item, quantity: newQuantity } : item
+            )
+        );
     };
 
     const formatDate = (dateString) => {
@@ -180,7 +187,14 @@ const Cart = ({ auth }) => {
                                                             justifyContent="center"
                                                             // mr="4px"
                                                         >
-                                                            Quantity:  {cart.quantity}
+                                                            <QuantitySelector
+                                                    initialStock={cart.item.stock}
+                                                    price={cart.item.price}
+                                                    onChange={(newQuantity) =>
+                                                        handleQuantityChange(cart.id, newQuantity)
+                                                    }
+                                                    initialQuantity={cart.quantity}
+                                                />
                                                         </Flex>
                                                     </Td>
                                                     <Td>
@@ -216,7 +230,12 @@ const Cart = ({ auth }) => {
                                                     Total ({checkedItems.length}{" "}
                                                     produk):
                                                 </Td>
-                                                <Td>{totalPrice}.00</Td>
+                                                <Td>
+                                                    Price: Rp.{" "}
+                                                    {Number(
+                                                    totalPrice
+                                                    ).toLocaleString()}
+                                                </Td>
                                             </Tr>
                                         </Tbody>
                                     </Table>

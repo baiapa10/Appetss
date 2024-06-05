@@ -21,10 +21,38 @@ const MyOrder = ({ auth, transactions }) => {
     const handleReceive = (id) => {
         Inertia.put(`/transactions/${id}`, { status: 2 });
     };
+    // useEffect(() => {
+    //     document.title = "My Order";
+    // }, []);
+
     useEffect(() => {
         document.title = "My Order";
+
+        const handleBrowserBackButton = (event) => {
+            event.preventDefault();
+            Inertia.visit("/homepages");
+        };
+
+        window.addEventListener("popstate", handleBrowserBackButton);
+
+        return () => {
+            window.removeEventListener("popstate", handleBrowserBackButton);
+        };
     }, []);
 
+    const transactionsWithIndex = transactions.map((transaction, index) => ({
+        ...transaction,
+        originalIndex: index
+    }));
+
+    // Separate transactions into not received and received
+    const notReceivedTransactions = transactionsWithIndex.filter(transaction => transaction.status === 1);
+    const receivedTransactions = transactionsWithIndex.filter(transaction => transaction.status === 2);
+
+    notReceivedTransactions.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+    // Concatenate not received and received transactions, with received at the end
+    const sortedTransactions = [...notReceivedTransactions, ...receivedTransactions];
     return (
         <ChakraProvider>
             <FlashMessageHandler >
@@ -66,7 +94,7 @@ const MyOrder = ({ auth, transactions }) => {
                             spacing="30px"
                             mt={6}
                         >
-                            {transactions.map((transaction, index) => (
+                            {sortedTransactions.map((transaction, index) => (
                                 <WrapItem key={transaction.id} maxW="360px" >
                                     <Box
                                         borderWidth="6px"
@@ -76,7 +104,7 @@ const MyOrder = ({ auth, transactions }) => {
                                         align="flex-start"
                                     >
                                         <Heading as="h2" size="md">
-                                            Transaction {index + 1}
+                                            Transaction {transaction.originalIndex + 1}
                                         </Heading>
                                         <Text mt={2}>
                                             Total Price: Rp.{" "}
@@ -85,18 +113,18 @@ const MyOrder = ({ auth, transactions }) => {
                                             ).toLocaleString()}
                                         </Text>
                                         <Text>
-                                            Date: {new Date(transaction.created_at).toLocaleDateString()}
-                                            </Text>
+                                            Date: {new Date(transaction.created_at).toLocaleString(undefined, { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric' })}
+                                        </Text>
                                         <Text>
                                             Address: {transaction.address}
-                                            </Text>
+                                        </Text>
 
                                         <Flex
                                             direction="column"
                                             align="start"
                                             justify="space-between"
                                         >
-                                           <Text>
+                                            <Text>
                                                 Status: {transaction.status === 1 ? "Not Received" : "Already Received"}
                                             </Text>
 
@@ -104,7 +132,6 @@ const MyOrder = ({ auth, transactions }) => {
                                                 <Button
                                                     fontSize="14px"
                                                     fontWeight="bold"
-                                                  //  ml={}
                                                     bg="rgba(133, 81, 33, 1)"
                                                     color="white"
                                                     size="sm"
@@ -127,7 +154,6 @@ const MyOrder = ({ auth, transactions }) => {
                                                 <Button
                                                     bg="green.500"
                                                     color="white"
-                                                    //ml={4}
                                                     _hover={{ bg: "green.600" }}
                                                     isDisabled
                                                 >

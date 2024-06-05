@@ -112,9 +112,10 @@ const Creates = (props) => {
                                 borderColor="gray.200"
                             >
                                 <Flex
-                                    alignItems="center"
-                                    justifyContent="space-between"
+                                    // alignItems="center"
+                                    // justifyContent="space-between"
                                     mb={6}
+                                    po
                                 >
                                     <Link
                                         className="px-6 py-2 text-white bg-blue-500 rounded-md focus:outline-none"
@@ -161,6 +162,81 @@ const Creates = (props) => {
                                                         className="mt-2"
                                                     />
                                                 </Box>
+                                                {/* <Box mb="4">
+                                                    <InputLabel
+                                                        htmlFor="description"
+                                                        value="Description"
+                                                        style={{
+                                                            color: "rgba(133, 81, 33, 1)",
+                                                            fontSize: "16px",
+                                                            fontWeight: "bold",
+                                                        }}
+                                                    >
+                                                        Description
+                                                    </InputLabel>
+                                                    <TextInput
+                                                        id="description"
+                                                        name="description"
+                                                        value={data.description}
+                                                        className="mt-1 block w-full"
+                                                        autoComplete="name"
+                                                        isFocused={true}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "description",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        required
+                                                    />
+                                                    <InputError
+                                                        message={
+                                                            errors.description
+                                                        }
+                                                        className="mt-2"
+                                                    />
+                                                </Box> */}
+                                            </GridItem>
+                                            <GridItem colSpan={1}>
+                                                <Box mb="4">
+                                                    <InputLabel
+                                                        htmlFor="price"
+                                                        value="Price"
+                                                        style={{
+                                                            color: "rgba(133, 81, 33, 1)",
+                                                            fontSize: "16px",
+                                                            fontWeight: "bold",
+                                                        }}
+                                                    >
+                                                        Price
+                                                    </InputLabel>
+                                                    <TextInput
+                                                        id="price"
+                                                        name="price"
+                                                        value={data.price}
+                                                        className="mt-1 block w-full"
+                                                        autoComplete="price"
+                                                        isFocused={true}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "price",
+                                                                e.target.value
+                                                            )
+                                                        }
+                                                        required
+                                                    />
+                                                    <InputError
+                                                        message={errors.price}
+                                                        className="mt-2"
+                                                    />
+                                                </Box>
+                                            </GridItem>
+                                        </Grid>
+                                            <Grid
+                                            templateColumns="repeat(2, 1fr)"
+                                            gap={6}
+                                                >
+                                                <GridItem colSpan={1}>
                                                 <Box mb="4">
                                                     <InputLabel
                                                         htmlFor="description"
@@ -195,43 +271,43 @@ const Creates = (props) => {
                                                         className="mt-2"
                                                     />
                                                 </Box>
-                                            </GridItem>
-                                            <GridItem colSpan={1}>
+                                                </GridItem>
+                                                <GridItem colSpan={1}>
+                                                {/* Stock Field */}
                                                 <Box mb="4">
                                                     <InputLabel
-                                                        htmlFor="image"
-                                                        value="Upload Image"
+                                                        htmlFor="stock"
+                                                        value="Stock"
                                                         style={{
                                                             color: "rgba(133, 81, 33, 1)",
                                                             fontSize: "16px",
-                                                            fontWeight: "bold",
+                                                            fontWeight: 900,
                                                         }}
                                                     >
-                                                        Image
+                                                        Stock
                                                     </InputLabel>
-                                                    <Input
-                                                        type="file"
-                                                        name="image"
-                                                        onChange={
-                                                            handleImageChange
+                                                    <TextInput
+                                                        id="stock"
+                                                        name="stock"
+                                                        value={data.stock}
+                                                        className="mt-1 block w-full"
+                                                        autoComplete="stock"
+                                                        isFocused={true}
+                                                        onChange={(e) =>
+                                                            setData(
+                                                                "stock",
+                                                                e.target.value
+                                                            )
                                                         }
+                                                        required
                                                     />
-                                                    {data.image && (
-                                                        <Image
-                                                            src={URL.createObjectURL(
-                                                                data.image
-                                                            )}
-                                                            alt="Uploaded Image"
-                                                            mt="2"
-                                                            maxW="200px"
-                                                        />
-                                                    )}
                                                     <InputError
-                                                        message={errors.image}
+                                                        message={errors.stock}
                                                         className="mt-2"
                                                     />
                                                 </Box>
                                             </GridItem>
+
                                         </Grid>
                                         <Grid
                                             templateColumns="repeat(2, 1fr)"
@@ -312,33 +388,26 @@ const Creates = (props) => {
                                             <GridItem colSpan={1}>
                                                 <Box mb="4">
                                                     <InputLabel
-                                                        htmlFor="price"
-                                                        value="Price"
+                                                        htmlFor="image"
+                                                        value="Upload Image"
                                                         style={{
                                                             color: "rgba(133, 81, 33, 1)",
                                                             fontSize: "16px",
                                                             fontWeight: "bold",
                                                         }}
                                                     >
-                                                        Price
+                                                        Image
                                                     </InputLabel>
-                                                    <TextInput
-                                                        id="price"
-                                                        name="price"
-                                                        value={data.price}
-                                                        className="mt-1 block w-full"
-                                                        autoComplete="price"
-                                                        isFocused={true}
-                                                        onChange={(e) =>
-                                                            setData(
-                                                                "price",
-                                                                e.target.value
-                                                            )
+                                                    <Input
+                                                        type="file"
+                                                        name="image"
+                                                        onChange={
+                                                            handleImageChange
                                                         }
-                                                        required
                                                     />
+
                                                     <InputError
-                                                        message={errors.price}
+                                                        message={errors.image}
                                                         className="mt-2"
                                                     />
                                                 </Box>
@@ -348,78 +417,33 @@ const Creates = (props) => {
                                             templateColumns="repeat(2, 1fr)"
                                             gap={6}
                                         >
-                                            {/* <GridItem colSpan={1}>
-                                                <Box mb="4">
-                                                    <InputLabel
-                                                        htmlFor="location"
-                                                        value="Location"
-                                                        style={{
-                                                            color: "rgba(133, 81, 33, 1)",
-                                                            fontSize: "16px",
-                                                            fontWeight: "bold",
-                                                        }}
-                                                    >
-                                                        Location
-                                                    </InputLabel>
-                                                    <TextInput
-                                                        id="location"
-                                                        name="location"
-                                                        value={data.location}
-                                                        className="mt-1 block w-full"
-                                                        autoComplete="location"
-                                                        isFocused={true}
-                                                        onChange={(e) =>
-                                                            setData(
-                                                                "location",
-                                                                e.target.value
-                                                            )
-                                                        }
-                                                        required
-                                                    />
-                                                    <InputError
-                                                        message={
-                                                            errors.location
-                                                        }
-                                                        className="mt-2"
-                                                    />
-                                                </Box>
-                                            </GridItem> */}
-                                            <GridItem colSpan={1}>
-                                                {/* Stock Field */}
-                                                <Box mb="4">
-                                                    <InputLabel
-                                                        htmlFor="stock"
-                                                        value="Stock"
-                                                        style={{
-                                                            color: "rgba(133, 81, 33, 1)",
-                                                            fontSize: "16px",
-                                                            fontWeight: 900,
-                                                        }}
-                                                    >
-                                                        Stock
-                                                    </InputLabel>
-                                                    <TextInput
-                                                        id="stock"
-                                                        name="stock"
-                                                        value={data.stock}
-                                                        className="mt-1 block w-full"
-                                                        autoComplete="stock"
-                                                        isFocused={true}
-                                                        onChange={(e) =>
-                                                            setData(
-                                                                "stock",
-                                                                e.target.value
-                                                            )
-                                                        }
-                                                        required
-                                                    />
-                                                    <InputError
-                                                        message={errors.stock}
-                                                        className="mt-2"
-                                                    />
-                                                </Box>
-                                            </GridItem>
                                         </Grid>
+                                        {data.image && (
+                                            <Box
+                                                border="1px solid"
+                                                borderColor="gray.200"
+                                                borderRadius="44px"
+                                                p={4}
+                                                maxW="520px"
+                                                ml={326}
+                                                transition="transform 0.3s ease"
+                                                _hover={{ transform: "scale(1.1)" }}
+                                                mt={6}
+                                            >
+                                                <Text fontSize="lg" mb={2} fontWeight="bold" align="center" style={{
+                                                            color: "rgba(133, 81, 33, 1)",
+                                                            fontSize: "26px",
+                                                            fontWeight: "bold",
+                                                        }}>Image Preview</Text>
+                                                <Image
+                                                    src={URL.createObjectURL(data.image)}
+                                                    alt="Uploaded Image"
+                                                    mt="2"
+                                                    mb={6}
+                                                    maxW="500px"
+                                                />
+                                            </Box>
+                                        )}
                                     </Flex>
                                     <PrimaryButton
                                         className="ms-4"

@@ -21,16 +21,19 @@ public function processPayment(Request $request)
     $userId = Auth::id();
     $totalPrice = $request->input('totalPrice');
     $cartItems = $request->input('cartItems');
-  //  $address = $request->input('address');
+    if (empty($cartItems)) {
+        return redirect()->route('cart.index')->with('message', 'Please select items to checkout.');
+    }
+    $address = $request->input('address') ?? auth()->user()->address;
     //dd($cartItems, $totalPrice, $address);
     // Create a new transaction
-    $user = Auth::user();
+   
    
     $transaction = Transaction::create([
         'user_id' => $userId,
         'total_price' => $totalPrice,
         'status' => 1,
-        'address' => $user->address,
+        'address' => $address,
     ]);
 
     // Loop through the cart items and create a new TransactionItem for each one

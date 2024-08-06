@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
           //  $table->string('location');
-            $table->decimal('price');
+            $table->decimal('price', 10, 2);
             $table->string('image');
             $table->integer('stock');
         });

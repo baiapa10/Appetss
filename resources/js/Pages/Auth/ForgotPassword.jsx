@@ -111,12 +111,10 @@ export default function ForgotPassword({ status }) {
                                     color: "rgba(133, 81, 33, 1)",
                                     fontSize: "16px",
                                     fontWeight: "bold",
+                                    marginLeft: "200px",
                                 }}
                             >
-                                Forgot your password? No problem. Just let us
-                                know your email address and we will email you a
-                                password reset link that will allow you to
-                                choose a new one.
+                                Insert your email and password to reset your password
                             </div>
 
                             {status && (
@@ -150,6 +148,7 @@ export default function ForgotPassword({ status }) {
                                     id="email"
                                     type="email"
                                     name="email"
+                                    placeholder="Input email..."
                                     value={data.email}
                                     className=" block w-full"
                                     isFocused={true}

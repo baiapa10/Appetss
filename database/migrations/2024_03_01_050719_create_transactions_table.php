@@ -16,7 +16,7 @@ return new class extends Migration
          //
             $table->integer('status'); // 1->belum diterima, 2->sudah diterima
            // $table->integer('quantity');
-            $table->decimal('total_price'); 
+            $table->decimal('total_price', 10, 2);
             $table->foreignId('user_id')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
            // $table->foreignId('item_id')->references('id')->on('items')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();

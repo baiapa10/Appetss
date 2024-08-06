@@ -49,7 +49,7 @@ class UserSeeder extends Seeder
           'name' => 'Benyamin Laksana',
           'email' => 'user3@gmail.com',
           'password' => 'password3',
-          'pho ne_number' => '0851000003',
+          'phone_number' => '0851000003',
             'address' => 'Jl. cikini raya no 20 jakarta pusat',
       ]);
   
